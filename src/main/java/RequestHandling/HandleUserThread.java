@@ -35,19 +35,15 @@ public class HandleUserThread implements Runnable{
 
         while (input.ready()) {
             requestChar = readRequest();
-            System.out.println(requestChar);
-            rawRequest.append( requestChar);
+            rawRequest.append(requestChar);
         }
 
-        System.out.println(rawRequest.toString());
-
-        System.out.println("Hello");
-            requestProcessor.handleRequest(rawRequest);
-            String response = requestProcessor.response();
-            if (response != null) {
-                System.out.println(Thread.currentThread().getName() + "response");
-                System.out.println(response);
-                writeMessage(response);
+        requestProcessor.handleRequest(rawRequest);
+        String response = requestProcessor.response();
+        if (response != null) {
+            System.out.println(Thread.currentThread().getName() + "response");
+            System.out.println(response);
+            writeMessage(response);
             }
         System.out.println("Out of the loop");
     }
