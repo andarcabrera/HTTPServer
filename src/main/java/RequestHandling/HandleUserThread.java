@@ -13,14 +13,13 @@ public class HandleUserThread implements Runnable{
     private InfoProcessor requestProcessor;
 
     public HandleUserThread(HttpInputStream inputStream, HttpOutputStream outputStream, InfoProcessor requestProcessor) {
-        this.input = inputStream;
+        this.input =  inputStream;
         this.output = outputStream;
         this.requestProcessor = requestProcessor;
     }
 
     private String readRequest() {
-        String request= input.readMessage();
-        return request;
+        return input.readMessage();
     }
 
     private void writeMessage(String message) {
@@ -31,16 +30,18 @@ public class HandleUserThread implements Runnable{
     public void run() {
         System.out.println(Thread.currentThread().getName() + "connected to server");
 
-        String requestLine;
         StringBuffer rawRequest = new StringBuffer();
+        String requestChar;
 
-        while (((requestLine = readRequest())) != null) {
-            System.out.println(requestLine);
-            rawRequest.append(requestLine + "\n");
-            if (requestLine.isEmpty()) {
-                break;
-            }
+        while (input.ready()) {
+            requestChar = readRequest();
+            System.out.println(requestChar);
+            rawRequest.append( requestChar);
         }
+
+        System.out.println(rawRequest.toString());
+
+        System.out.println("Hello");
             requestProcessor.handleRequest(rawRequest);
             String response = requestProcessor.response();
             if (response != null) {

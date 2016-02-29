@@ -53,7 +53,7 @@ public class Request implements RequestBuilder {
 
 
     private void separateHeaderBody(){
-        String[] parsedRequest = rawRequest.split("\n\\s*\n");
+        String[] parsedRequest = rawRequest.split("\r\n\\s*\r\n");
         if (parsedRequest.length == 2) {
             rawHeader = parsedRequest[0];
             rawBody = parsedRequest[1];
@@ -82,7 +82,7 @@ public class Request implements RequestBuilder {
     }
 
     private String[] getRawHeaderLines() {
-        return rawHeader.split("\n");
+        return rawHeader.split("\r\n");
     }
 
     public boolean startsWithMethodName(String request, int start, int end){

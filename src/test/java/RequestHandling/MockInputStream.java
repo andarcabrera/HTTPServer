@@ -9,16 +9,23 @@ import java.util.ArrayList;
  */
 public class MockInputStream implements HttpInputStream {
     ArrayList<String> request = new ArrayList<String>();
+    private boolean isReady = true;
 
     public String readMessage() {
         String message;
-        if (request.size() > 0) {
+        if (request.size() >= 1) {
             message = request.get(0);
             request.remove(0);
         } else {
+            isReady = false;
             message = "";
         }
         return message;
+    }
+
+    @Override
+    public boolean ready() {
+        return isReady;
     }
 
     public void emptyStream() {
@@ -26,6 +33,7 @@ public class MockInputStream implements HttpInputStream {
     }
 
     public void addInput(String a) {
-        request.add(a);
+        System.out.println(a);
+            request.add(a);
     }
 }

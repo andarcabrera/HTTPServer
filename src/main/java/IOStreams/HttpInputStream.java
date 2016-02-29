@@ -5,4 +5,5 @@ package IOStreams;
  */
 public interface HttpInputStream {
     String readMessage();
+    boolean ready();
 }

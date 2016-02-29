@@ -14,13 +14,22 @@ public class HttpClientInputStream implements HttpInputStream {
     }
 
     public String readMessage() {
-        String message = null;
+        int request = 0;
         try {
-            message = input.readLine();
+            request = input.read();
         } catch (IOException e) {
-            System.out.println("Caught socket closed exception!");
-//            e.printStackTrace();
+            e.printStackTrace();
         }
-        return message;
+        return String.valueOf((char) request);
+    }
+
+    public boolean ready(){
+        boolean isReady = false;
+        try {
+             isReady = input.ready();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return isReady;
     }
 }
