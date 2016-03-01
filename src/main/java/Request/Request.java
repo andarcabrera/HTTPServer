@@ -16,6 +16,7 @@ public class Request implements RequestBuilder {
 
     public Request(StringBuffer rawRequest){
         this.rawRequest = rawRequest.toString();
+        setRequestDetails();
     }
 
     public void setRequestDetails(){
@@ -67,8 +68,6 @@ public class Request implements RequestBuilder {
         for (int i = 0; i < getRawHeaderLines().length;i++){
             if (methodName(getRawHeaderLines()[i])){
                 initialLine = getRawHeaderLines()[i];
-                System.out.println(initialLine);
-                System.out.println("initial line " + initialLine);
             }else{
                 headers.add(getRawHeaderLines()[i]);
             }
@@ -76,6 +75,7 @@ public class Request implements RequestBuilder {
     }
 
     private void processInitialLine() {
+        System.out.println("initial line" + initialLine);
         String[] parsedLine = getInitialLine().split(" ");
         method = parsedLine[0];
         url = parsedLine[1];

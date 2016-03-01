@@ -16,6 +16,5 @@ public class HttpClientOutputStream implements HttpOutputStream{
         output.print(message);
         output.flush();
         output.close();
-
     }
 }

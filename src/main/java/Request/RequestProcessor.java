@@ -14,8 +14,6 @@ public class RequestProcessor implements InfoProcessor {
     public void handleRequest(StringBuffer rawRequest){
         this.request = new Request(rawRequest);
         setRawRequest(rawRequest);
-        System.out.println(rawRequest);
-        request.setRequestDetails();
         router.route(request);
     }
 

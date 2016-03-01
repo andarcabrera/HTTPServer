@@ -14,12 +14,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Hashtable;
 
 
 public class HTTPServer {
-    private Hashtable<Thread, Socket> allThreads = new Hashtable<Thread, Socket>();
-
     public void listen() throws IOException {
         ServerSocket chatServer = new ServerSocket(5000);
 
@@ -36,12 +33,10 @@ public class HTTPServer {
                 InfoProcessor requestProcessor = new RequestProcessor();
 
                 Thread userThread = new Thread(new HandleUserThread(userInputStream, userOutputStream, requestProcessor));
-                allThreads.put(userThread, userSocket);
                 userThread.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Test");
         } finally {
             chatServer.close();
         }

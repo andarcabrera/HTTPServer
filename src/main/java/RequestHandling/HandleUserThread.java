@@ -33,15 +33,18 @@ public class HandleUserThread implements Runnable{
         StringBuffer rawRequest = new StringBuffer();
         String requestChar;
 
-        while (input.ready()) {
+        while (input.ready() || rawRequest.length() < 5) {
             requestChar = readRequest();
             rawRequest.append(requestChar);
         }
 
+        System.out.println("rawRequest" + rawRequest.toString());
+
         requestProcessor.handleRequest(rawRequest);
+
         String response = requestProcessor.response();
         if (response != null) {
-            System.out.println(Thread.currentThread().getName() + "response");
+            System.out.println(Thread.currentThread().getName() + "response:");
             System.out.println(response);
             writeMessage(response);
             }
