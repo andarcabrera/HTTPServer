@@ -12,8 +12,7 @@ public class AccessFile {
 
     public byte[] readFromFile(String fileName) {
         FileInputStream fileInputStream = null;
-        File directoryPath = new File(System.getProperty("user.home"), "/Desktop/cob_spec/public");
-        File file = new File(directoryPath, fileName);
+        File file = new File(fileName);
 
         byte[] fileContent = new byte[(int) file.length()];
 

@@ -37,7 +37,7 @@ public class SimpleController implements Controller{
         if (action.equals("/")){
             response.setStatusCode(200);
         } else {
-            byte[] fileContent = accessFile.readFromFile(action);
+            byte[] fileContent = accessFile.readFromFile("/Users/andacabrera29/Desktop/cob_spec/public" + action);
             if (fileContent.length == 0){
                 response.setStatusCode(404);
             } else {
