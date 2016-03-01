@@ -1,20 +1,33 @@
 package IOStreams;
 
-import java.io.PrintWriter;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 /**
  * Created by andacabrera29 on 2/24/16.
  */
 public class HttpClientOutputStream implements HttpOutputStream{
-    PrintWriter output = null;
+    DataOutputStream output = null;
 
-    public HttpClientOutputStream(PrintWriter output) {
+    public HttpClientOutputStream(DataOutputStream output) {
         this.output = output;
     }
 
-    public void writeMessage(String message) {
-        output.print(message);
-        output.flush();
-        output.close();
+    public void writeMessage(byte[] message) {
+        try {
+            output.write(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            output.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            output.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -8,10 +8,7 @@ import Request.InfoProcessor;
 import Request.RequestProcessor;
 import RequestHandling.HandleUserThread;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,11 +21,11 @@ public class HTTPServer {
             while (true) {
                 Socket userSocket = chatServer.accept();
 
-                PrintWriter printWriter = new PrintWriter(userSocket.getOutputStream(), true);
+                DataOutputStream dataOutputStream = new DataOutputStream(userSocket.getOutputStream());
                 BufferedReader inputReader = new BufferedReader(new InputStreamReader(userSocket.getInputStream()));
 
                 HttpInputStream userInputStream = new HttpClientInputStream(inputReader);
-                HttpOutputStream userOutputStream = new HttpClientOutputStream(printWriter);
+                HttpOutputStream userOutputStream = new HttpClientOutputStream(dataOutputStream);
 
                 InfoProcessor requestProcessor = new RequestProcessor();
 

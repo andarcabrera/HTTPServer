@@ -1,33 +1,37 @@
 package FileMgmt;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Created by andacabrera29 on 2/25/16.
  */
 public class AccessFile {
 
-    public String readFromFile(String fileName){
-        File path = new File(System.getProperty("user.home"), "/Desktop/cob_spec/public");
+    public byte[] readFromFile(String fileName) {
+        FileInputStream fileInputStream = null;
+        File directoryPath = new File(System.getProperty("user.home"), "/Desktop/cob_spec/public");
+        File file = new File(directoryPath, fileName);
 
-        StringBuffer result = new StringBuffer("");
+        byte[] fileContent = new byte[(int) file.length()];
 
-          try (Scanner scanner = new Scanner(new File(path, fileName))) {
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(fileContent);
+            fileInputStream.close();
 
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    result.append(line).append("\n");
-                }
 
-                scanner.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result.toString();
-
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return fileContent;
+    }
 }
+
+
+
+

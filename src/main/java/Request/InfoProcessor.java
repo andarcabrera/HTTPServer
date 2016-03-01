@@ -5,5 +5,5 @@ package Request;
  */
 public interface InfoProcessor {
     void handleRequest(StringBuffer rawRequest);
-    String response();
+    byte[] response();
 }

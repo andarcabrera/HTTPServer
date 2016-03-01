@@ -17,7 +17,7 @@ public class Router {
 
     }
 
-    public String getResponse(){
+    public byte[] getResponse(){
         return controller.sendResponse();
     }
 }

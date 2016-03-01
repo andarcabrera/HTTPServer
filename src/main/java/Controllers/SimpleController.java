@@ -16,8 +16,8 @@ public class SimpleController implements Controller{
     }
 
 
-    public String sendResponse(){
-        String messageFromServer = null;
+    public byte[] sendResponse(){
+        byte[] messageFromServer = null;
         switch (request.getMethod()) {
             case "GET":
                messageFromServer = get(request.getUrl());
@@ -33,34 +33,30 @@ public class SimpleController implements Controller{
     }
 
     @Override
-    public String get(String action) {
+    public byte[] get(String action) {
         if (action.equals("/")){
             response.setStatusCode(200);
         } else {
-            String fileContent = accessFile.readFromFile(action);
-            if (fileContent.isEmpty()){
+            byte[] fileContent = accessFile.readFromFile(action);
+            if (fileContent.length == 0){
                 response.setStatusCode(404);
             } else {
                 response.setStatusCode(200);
                 response.setResponseBody(fileContent);
             }
         }
-        return response.toString();
+        return response.responseToBytes();
     }
 
     @Override
-    public String post(String action, String instructions) {
+    public byte[] post(String action, String instructions) {
         response.setStatusCode(200);
-        return response.toString();
+        return response.responseToBytes();
     }
 
     @Override
-    public String put(String action, String instructions) {
+    public byte[] put(String action, String instructions) {
         response.setStatusCode(200);
-        return response.toString();    }
+        return response.responseToBytes();    }
 
-    @Override
-    public String delete(String action, String instructions) {
-        response.setStatusCode(200);
-        return response.toString();    }
 }

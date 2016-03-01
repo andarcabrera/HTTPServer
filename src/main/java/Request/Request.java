@@ -75,7 +75,6 @@ public class Request implements RequestBuilder {
     }
 
     private void processInitialLine() {
-        System.out.println("initial line" + initialLine);
         String[] parsedLine = getInitialLine().split(" ");
         method = parsedLine[0];
         url = parsedLine[1];

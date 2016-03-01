@@ -6,16 +6,13 @@ import Request.InfoProcessor;
  * Created by andacabrera29 on 2/25/16.
  */
 public class MockRequestProcessor implements InfoProcessor {
-    String response;
+    byte[] response;
 
     public void handleRequest(StringBuffer rawRequest) {
-        System.out.println("Here");
-
-        response = rawRequest.substring(0);
-        System.out.println(response);
+        response = rawRequest.substring(0).getBytes();
     }
 
-    public String response() {
+    public byte[] response() {
         return response;
     }
 }

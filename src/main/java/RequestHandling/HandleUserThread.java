@@ -22,7 +22,7 @@ public class HandleUserThread implements Runnable{
         return input.readMessage();
     }
 
-    private void writeMessage(String message) {
+    private void writeMessage(byte[] message) {
         output.writeMessage(message);
     }
 
@@ -42,7 +42,7 @@ public class HandleUserThread implements Runnable{
 
         requestProcessor.handleRequest(rawRequest);
 
-        String response = requestProcessor.response();
+        byte[] response = requestProcessor.response();
         if (response != null) {
             System.out.println(Thread.currentThread().getName() + "response:");
             System.out.println(response);

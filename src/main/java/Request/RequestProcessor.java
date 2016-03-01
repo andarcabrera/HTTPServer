@@ -21,7 +21,7 @@ public class RequestProcessor implements InfoProcessor {
         this.rawRequest = rawRequest;
     }
 
-    public String response(){
+    public byte[] response(){
         return router.getResponse();
     }
 }

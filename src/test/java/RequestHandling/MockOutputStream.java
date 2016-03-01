@@ -8,8 +8,8 @@ import IOStreams.HttpOutputStream;
 public class MockOutputStream implements HttpOutputStream{
     private StringBuffer messagesFromServer = new StringBuffer();
 
-    public void writeMessage(String message) {
-        messagesFromServer.append(message);
+    public void writeMessage(byte[] message) {
+        messagesFromServer.append(new String(message));
     }
 
     public String revealOutputStream() {
