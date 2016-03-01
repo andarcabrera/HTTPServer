@@ -1,27 +1,23 @@
 package Router;
 
+import Controllers.SimpleController;
 import Request.Request;
-import RequestHandling.HandleGet;
-import RequestHandling.Handler;
+import Response.ResponseBuilder;
 
-import java.util.ArrayList;
 
 /**
  * Created by andacabrera29 on 2/25/16.
  */
 public class Router {
-    ArrayList<Handler> handlers = new ArrayList<Handler>();
-    private HandleGet handleGet = new HandleGet();
+    ResponseBuilder response = new Response.ResponseBuilder();
+    SimpleController controller;
 
     public void route(Request request) {
-        switch (request.getMethod()) {
-            case "GET":
-                handleGet.setRequest(request);
-                break;
-        }
+        controller = new SimpleController(request, response);
+
     }
 
     public String getResponse(){
-        return handleGet.getResponse();
+        return controller.sendResponse();
     }
 }

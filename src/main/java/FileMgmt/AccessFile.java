@@ -14,12 +14,7 @@ public class AccessFile {
 
         StringBuffer result = new StringBuffer("");
 
-        if (fileName.equals("/")){
-            return "HTTP/1.0 200 OK\n";
-        }
-
           try (Scanner scanner = new Scanner(new File(path, fileName))) {
-              result.append("HTTP/1.0 200 OK\n\n");
 
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
@@ -29,7 +24,6 @@ public class AccessFile {
                 scanner.close();
 
             } catch (IOException e) {
-                result.append("HTTP/1.0 404 Not Found\n");
                 e.printStackTrace();
             }
 

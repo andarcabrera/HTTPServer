@@ -15,7 +15,6 @@ public class Request implements RequestBuilder {
     private String requestBody = "";
 
     public Request(StringBuffer rawRequest){
-        System.out.println("rawRequest" + rawRequest);
         this.rawRequest = rawRequest.toString();
     }
 
