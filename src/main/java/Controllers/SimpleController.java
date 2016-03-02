@@ -1,14 +1,21 @@
 package Controllers;
 
+import FileMgmt.AccessDirectory;
 import FileMgmt.AccessFile;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import Views.HtmlContent;
+
+import java.io.File;
 
 
 public class SimpleController implements Controller{
     ResponseBuilder response;
-    private AccessFile accessFile = new AccessFile();
     RequestBuilder request;
+    private AccessFile accessFile = new AccessFile();
+    private AccessDirectory accessDirectory = new AccessDirectory();
+    private HtmlContent htmlContent = new HtmlContent();
+    private String sourceDirectory = "/Users/andacabrera29/Desktop/cob_spec/public";
 
     public SimpleController(RequestBuilder request, ResponseBuilder response){
         this.request = request;
@@ -36,8 +43,11 @@ public class SimpleController implements Controller{
     public byte[] get(String action) {
         if (action.equals("/")){
             response.setStatusCode(200);
+            File files[] = accessDirectory.getFiles("/Users/andacabrera29/Desktop/cob_spec/public");
+            byte[] body = htmlContent.htmlBody(files, sourceDirectory);
+            response.setResponseBody(body);
         } else {
-            byte[] fileContent = accessFile.readFromFile("/Users/andacabrera29/Desktop/cob_spec/public" + action);
+            byte[] fileContent = accessFile.readFromFile(sourceDirectory + action);
             if (fileContent.length == 0){
                 response.setStatusCode(404);
             } else {
