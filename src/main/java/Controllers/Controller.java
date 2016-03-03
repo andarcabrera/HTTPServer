@@ -5,8 +5,8 @@ import Response.ResponseBuilder;
 
 
 public abstract class Controller implements ControllerStrategy {
-    private ResponseBuilder response;
-    private RequestBuilder request;
+    public ResponseBuilder response;
+    public RequestBuilder request;
 
     public Controller(RequestBuilder request, ResponseBuilder response){
         this.request = request;
@@ -29,15 +29,15 @@ public abstract class Controller implements ControllerStrategy {
         return messageFromServer;
     }
 
-    private byte[] get(RequestBuilder request) {
+    public byte[] get(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    private byte[] post(RequestBuilder request) {
+    public byte[] post(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    private byte[] put(RequestBuilder request) {
+    public byte[] put(RequestBuilder request) {
         return fourOhFourResponse();
     }
 

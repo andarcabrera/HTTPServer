@@ -6,5 +6,6 @@ package Response;
 public interface ResponseBuilder {
     public void setStatusCode(Integer code);
     public void addHeader(String header);
+    public void setResponseBody(byte[] bodyContent);
     public byte[] responseToBytes();
 }

@@ -18,6 +18,11 @@ public class MockResponse implements ResponseBuilder {
     }
 
     @Override
+    public void setResponseBody(byte[] bodyContent) {
+
+    }
+
+    @Override
     public byte[] responseToBytes() {
         return statusCode.getBytes();
     }
