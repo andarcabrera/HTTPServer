@@ -7,6 +7,8 @@ import Response.ResponseBuilder;
 import Views.HtmlContent;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class SimpleController implements Controller{
@@ -46,6 +48,9 @@ public class SimpleController implements Controller{
             File files[] = accessDirectory.getFiles("/Users/andacabrera29/Desktop/cob_spec/public");
             byte[] body = htmlContent.htmlBody(files, sourceDirectory);
             response.setResponseBody(body);
+        } else if (action.equals("/parameters")){
+            response.setStatusCode(200);
+            response.setResponseBody(getParams(request.getParams()));
         } else {
             byte[] fileContent = accessFile.readFromFile(sourceDirectory + action);
             if (fileContent.length == 0){
@@ -69,4 +74,15 @@ public class SimpleController implements Controller{
         response.setStatusCode(200);
         return response.responseToBytes();    }
 
-}
+    private byte[] getParams(HashMap <String, String> params){
+        String paramDetails = "";
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            String name = entry.getKey();
+            String content = entry.getValue();
+            String variable = name + " = " + content + "\n";
+            paramDetails += variable;
+            }
+        return  paramDetails.getBytes();
+        }
+    }
+

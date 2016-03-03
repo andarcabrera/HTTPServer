@@ -45,7 +45,7 @@ public class HandleUserThread implements Runnable{
         byte[] response = requestProcessor.response();
         if (response != null) {
             System.out.println(Thread.currentThread().getName() + "response:");
-            System.out.println(response);
+            System.out.println(new String(response));
             writeMessage(response);
             }
         System.out.println("Out of the loop");

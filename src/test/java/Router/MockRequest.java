@@ -3,6 +3,7 @@ package Router;
 import Request.RequestBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by andacabrera29 on 2/25/16.
@@ -35,6 +36,11 @@ public class MockRequest implements RequestBuilder {
 
     @Override
     public String getVersion() {
+        return null;
+    }
+
+    @Override
+    public HashMap<String, String> getParams() {
         return null;
     }
 }

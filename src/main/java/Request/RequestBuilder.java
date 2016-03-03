@@ -1,6 +1,7 @@
 package Request;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public interface RequestBuilder {
@@ -15,5 +16,7 @@ public interface RequestBuilder {
     public String getUrl();
 
     public String getVersion();
+
+    public HashMap<String, String> getParams();
 
 }

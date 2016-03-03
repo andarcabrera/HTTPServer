@@ -1,6 +1,8 @@
 package Request;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Request implements RequestBuilder {
@@ -9,6 +11,7 @@ public class Request implements RequestBuilder {
     private String rawBody = "";
     private String method = "";
     private String url = "";
+    private HashMap<String, String> params = new HashMap<>();
     private String version= "";
     private String initialLine = "";
     private ArrayList<String> headers = new ArrayList<String>();
@@ -53,6 +56,10 @@ public class Request implements RequestBuilder {
         return version;
     }
 
+    public HashMap<String, String> getParams(){
+        return params;
+    }
+
 
     private void separateHeaderBody(){
         String[] parsedRequest = rawRequest.split("\n\\s*\n");
@@ -77,9 +84,8 @@ public class Request implements RequestBuilder {
     private void processInitialLine() {
         String[] parsedLine = getInitialLine().split(" ");
         method = parsedLine[0];
-        url = parsedLine[1];
+        getUrlAndParams(parsedLine[1]);
         version = parsedLine[2];
-
     }
 
     private String[] getRawHeaderLines() {
@@ -89,5 +95,80 @@ public class Request implements RequestBuilder {
     private boolean methodName(String line){
         String firstWord = line.split(" ")[0];
         return MethodNames.methodNames.contains(firstWord);
+    }
+
+    private void getUrlAndParams(String rawUrlParams){
+        String[] rawVariables = getRawVariables(rawUrlParams);
+        for (String rawVariable : rawVariables ){
+            String name = getVariableName(rawVariable);
+            String rawContent = getVariableContent(rawVariable);
+            String content = processRawVariable(rawContent);
+            params.put(name, content);
+        }
+    }
+
+    private String getVariableName(String rawVariable){
+        String[] splitVariable = rawVariable.split("=");
+        return splitVariable[0];
+    }
+
+    private String getVariableContent(String rawVariable){
+        String[] splitVariable = rawVariable.split("=");
+        String content  = "";
+        if (splitVariable.length > 1){
+            content = splitVariable[1];
+        }
+        return content;
+    }
+
+    private String processRawVariable(String rawVariable){
+        String decodedVariable = rawVariable;
+        HashMap<String, String> decoder = decodeUrl();
+        for (Map.Entry<String, String> entry : decoder.entrySet()) {
+            String urlCode = entry.getKey();
+            String decodedText = entry.getValue();
+            decodedVariable = decodedVariable.replaceAll(urlCode, decodedText);
+        }
+        return  decodedVariable.replaceAll("24", "\\$");
+    }
+
+    private String[] getRawVariables(String rawUrlParams){
+        String rawParams = getRawParams(rawUrlParams);
+        String[] rawVariables = rawParams.split("&");
+        return rawVariables;
+    }
+
+    private String getRawParams(String rawUrlParams){
+        String rawParameters = "";
+        String[] parsedUrl = rawUrlParams.split("\\?");
+        url = parsedUrl[0];
+
+        if (parsedUrl.length > 1){
+            rawParameters = parsedUrl[1];
+        }
+        return rawParameters;
+    }
+
+    private HashMap decodeUrl(){
+        HashMap<String, String> urlCodes = new HashMap();
+        urlCodes.put("20", " ");
+        urlCodes.put("22", "\"");
+        urlCodes.put("23", "#");
+        urlCodes.put("26", "&");
+        urlCodes.put("40", "@");
+        urlCodes.put("43", "+");
+        urlCodes.put("2B", "+");
+        urlCodes.put("2C", ",");
+        urlCodes.put("2F", "/");
+        urlCodes.put("3A", ":");
+        urlCodes.put("3B", ";");
+        urlCodes.put("3C", "<");
+        urlCodes.put("3D", "=");
+        urlCodes.put("3E", ">");
+        urlCodes.put("3F", "?");
+        urlCodes.put("5B", "[");
+        urlCodes.put("5D", "]");
+        urlCodes.put("%", "");
+        return urlCodes;
     }
 }
