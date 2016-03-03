@@ -6,7 +6,7 @@ import IOStreams.HttpInputStream;
 import IOStreams.HttpOutputStream;
 import Request.InfoProcessor;
 import Request.RequestProcessor;
-import RequestHandling.HandleUserThread;
+import ClientThreads.HandleUserThread;
 
 import java.io.*;
 import java.net.ServerSocket;

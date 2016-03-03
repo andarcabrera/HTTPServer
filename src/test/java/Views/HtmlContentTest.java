@@ -19,7 +19,7 @@ public class HtmlContentTest {
     public void setup(){
         htmlContent = new HtmlContent();
         directoryName = "./src/test/java/resources";
-        File directory = new File(String.valueOf(ClassLoader.getSystemResource(directoryName)));
+        File directory = new File(directoryName);
         files = directory.listFiles();
     }
 

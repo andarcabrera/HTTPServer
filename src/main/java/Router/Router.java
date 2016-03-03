@@ -2,11 +2,11 @@ package Router;
 
 import Controllers.SimpleController;
 import Request.Request;
-import Response.ResponseBuilder;
+import Response.HttpServerResponse;
 
 
 public class Router {
-    ResponseBuilder response = new Response.ResponseBuilder();
+    HttpServerResponse response = new HttpServerResponse();
     SimpleController controller;
 
     public void route(Request request) {

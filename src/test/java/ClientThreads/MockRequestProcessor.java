@@ -1,4 +1,4 @@
-package RequestHandling;
+package ClientThreads;
 
 import Request.InfoProcessor;
 

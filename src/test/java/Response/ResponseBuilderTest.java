@@ -8,7 +8,7 @@ public class ResponseBuilderTest {
 
     @Test
     public void testResponseToBytes() throws Exception {
-        ResponseBuilder response = new ResponseBuilder();
+        HttpServerResponse response = new HttpServerResponse();
         response.setStatusCode(200);
         response.addHeader("Content-Type: text/html");
         response.setResponseBody("This is a test".getBytes());
