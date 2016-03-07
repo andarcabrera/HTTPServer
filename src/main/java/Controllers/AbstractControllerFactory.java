@@ -3,9 +3,7 @@ package Controllers;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
-/**
- * Created by andacabrera29 on 3/7/16.
- */
+
 public abstract class AbstractControllerFactory {
 
     public Controller createController(String route, RequestBuilder request, ResponseBuilder response){

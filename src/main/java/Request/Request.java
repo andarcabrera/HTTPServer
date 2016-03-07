@@ -73,7 +73,7 @@ public class Request implements RequestBuilder {
 
     private void setHeaderLines(){
         for (int i = 0; i < getRawHeaderLines().length;i++){
-            if (methodName(getRawHeaderLines()[i])){
+            if (i == 0 ){
                 initialLine = getRawHeaderLines()[i];
             }else{
                 headers.add(getRawHeaderLines()[i]);

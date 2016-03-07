@@ -24,6 +24,7 @@ public class RoutesSetup {
         addRoute("/image.gif", "fileController");
         addRoute("/parameters", "parameterController");
         addRoute("/form", "simpleController");
+        addRoute("/text-file.txt", "fileController");
     }
 
     private void addRoute(String action, String controller){

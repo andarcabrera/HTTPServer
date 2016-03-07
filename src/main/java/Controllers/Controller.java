@@ -25,6 +25,9 @@ public abstract class Controller implements ControllerStrategy {
             case "PUT":
                 messageFromServer = put(request);
                 break;
+            default:
+                messageFromServer = bogus();
+                break;
         }
         return messageFromServer;
     }
@@ -41,8 +44,15 @@ public abstract class Controller implements ControllerStrategy {
         return fourOhFourResponse();
     }
 
+    public byte[] bogus() {
+        response.setStatusCode(405);
+        return  response.responseToBytes();
+    }
+
     private byte[] fourOhFourResponse() {
         response.setStatusCode(404);
         return  response.responseToBytes();
     }
+
+
 }

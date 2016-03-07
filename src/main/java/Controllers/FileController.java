@@ -28,5 +28,15 @@ public class FileController extends Controller{
         }
         return response.responseToBytes();
     }
+
+    public byte[] post(RequestBuilder request) {
+        response.setStatusCode(405);
+        return response.responseToBytes();
+    }
+
+    public byte[] put(RequestBuilder request) {
+        response.setStatusCode(405);
+        return response.responseToBytes();
+    }
 }
 
