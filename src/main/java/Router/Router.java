@@ -20,6 +20,7 @@ public class Router {
     public void route(Request request) {
         String action = request.getUrl();
         controller = createController(action, request, response);
+        System.out.println(controller.getClass());
     }
 
     private Controller createController(String action, RequestBuilder request, ResponseBuilder response){

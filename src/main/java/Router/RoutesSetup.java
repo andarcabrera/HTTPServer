@@ -17,13 +17,12 @@ public class RoutesSetup {
     }
 
     private void addRoutes(){
-        addRoute("/", "simpleController");
-        addRoute("/file1", "simpleController");
-        addRoute("/foobar", "simpleController");
-        addRoute("/image.jpeg", "simpleController");
-        addRoute("/image.png", "simpleController");
-        addRoute("/image.gif", "simpleController");
-        addRoute("/parameters", "simpleController");
+        addRoute("/", "directoryController");
+        addRoute("/file1", "fileController");
+        addRoute("/image.jpeg", "fileController");
+        addRoute("/image.png", "fileController");
+        addRoute("/image.gif", "fileController");
+        addRoute("/parameters", "parameterController");
         addRoute("/form", "simpleController");
     }
 
