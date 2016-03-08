@@ -25,10 +25,10 @@ public class FileController extends Controller{
 
         byte[] fileContent;
         if (range != null){
-            response.setStatusCode(206);
+            response.setStatusCode("PartialContent");
             fileContent = accessFile.readPartiallyFromFile(sourceDirectory + request.getUrl(), range);
         } else {
-            response.setStatusCode(200);
+            response.setStatusCode("OK");
             fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
         }
         response.setResponseBody(fileContent);
@@ -36,12 +36,12 @@ public class FileController extends Controller{
     }
 
     public byte[] post(RequestBuilder request) {
-        response.setStatusCode(405);
+        response.setStatusCode("MethodNotAllowed");
         return response.responseToBytes();
     }
 
     public byte[] put(RequestBuilder request) {
-        response.setStatusCode(405);
+        response.setStatusCode("MethodNotAllowed");
         return response.responseToBytes();
     }
 

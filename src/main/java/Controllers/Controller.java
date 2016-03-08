@@ -59,12 +59,12 @@ public abstract class Controller implements ControllerStrategy {
     }
 
     public byte[] bogus() {
-        response.setStatusCode(405);
+        response.setStatusCode("MethodNotAllowed");
         return  response.responseToBytes();
     }
 
     private byte[] fourOhFourResponse() {
-        response.setStatusCode(404);
+        response.setStatusCode("PageNotFound");
         return  response.responseToBytes();
     }
 

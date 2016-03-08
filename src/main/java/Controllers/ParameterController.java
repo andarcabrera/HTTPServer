@@ -13,7 +13,7 @@ public class ParameterController extends Controller{
     }
 
     public byte[] get(RequestBuilder request) {
-        response.setStatusCode(200);
+        response.setStatusCode("OK");
         response.setResponseBody(getParams(request.getParams()));
         return response.responseToBytes();
     }

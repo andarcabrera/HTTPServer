@@ -8,8 +8,8 @@ import Response.ResponseBuilder;
 public class MockResponse implements ResponseBuilder {
     private String statusCode = "";
     @Override
-    public void setStatusCode(Integer code) {
-        this.statusCode = String.valueOf(code);
+    public void setStatusCode(String status) {
+        this.statusCode = status;
     }
 
     @Override

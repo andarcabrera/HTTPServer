@@ -11,17 +11,17 @@ public class DefaultController extends Controller{
     }
 
     public byte[] get(RequestBuilder request) {
-        response.setStatusCode(404);
+        response.setStatusCode("PageNotFound");
         return response.responseToBytes();
     }
 
     public byte[] post(RequestBuilder request) {
-        response.setStatusCode(404);
+        response.setStatusCode("PageNotFound");
         return response.responseToBytes();
     }
 
     public byte[] put(RequestBuilder request) {
-        response.setStatusCode(404);
+        response.setStatusCode("PageNotFound");
         return response.responseToBytes();
     }
 }

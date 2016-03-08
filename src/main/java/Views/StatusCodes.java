@@ -4,19 +4,17 @@ import java.util.HashMap;
 
 
 public class StatusCodes {
-    public static final HashMap<Integer, String> statusCodes = new HashMap<Integer, String>();
+    public static final HashMap<String, String> statusCodes = new HashMap<>();
 
     private static void populateStatusCodes(){
-        statusCodes.put(200, "200 OK");
-        statusCodes.put(206, "206 Partial Content");
-        statusCodes.put(404, "404 Not Found");
-        statusCodes.put(405, "405 Method Not Allowed");
-        statusCodes.put(406, "406 Not Acceptable");
-        statusCodes.put(451, "451 Redirect");
+        statusCodes.put("OK", "200 OK");
+        statusCodes.put("PartialContent", "206 Partial Content");
+        statusCodes.put("PageNotFound", "404 Not Found");
+        statusCodes.put("MethodNotAllowed", "405 Method Not Allowed");
     }
 
-    public static String getStatus(Integer code){
+    public static String getStatus(String status){
         populateStatusCodes();
-        return statusCodes.get(code);
+        return statusCodes.get(status);
     }
 }

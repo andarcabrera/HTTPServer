@@ -12,8 +12,8 @@ public class StatusCodesTest {
 
     @Test
     public void testgetStatus() throws Exception {
-        assertEquals("200 OK", StatusCodes.getStatus(200));
-        assertEquals("404 Not Found", StatusCodes.getStatus(404));
+        assertEquals("200 OK", StatusCodes.getStatus("OK"));
+        assertEquals("404 Not Found", StatusCodes.getStatus("PageNotFound"));
     }
 
 }

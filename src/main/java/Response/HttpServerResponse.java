@@ -14,8 +14,8 @@ public class HttpServerResponse implements ResponseBuilder{
     private byte[] body;
     private ByteArrayOutputStream byteResponse = new ByteArrayOutputStream();
 
-    public void setStatusCode(Integer code){
-        this.statusCode = StatusCodes.getStatus(code);
+    public void setStatusCode(String status){
+        this.statusCode = StatusCodes.getStatus(status);
     }
 
     public void addHeader(String headerTitle, String headerDetail){
