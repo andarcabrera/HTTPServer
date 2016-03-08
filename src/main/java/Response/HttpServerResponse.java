@@ -3,14 +3,14 @@ package Response;
 import Views.StatusCodes;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class HttpServerResponse implements ResponseBuilder{
     private String version = "HTTP/1.0";
     private String statusCode = "";
-    private ArrayList<String> headers = new ArrayList<String>();
+    private HashMap<String, String> headers = new HashMap<>();
     private byte[] body;
     private ByteArrayOutputStream byteResponse = new ByteArrayOutputStream();
 
@@ -18,8 +18,8 @@ public class HttpServerResponse implements ResponseBuilder{
         this.statusCode = StatusCodes.getStatus(code);
     }
 
-    public void addHeader(String header){
-        headers.add(header);
+    public void addHeader(String headerTitle, String headerDetail){
+        headers.put(headerTitle, headerDetail);
     }
 
     public byte[] responseToBytes(){
@@ -40,12 +40,13 @@ public class HttpServerResponse implements ResponseBuilder{
 
     private String headersToString(){
         String headersString = "";
-        Iterator headersIterator = headers.iterator();
-        while (headersIterator.hasNext()) {
-            headersString += headersIterator.next() + "\n";
+        for (Map.Entry<String, String> entry : headers.entrySet()) {
+            String headerTitle = entry.getKey();
+            String headerContent = entry.getValue();
+            headersString += headerTitle + ": " + headerContent + "\n";
         }
         return headersString;
-        }
+    }
 
     public void setResponseBody(byte[] message){
         this.body = message;

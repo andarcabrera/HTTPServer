@@ -37,5 +37,11 @@ public class SimpleController extends Controller{
         response.setStatusCode(200);
         return response.responseToBytes();
     }
+
+    public byte[] options() {
+        response.setStatusCode(200);
+        response.addHeader("Allow", "GET,HEAD,POST,OPTIONS,PUT");
+        return response.responseToBytes();
+    }
 }
 

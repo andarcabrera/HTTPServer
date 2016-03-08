@@ -13,7 +13,7 @@ public class MockResponse implements ResponseBuilder {
     }
 
     @Override
-    public void addHeader(String header) {
+    public void addHeader(String headerTitle, String headerContent) {
 
     }
 

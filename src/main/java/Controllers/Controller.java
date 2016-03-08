@@ -28,6 +28,9 @@ public abstract class Controller implements ControllerStrategy {
             case "DELETE":
                 messageFromServer = delete(request);
                 break;
+            case "OPTIONS":
+                messageFromServer = options();
+                break;
             default:
                 messageFromServer = bogus();
                 break;
@@ -48,6 +51,10 @@ public abstract class Controller implements ControllerStrategy {
     }
 
     public byte[] delete(RequestBuilder request) {
+        return fourOhFourResponse();
+    }
+
+    public byte[] options() {
         return fourOhFourResponse();
     }
 

@@ -26,6 +26,7 @@ public class RoutesSetup {
         addRoute("/form", "simpleController");
         addRoute("/text-file.txt", "fileController");
         addRoute("/partial_content.txt", "fileController");
+        addRoute("/method_options", "simpleController");
     }
 
     private void addRoute(String action, String controller){
