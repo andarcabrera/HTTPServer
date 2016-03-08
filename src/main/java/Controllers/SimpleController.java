@@ -13,35 +13,35 @@ public class SimpleController extends Controller{
         super(request, response);
     }
 
-    public byte[] get(RequestBuilder request) {
+    public ResponseBuilder get(RequestBuilder request) {
         byte[] fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
         response.setStatusCode("OK");
         response.setResponseBody(fileContent);
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] post(RequestBuilder request) {
+    public ResponseBuilder post(RequestBuilder request) {
         accessFile.writeToFile(sourceDirectory + request.getUrl(), request.getRawBody());
         response.setStatusCode("OK");
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] put(RequestBuilder request) {
+    public ResponseBuilder put(RequestBuilder request) {
         accessFile.writeToFile(sourceDirectory + request.getUrl(), request.getRawBody());
         response.setStatusCode("OK");
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] delete(RequestBuilder request) {
+    public ResponseBuilder delete(RequestBuilder request) {
         accessFile.deleteFileContent(sourceDirectory + request.getUrl());
         response.setStatusCode("OK");
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] options() {
+    public ResponseBuilder options() {
         response.setStatusCode("OK");
         response.addHeader("Allow", "GET,HEAD,POST,OPTIONS,PUT");
-        return response.responseToBytes();
+        return response;
     }
 }
 

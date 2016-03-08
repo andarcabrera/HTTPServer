@@ -10,19 +10,19 @@ public class DefaultController extends Controller{
         super(request, response);
     }
 
-    public byte[] get(RequestBuilder request) {
+    public ResponseBuilder get(RequestBuilder request) {
         response.setStatusCode("PageNotFound");
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] post(RequestBuilder request) {
+    public ResponseBuilder post(RequestBuilder request) {
         response.setStatusCode("PageNotFound");
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] put(RequestBuilder request) {
+    public ResponseBuilder put(RequestBuilder request) {
         response.setStatusCode("PageNotFound");
-        return response.responseToBytes();
+        return response;
     }
 }
 

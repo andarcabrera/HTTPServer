@@ -17,12 +17,12 @@ public class DirectoryController extends Controller{
         super(request, response);
     }
 
-    public byte[] get(RequestBuilder request) {
+    public ResponseBuilder get(RequestBuilder request) {
         response.setStatusCode("OK");
         File files[] = accessDirectory.getFiles("/Users/andacabrera29/Desktop/cob_spec/public");
         byte[] body = htmlContent.htmlBody(files, sourceDirectory);
         response.setResponseBody(body);
-        return response.responseToBytes();
+        return response;
     }
 }
 

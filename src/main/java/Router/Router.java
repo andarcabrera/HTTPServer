@@ -2,7 +2,6 @@ package Router;
 
 import Controllers.Controller;
 import Controllers.ControllerFactory;
-import Request.Request;
 import Request.RequestBuilder;
 import Response.HttpServerResponse;
 import Response.ResponseBuilder;
@@ -11,13 +10,13 @@ import java.util.HashMap;
 
 
 public class Router {
-    HttpServerResponse response = new HttpServerResponse();
+    ResponseBuilder response = new HttpServerResponse();
     RoutesSetup routesSetup = new RoutesSetup();
     ControllerFactory controllerFactory = new ControllerFactory();
     Controller controller;
 
 
-    public void route(Request request) {
+    public void route(RequestBuilder request) {
         String action = request.getUrl();
         controller = createController(action, request, response);
         System.out.println(controller.getClass());
@@ -30,7 +29,8 @@ public class Router {
 
 
     public byte[] getResponse(){
-        return controller.sendResponse();
+        response =  controller.sendResponse();
+        return response.responseToBytes();
     }
 
     private HashMap<String, String> getRoutes(){

@@ -12,10 +12,10 @@ public class ParameterController extends Controller{
         super(request, response);
     }
 
-    public byte[] get(RequestBuilder request) {
+    public ResponseBuilder get(RequestBuilder request) {
         response.setStatusCode("OK");
         response.setResponseBody(getParams(request.getParams()));
-        return response.responseToBytes();
+        return response;
     }
 
     private byte[] getParams(HashMap <String, String> params){

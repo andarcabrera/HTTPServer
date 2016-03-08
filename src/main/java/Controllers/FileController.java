@@ -19,7 +19,7 @@ public class FileController extends Controller{
         super(request, response);
     }
 
-    public byte[] get(RequestBuilder request) {
+    public ResponseBuilder get(RequestBuilder request) {
         HashMap<String, String> headers = request.getHeaders();
         String range = headers.get("Range");
 
@@ -32,17 +32,17 @@ public class FileController extends Controller{
             fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
         }
         response.setResponseBody(fileContent);
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] post(RequestBuilder request) {
+    public ResponseBuilder post(RequestBuilder request) {
         response.setStatusCode("MethodNotAllowed");
-        return response.responseToBytes();
+        return response;
     }
 
-    public byte[] put(RequestBuilder request) {
+    public ResponseBuilder put(RequestBuilder request) {
         response.setStatusCode("MethodNotAllowed");
-        return response.responseToBytes();
+        return response;
     }
 
 }

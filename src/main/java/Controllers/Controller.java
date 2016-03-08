@@ -13,59 +13,58 @@ public abstract class Controller implements ControllerStrategy {
         this.response = response;
     }
 
-    public byte[] sendResponse(){
-        byte[] messageFromServer = null;
+    public ResponseBuilder sendResponse(){
         switch (request.getMethod()) {
             case "GET":
-                messageFromServer = get(request);
+                response = get(request);
                 break;
             case "POST":
-                messageFromServer = post(request);
+                response = post(request);
                 break;
             case "PUT":
-                messageFromServer = put(request);
+                response = put(request);
                 break;
             case "DELETE":
-                messageFromServer = delete(request);
+                response = delete(request);
                 break;
             case "OPTIONS":
-                messageFromServer = options();
+                response = options();
                 break;
             default:
-                messageFromServer = bogus();
+                response = bogus();
                 break;
         }
-        return messageFromServer;
+        return response;
     }
 
-    public byte[] get(RequestBuilder request) {
+    public ResponseBuilder get(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public byte[] post(RequestBuilder request) {
+    public ResponseBuilder post(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public byte[] put(RequestBuilder request) {
+    public ResponseBuilder put(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public byte[] delete(RequestBuilder request) {
+    public ResponseBuilder delete(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public byte[] options() {
+    public ResponseBuilder options() {
         return fourOhFourResponse();
     }
 
-    public byte[] bogus() {
+    public ResponseBuilder bogus() {
         response.setStatusCode("MethodNotAllowed");
-        return  response.responseToBytes();
+        return response;
     }
 
-    private byte[] fourOhFourResponse() {
+    private ResponseBuilder fourOhFourResponse() {
         response.setStatusCode("PageNotFound");
-        return  response.responseToBytes();
+        return response;
     }
 
 

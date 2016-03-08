@@ -7,7 +7,7 @@ import Router.Router;
  */
 public class RequestProcessor implements InfoProcessor {
     private StringBuffer rawRequest;
-    private Request request;
+    private RequestBuilder request;
     private Router router = new Router();
 
 
