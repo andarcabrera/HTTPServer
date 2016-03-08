@@ -11,6 +11,7 @@ public class HandleUserThread implements Runnable{
     private HttpInputStream input;
     private HttpOutputStream output;
     private InfoProcessor requestProcessor;
+    private String directory;
 
     public HandleUserThread(HttpInputStream inputStream, HttpOutputStream outputStream, InfoProcessor requestProcessor) {
         this.input =  inputStream;

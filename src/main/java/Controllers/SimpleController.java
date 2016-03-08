@@ -7,7 +7,6 @@ import Response.ResponseBuilder;
 
 public class SimpleController extends Controller{
     private AccessFile accessFile = new AccessFile();
-    private String sourceDirectory = "/Users/andacabrera29/Desktop/cob_spec/public";
 
     public SimpleController(RequestBuilder request, ResponseBuilder response){
         super(request, response);

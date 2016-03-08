@@ -15,11 +15,7 @@ public class SetUpTest {
 
     @Test
     public void testGetPort() throws Exception {
-        assertEquals("5000", serverSetup.getPort());
+        assertEquals(5000, serverSetup.getPort());
     }
 
-    @Test
-    public void testGetDirectory() throws Exception {
-        assertEquals("/file/public", serverSetup.getDirectory());
-    }
 }

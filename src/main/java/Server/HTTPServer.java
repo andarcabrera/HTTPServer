@@ -14,8 +14,8 @@ import java.net.Socket;
 
 
 public class HTTPServer {
-    public void listen() throws IOException {
-        ServerSocket chatServer = new ServerSocket(5000);
+    public void listen(int port) throws IOException {
+        ServerSocket chatServer = new ServerSocket(port);
 
         try {
             while (true) {

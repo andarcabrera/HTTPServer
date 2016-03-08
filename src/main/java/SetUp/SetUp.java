@@ -1,8 +1,10 @@
 package SetUp;
 
+import java.util.Properties;
+
 public class SetUp {
     private String[] args;
-    private String port;
+    private int port;
     private String directory;
 
     public SetUp(String[] args){
@@ -13,21 +15,23 @@ public class SetUp {
 
     private void setPort(){
         if(args[0].equals("-p")){
-            port = args[1];
+            port = Integer.parseInt(args[1]);
         }
     }
 
     private void setDirectory(){
         if(args[2].equals("-d")){
             directory = args[3];
+            setSystemPropertiesDirectory(directory);
         }
     }
 
-    public String getPort(){
+    public int getPort(){
         return port;
     }
 
-    public String getDirectory(){
-        return directory;
+    public void setSystemPropertiesDirectory(String directory){
+        Properties props = System.getProperties();
+        props.setProperty("source_directory", directory);
     }
 }

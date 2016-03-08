@@ -11,7 +11,6 @@ import java.io.File;
 public class DirectoryController extends Controller{
     private AccessDirectory accessDirectory = new AccessDirectory();
     private HtmlContent htmlContent = new HtmlContent();
-    private String sourceDirectory = "/Users/andacabrera29/Desktop/cob_spec/public";
 
     public DirectoryController(RequestBuilder request, ResponseBuilder response){
         super(request, response);

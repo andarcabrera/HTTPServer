@@ -5,8 +5,9 @@ import Response.ResponseBuilder;
 
 
 public abstract class Controller implements ControllerStrategy {
-    public ResponseBuilder response;
-    public RequestBuilder request;
+    protected ResponseBuilder response;
+    protected RequestBuilder request;
+    protected String sourceDirectory = System.getProperty("source_directory");
 
     public Controller(RequestBuilder request, ResponseBuilder response){
         this.request = request;
@@ -37,27 +38,27 @@ public abstract class Controller implements ControllerStrategy {
         return response;
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
+    protected ResponseBuilder get(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public ResponseBuilder post(RequestBuilder request) {
+    protected ResponseBuilder post(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public ResponseBuilder put(RequestBuilder request) {
+    protected ResponseBuilder put(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public ResponseBuilder delete(RequestBuilder request) {
+    protected ResponseBuilder delete(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
-    public ResponseBuilder options() {
+    protected ResponseBuilder options() {
         return fourOhFourResponse();
     }
 
-    public ResponseBuilder bogus() {
+    protected ResponseBuilder bogus() {
         response.setStatusCode("MethodNotAllowed");
         return response;
     }

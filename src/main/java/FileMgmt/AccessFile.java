@@ -81,8 +81,10 @@ public class AccessFile {
             if (rawRangeLimits.substring(1, 2).equals("-")) {
                 rangeString[0] = rawRangeLimits.substring(0, 1);
                 rangeString[1] = String.valueOf(file.length() - 1);
-            } else {
-                rangeString[0] = "71";
+            } else if (rawRangeLimits.substring(0, 1).equals("-")) {
+                int fileLenght = (int) file.length();
+                int totalBytes = Integer.parseInt(rawRangeLimits.substring(1, 2));
+                rangeString[0] = String.valueOf(fileLenght-totalBytes);
                 rangeString[1] = String.valueOf(file.length() - 1);
             }
         }

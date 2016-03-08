@@ -13,7 +13,6 @@ public class FileController extends Controller{
     private AccessFile accessFile = new AccessFile();
     private AccessDirectory accessDirectory = new AccessDirectory();
     private HtmlContent htmlContent = new HtmlContent();
-    private String sourceDirectory = "/Users/andacabrera29/Desktop/cob_spec/public";
 
     public FileController(RequestBuilder request, ResponseBuilder response){
         super(request, response);
