@@ -1,6 +1,5 @@
 package Request;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class Request implements RequestBuilder {
     private HashMap<String, String> params = new HashMap<>();
     private String version= "";
     private String initialLine = "";
-    private ArrayList<String> headers = new ArrayList<String>();
+    private HashMap<String, String> headers = new HashMap<>();
     private String requestBody = "";
 
     public Request(StringBuffer rawRequest){
@@ -36,7 +35,7 @@ public class Request implements RequestBuilder {
         return initialLine;
     }
 
-    public ArrayList<String> getHeaders(){
+    public HashMap<String, String> getHeaders(){
         return headers;
     }
 
@@ -72,12 +71,12 @@ public class Request implements RequestBuilder {
     }
 
     private void setHeaderLines(){
-        for (int i = 0; i < getRawHeaderLines().length;i++){
-            if (i == 0 ){
-                initialLine = getRawHeaderLines()[i];
-            }else{
-                headers.add(getRawHeaderLines()[i]);
-            }
+        initialLine = getRawHeaderLines()[0];
+        for (int i = 1; i < getRawHeaderLines().length - 1 ;i++){
+            String[] headerInfo = getRawHeaderLines()[i].split(": ");
+            String headerTitle = headerInfo[0];
+            String headerBody = headerInfo[1];
+            headers.put(headerTitle, headerBody);
         }
     }
 

@@ -2,7 +2,6 @@ package Router;
 
 import Request.RequestBuilder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -15,7 +14,7 @@ public class MockRequest implements RequestBuilder {
     }
 
     @Override
-    public ArrayList<String> getHeaders() {
+    public HashMap<String, String> getHeaders() {
         return null;
     }
 

@@ -8,11 +8,11 @@ public class RequestTest {
 
     @Test
     public void testSetRequestDetailsHeaderOnly() throws Exception {
-        StringBuffer rawRequest = new StringBuffer("GET url version\nheader1\nheader2");
+        StringBuffer rawRequest = new StringBuffer("GET url version\nheader_title: header_body\nheader2_title: header2_body\n \n");
         Request request = new Request(rawRequest);
         assertEquals("GET url version", request.getInitialLine());
-        assertEquals("header1", request.getHeaders().get(0));
-        assertEquals("header2", request.getHeaders().get(1));
+        assertEquals("header_body", request.getHeaders().get("header_title"));
+        assertEquals("header2_body", request.getHeaders().get("header2_title"));
         assertEquals("GET", request.getMethod());
         assertEquals("url", request.getUrl());
         assertEquals("version", request.getVersion());
@@ -20,13 +20,13 @@ public class RequestTest {
 
     @Test
     public void testSetRequestDetailsWithBody() throws Exception {
-        StringBuffer rawRequest1 = new StringBuffer("GET initial line\nheader1\n \nbody");
+        StringBuffer rawRequest1 = new StringBuffer("GET initial line\nheader_title: header_body\n \nbody");
         Request request1 = new Request(rawRequest1);
-        StringBuffer rawRequest2 = new StringBuffer("GET initial line\nheader1\n      \nbody");
+        StringBuffer rawRequest2 = new StringBuffer("GET initial line\nheader_title: header_body\n      \nbody");
         Request request2 = new Request(rawRequest2);
-        StringBuffer rawRequest3 = new StringBuffer("GET initial line\nheader1\n\nbody");
+        StringBuffer rawRequest3 = new StringBuffer("GET initial line\nheader_title: header_body\n\nbody");
         Request request3 = new Request(rawRequest3);
-        assertEquals("GET initial line\nheader1", request1.getRawHeader());
+        assertEquals("GET initial line\nheader_title: header_body", request1.getRawHeader());
         assertEquals("body", request1.getRawBody());
         assertEquals("body", request2.getRawBody());
         assertEquals("body", request3.getRawBody());

@@ -6,6 +6,8 @@ import Request.RequestBuilder;
 import Response.ResponseBuilder;
 import Views.HtmlContent;
 
+import java.util.HashMap;
+
 
 public class FileController extends Controller{
     private AccessFile accessFile = new AccessFile();
@@ -17,15 +19,19 @@ public class FileController extends Controller{
         super(request, response);
     }
 
-
     public byte[] get(RequestBuilder request) {
-        byte[] fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
-        if (fileContent.length == 0){
-            response.setStatusCode(404);
+        HashMap<String, String> headers = request.getHeaders();
+        String range = headers.get("Range");
+
+        byte[] fileContent;
+        if (range != null){
+            response.setStatusCode(206);
+            fileContent = accessFile.readPartiallyFromFile(sourceDirectory + request.getUrl(), range);
         } else {
             response.setStatusCode(200);
-            response.setResponseBody(fileContent);
+            fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
         }
+        response.setResponseBody(fileContent);
         return response.responseToBytes();
     }
 
@@ -38,5 +44,6 @@ public class FileController extends Controller{
         response.setStatusCode(405);
         return response.responseToBytes();
     }
+
 }
 

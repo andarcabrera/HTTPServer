@@ -1,13 +1,12 @@
 package Request;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public interface RequestBuilder {
     String getInitialLine();
 
-    public ArrayList<String> getHeaders();
+    public HashMap<String, String> getHeaders();
 
     public String getRawBody();
 
