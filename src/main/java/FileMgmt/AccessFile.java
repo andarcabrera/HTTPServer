@@ -1,17 +1,15 @@
 package FileMgmt;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by andacabrera29 on 2/25/16.
  */
 public class AccessFile {
+    FileInputStream fileInputStream = null;
+    FileOutputStream fileOutputStream = null;
 
     public byte[] readFromFile(String fileName) {
-        FileInputStream fileInputStream = null;
         File file = new File(fileName);
 
         byte[] fileContent = new byte[(int) file.length()];
@@ -31,7 +29,6 @@ public class AccessFile {
     }
 
     public byte[] readPartiallyFromFile(String fileName, String rawRange) {
-        FileInputStream fileInputStream = null;
         File file = new File(fileName);
 
         int[] range = parsedRange(rawRange, file);
@@ -52,6 +49,25 @@ public class AccessFile {
         return fileContent;
     }
 
+    public void writeToFile(String fileName, String message){
+        File file = new File(fileName);
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(message.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteFileContent(String fileName){
+        File file = new File(fileName);
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write("".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private int[] parsedRange(String rawRange, File file){
         int[] range = new int[2];

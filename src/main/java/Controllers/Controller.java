@@ -25,6 +25,9 @@ public abstract class Controller implements ControllerStrategy {
             case "PUT":
                 messageFromServer = put(request);
                 break;
+            case "DELETE":
+                messageFromServer = delete(request);
+                break;
             default:
                 messageFromServer = bogus();
                 break;
@@ -41,6 +44,10 @@ public abstract class Controller implements ControllerStrategy {
     }
 
     public byte[] put(RequestBuilder request) {
+        return fourOhFourResponse();
+    }
+
+    public byte[] delete(RequestBuilder request) {
         return fourOhFourResponse();
     }
 
