@@ -3,7 +3,7 @@ package Helpers;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by andacabrera29 on 3/9/16.
@@ -18,21 +18,27 @@ public class RangeParserTest {
 
     @Test
     public void testGetRangeBothLimitsProvided(){
-        assertArrayEquals(new int[]{0, 5}, parser.getRange("bytes=0-4", 10));
-        assertArrayEquals(new int[]{10, 45}, parser.getRange("bytes=10-44", 50));
-        assertArrayEquals(new int[]{10, 45}, parser.getRange(" bytes=10-44", 50));
-        assertArrayEquals(new int[]{10, 45}, parser.getRange(" bytes=10-44 ", 50));
+        assertEquals(5, parser.containerSize("bytes=0-4", 10));
+        assertEquals(0, parser.getSkipedBytes());
+        assertEquals(35, parser.containerSize("bytes=10-44", 50));
+        assertEquals(10, parser.getSkipedBytes());
+        assertEquals(35, parser.containerSize(" bytes=10-44", 50));
+        assertEquals(35, parser.containerSize(" bytes=10-44 ", 50));
     }
 
     @Test
     public void testGetRangeStartingRangeProvidedOnly(){
-        assertArrayEquals(new int[]{4, 10}, parser.getRange("bytes=4-", 10));
-        assertArrayEquals(new int[]{10, 20}, parser.getRange("bytes=10- ", 20));
+        assertEquals(6, parser.containerSize("bytes=4-", 10));
+        assertEquals(4, parser.getSkipedBytes());
+        assertEquals(10, parser.containerSize("bytes=10- ", 20));
+        assertEquals(10, parser.getSkipedBytes());
     }
 
     @Test
     public void testGetRangeBytesFromEndOFileProvided(){
-        assertArrayEquals(new int[]{4, 10}, parser.getRange("bytes=-6", 10));
-        assertArrayEquals(new int[]{9, 20}, parser.getRange("bytes=-11 ", 20));
+        assertEquals(6, parser.containerSize("bytes=-6", 10));
+        assertEquals(4, parser.getSkipedBytes());
+        assertEquals(11, parser.containerSize("bytes=-11 ", 20));
+        assertEquals(9, parser.getSkipedBytes());
     }
 }

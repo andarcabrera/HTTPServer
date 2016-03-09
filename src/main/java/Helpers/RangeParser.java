@@ -5,9 +5,20 @@ package Helpers;
  */
 public class RangeParser {
     private String rawRangeInfo;
-    private int[] range = new int[2];
+    private int lowerRange;
+    private int upperRange;
+    private int skippedBytes;
 
-    public int[] getRange(String rawRange, int fileLength){
+    public int containerSize(String rawRange, int fileLength){
+        getRange(rawRange, fileLength);
+        return upperRange - lowerRange;
+    }
+
+    public int getSkipedBytes(){
+        return skippedBytes;
+    }
+
+    private void getRange(String rawRange, int fileLength){
         splitRangeInfo(rawRange);
 
         if (rawRangeInfo.startsWith("-")) {
@@ -17,25 +28,27 @@ public class RangeParser {
         } else {
             twoLimitsProvided(rawRangeInfo);
         }
-        return range;
     }
 
     private void twoLimitsProvided(String rangeInfo){
         String[] splitRangeInfo = rangeInfo.split("-");
-        range[0] = Integer.parseInt(splitRangeInfo[0]);
-        range[1] = Integer.parseInt(splitRangeInfo[1]) + 1;
+        lowerRange = Integer.parseInt(splitRangeInfo[0]);
+        upperRange = Integer.parseInt(splitRangeInfo[1]) + 1;
+        skippedBytes = lowerRange;
     }
 
     private void lowerLimitProvided(String rangeInfo, int fileLength){
         String[] splitRangeInfo = rangeInfo.split("-");
-        range[0] = Integer.parseInt(splitRangeInfo[0]);
-        range[1] = fileLength;
+        lowerRange = Integer.parseInt(splitRangeInfo[0]);
+        upperRange = fileLength;
+        skippedBytes = lowerRange;
     }
 
     private void bytesFromEndofFileProvided(String rangeInfo, int fileLength){
         String trimmedRangeLimit = rangeInfo.substring(1);
-        range[0] = fileLength - Integer.parseInt(trimmedRangeLimit);
-        range[1] = fileLength;
+        lowerRange = fileLength - Integer.parseInt(trimmedRangeLimit);
+        upperRange = fileLength;
+        skippedBytes = upperRange-Integer.parseInt(trimmedRangeLimit);
     }
 
     private void splitRangeInfo(String rawRange){

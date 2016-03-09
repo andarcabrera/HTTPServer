@@ -34,13 +34,13 @@ public class AccessFile {
     public byte[] readPartiallyFromFile(String fileName, String rawRange) {
         File file = new File(fileName);
 
-        int[] range = parser.getRange(rawRange, (int) file.length());
-        byte[] fileContent = new byte[range[1] - range[0]];
+        int containerSize = parser.containerSize(rawRange, (int) file.length());
+        byte[] fileContent = new byte[containerSize];
 
         try {
             fileInputStream = new FileInputStream(file);
-            fileInputStream.skip(range[0]);
-            fileInputStream.read(fileContent, 0, range[1] - range[0]);
+            fileInputStream.skip(parser.getSkipedBytes());
+            fileInputStream.read(fileContent, 0, containerSize);
             fileInputStream.close();
 
         } catch (FileNotFoundException e) {

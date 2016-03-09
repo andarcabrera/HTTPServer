@@ -40,4 +40,14 @@ public class AccessFileTest {
         assertEquals("Travis", new String(accessFile.readPartiallyFromFile(filePath, "bytes=-6")));
         assertEquals(" is especially dedicated to Travis", new String(accessFile.readPartiallyFromFile(filePath, "bytes=9-")));
     }
+
+    @Test
+    public void deleteFileContent() throws Exception {
+        File testFile = File.createTempFile("testFile", "txt");
+        String filePath = testFile.getPath();
+        testFile.deleteOnExit();
+        accessFile.writeToFile(filePath, "This test is especially dedicated to Travis");
+        accessFile.deleteFileContent(filePath);
+        assertEquals("", new String(accessFile.readFromFile(filePath)));
+    }
 }
