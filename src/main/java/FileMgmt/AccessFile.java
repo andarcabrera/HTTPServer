@@ -1,5 +1,7 @@
 package FileMgmt;
 
+import Helpers.RangeParser;
+
 import java.io.*;
 
 /**
@@ -8,6 +10,7 @@ import java.io.*;
 public class AccessFile {
     FileInputStream fileInputStream = null;
     FileOutputStream fileOutputStream = null;
+    RangeParser parser = new RangeParser();
 
     public byte[] readFromFile(String fileName) {
         File file = new File(fileName);
@@ -31,13 +34,13 @@ public class AccessFile {
     public byte[] readPartiallyFromFile(String fileName, String rawRange) {
         File file = new File(fileName);
 
-        int[] range = parsedRange(rawRange, file);
-        byte[] fileContent = new byte[range[1] - range[0] + 1];
+        int[] range = parser.getRange(rawRange, (int) file.length());
+        byte[] fileContent = new byte[range[1] - range[0]];
 
         try {
             fileInputStream = new FileInputStream(file);
             fileInputStream.skip(range[0]);
-            fileInputStream.read(fileContent, 0, range[1] - range[0] + 1);
+            fileInputStream.read(fileContent, 0, range[1] - range[0]);
             fileInputStream.close();
 
         } catch (FileNotFoundException e) {
@@ -67,33 +70,6 @@ public class AccessFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private int[] parsedRange(String rawRange, File file){
-        int[] range = new int[2];
-        String[] rangeString = new String[2];
-
-        String[] parsedRawRange = rawRange.split("=");
-        String rawRangeLimits = parsedRawRange[1];
-        if (rawRangeLimits.trim().length() == 3) {
-            rangeString = rawRangeLimits.split("-");
-        }else if(rawRangeLimits.trim().length() == 2) {
-            if (rawRangeLimits.substring(1, 2).equals("-")) {
-                rangeString[0] = rawRangeLimits.substring(0, 1);
-                rangeString[1] = String.valueOf(file.length() - 1);
-            } else if (rawRangeLimits.substring(0, 1).equals("-")) {
-                int fileLenght = (int) file.length();
-                int totalBytes = Integer.parseInt(rawRangeLimits.substring(1, 2));
-                rangeString[0] = String.valueOf(fileLenght-totalBytes);
-                rangeString[1] = String.valueOf(file.length() - 1);
-            }
-        }
-
-        System.out.println("range0: " + rangeString[0]);
-        System.out.println("range1: " + rangeString[1]);
-        range[0] = Integer.parseInt(rangeString[0].trim());
-        range[1] = Integer.parseInt(rangeString[1].trim());
-        return range;
     }
 }
 
