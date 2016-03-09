@@ -13,6 +13,10 @@ public class SetUp {
         setDirectory();
     }
 
+    public int getPort(){
+        return port;
+    }
+
     private void setPort(){
         if(args[0].equals("-p")){
             port = Integer.parseInt(args[1]);
@@ -26,11 +30,7 @@ public class SetUp {
         }
     }
 
-    public int getPort(){
-        return port;
-    }
-
-    public void setSystemPropertiesDirectory(String directory){
+    private void setSystemPropertiesDirectory(String directory){
         Properties props = System.getProperties();
         props.setProperty("source_directory", directory);
     }

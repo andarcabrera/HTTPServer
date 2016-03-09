@@ -89,8 +89,8 @@ public class AccessFile {
             }
         }
 
-        System.out.println(rangeString[0]);
-        System.out.println(rangeString[1]);
+        System.out.println("range0: " + rangeString[0]);
+        System.out.println("range1: " + rangeString[1]);
         range[0] = Integer.parseInt(rangeString[0].trim());
         range[1] = Integer.parseInt(rangeString[1].trim());
         return range;

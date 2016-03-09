@@ -2,6 +2,9 @@ package FileMgmt;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -16,8 +19,25 @@ public class AccessFileTest {
     }
 
     @Test
-    public void testReadFromFile() throws Exception {
-        String testFile = "./src/test/java/resources/testFile";
-        assertEquals("Busted!", new String(accessFile.readFromFile(testFile)));
+    public void testWriteToFile() throws Exception {
+        File testFile = File.createTempFile("testFile", "txt");
+        String filePath = testFile.getPath();
+        testFile.deleteOnExit();
+
+        accessFile.writeToFile(filePath, "Testing, testing, hoping Travis will like it");
+        assertEquals("Testing, testing, hoping Travis will like it", new String(accessFile.readFromFile(filePath)));
+    }
+
+
+    @Test
+    public void testReadPartiallyFromFile() throws Exception {
+        File testFile = File.createTempFile("testFile", "txt");
+        String filePath = testFile.getPath();
+        testFile.deleteOnExit();
+
+        accessFile.writeToFile(filePath, "This test is especially dedicated to Travis");
+        assertEquals("This ", new String(accessFile.readPartiallyFromFile(filePath, "bytes=0-4")));
+        assertEquals("Travis", new String(accessFile.readPartiallyFromFile(filePath, "bytes=-6")));
+        assertEquals(" is especially dedicated to Travis", new String(accessFile.readPartiallyFromFile(filePath, "bytes=9-")));
     }
 }

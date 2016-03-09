@@ -18,4 +18,9 @@ public class SetUpTest {
         assertEquals(5000, serverSetup.getPort());
     }
 
+    @Test
+    public void testsetDirectory() throws Exception {
+        assertEquals("/file/public", System.getProperty("source_directory"));
+    }
+
 }
