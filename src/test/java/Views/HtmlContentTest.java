@@ -1,7 +1,9 @@
 package Views;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 
@@ -18,14 +20,23 @@ public class HtmlContentTest {
     @Before
     public void setup(){
         htmlContent = new HtmlContent();
-        directoryName = "./src/test/java/resources";
-        File directory = new File(directoryName);
-        files = directory.listFiles();
     }
+
+    @Rule
+    public TemporaryFolder folder= new TemporaryFolder();
+
 
     @Test
     public void testHtmlBody() throws Exception {
-        assertEquals(expectedHtmlContent(), new String(htmlContent.htmlBody(files, directoryName)));
+        File createdFile= folder.newFile("testFile1");
+        File createdFile1= folder.newFile("testFile2");
+        File createdFile2= folder.newFile("testFile3");
+        File folderRoot = folder.getRoot();
+        String folderPath = folderRoot.getPath();
+        File[] files = folderRoot.listFiles();
+
+
+        assertEquals(expectedHtmlContent(), new String(htmlContent.htmlBody(files, folderPath)));
     }
 
     private String expectedHtmlContent(){
@@ -37,7 +48,7 @@ public class HtmlContentTest {
                 "<body>\n" +
                 "<div>\n" +
                 "<ul>\n" +
-                "<li><a href=\"/testFile\">/testFile</a></li>" +
+                "<li><a href=\"/testFile1\">/testFile1</a></li>" +
                 "<li><a href=\"/testFile2\">/testFile2</a></li>" +
                 "<li><a href=\"/testFile3\">/testFile3</a></li>" +
                 "</ul>" +
@@ -46,3 +57,8 @@ public class HtmlContentTest {
                 "</html>";
     }
 }
+
+
+
+
+
