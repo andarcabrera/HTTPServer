@@ -91,11 +91,6 @@ public class Request implements RequestBuilder {
         return rawHeader.split("\n");
     }
 
-    private boolean methodName(String line){
-        String firstWord = line.split(" ")[0];
-        return MethodNames.methodNames.contains(firstWord);
-    }
-
     private void getUrlAndParams(String rawUrlParams){
         String[] rawVariables = getRawVariables(rawUrlParams);
         for (String rawVariable : rawVariables ){

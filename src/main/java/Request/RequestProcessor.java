@@ -10,7 +10,6 @@ public class RequestProcessor implements InfoProcessor {
     private RequestBuilder request;
     private Router router = new Router();
 
-
     public void handleRequest(StringBuffer rawRequest){
         this.request = new Request(rawRequest);
         setRawRequest(rawRequest);

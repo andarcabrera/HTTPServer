@@ -18,7 +18,7 @@ public class DirectoryController extends Controller{
 
     public ResponseBuilder get(RequestBuilder request) {
         response.setStatusCode("OK");
-        File files[] = accessDirectory.getFiles("/Users/andacabrera29/Desktop/cob_spec/public");
+        File files[] = accessDirectory.getFiles(sourceDirectory);
         byte[] body = htmlContent.htmlBody(files, sourceDirectory);
         response.setResponseBody(body);
         return response;

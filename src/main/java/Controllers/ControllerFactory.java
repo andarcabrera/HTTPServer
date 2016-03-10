@@ -29,4 +29,9 @@ public class ControllerFactory extends AbstractControllerFactory {
     public Controller createDefaultController(RequestBuilder request, ResponseBuilder response) {
         return new DefaultController(request, response);
     }
+
+    @Override
+    public Controller createRedirectController(RequestBuilder request, ResponseBuilder response) {
+        return new RedirectController(request, response);
+    }
 }

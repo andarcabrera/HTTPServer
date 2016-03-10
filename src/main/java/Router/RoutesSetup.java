@@ -27,6 +27,7 @@ public class RoutesSetup {
         addRoute("/text-file.txt", "fileController");
         addRoute("/partial_content.txt", "fileController");
         addRoute("/method_options", "simpleController");
+        addRoute("/redirect", "redirectController");
     }
 
     private void addRoute(String action, String controller){

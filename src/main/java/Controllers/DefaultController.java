@@ -10,19 +10,5 @@ public class DefaultController extends Controller{
         super(request, response);
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
-        response.setStatusCode("PageNotFound");
-        return response;
-    }
-
-    public ResponseBuilder post(RequestBuilder request) {
-        response.setStatusCode("PageNotFound");
-        return response;
-    }
-
-    public ResponseBuilder put(RequestBuilder request) {
-        response.setStatusCode("PageNotFound");
-        return response;
-    }
 }
 

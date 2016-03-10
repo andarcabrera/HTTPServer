@@ -26,6 +26,9 @@ public abstract class AbstractControllerFactory {
             case "parameterController":
                 controller = createParameterController(request, response);
                 break;
+            case "redirectController":
+                controller = createRedirectController(request, response);
+                break;
         }
         return controller;
     }
@@ -35,4 +38,5 @@ public abstract class AbstractControllerFactory {
     public abstract Controller createFileController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createParameterController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createDefaultController(RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createRedirectController(RequestBuilder request, ResponseBuilder response);
 }

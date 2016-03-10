@@ -11,6 +11,7 @@ public class StatusCodes {
         statusCodes.put("PartialContent", "206 Partial Content");
         statusCodes.put("PageNotFound", "404 Not Found");
         statusCodes.put("MethodNotAllowed", "405 Method Not Allowed");
+        statusCodes.put("Redirect", "302 Found");
     }
 
     public static String getStatus(String status){
