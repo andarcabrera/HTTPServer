@@ -28,6 +28,8 @@ public class RoutesSetup {
         addRoute("/partial_content.txt", "fileController");
         addRoute("/method_options", "simpleController");
         addRoute("/redirect", "redirectController");
+        addRoute("/patch-content.txt", "patchController");
+        addRoute("/logs", "basicAuthController");
     }
 
     private void addRoute(String action, String controller){

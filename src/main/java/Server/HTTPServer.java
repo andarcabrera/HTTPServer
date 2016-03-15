@@ -1,6 +1,7 @@
 package Server;
 
 import ClientThreads.HandleUserThread;
+import Helpers.RequestLogger;
 import IOStreams.HttpClientInputStream;
 import IOStreams.HttpClientOutputStream;
 import IOStreams.HttpInputStream;
@@ -30,6 +31,7 @@ public class HTTPServer {
                 Runtime.getRuntime().addShutdownHook(new Thread() {
                     public void run() {
                         System.out.println("Shut down hook started to close all threads.");
+                        RequestLogger.resetLog();
                         stopAllThreads();
                         System.out.println("Shutdown hook completed :).");
                     }

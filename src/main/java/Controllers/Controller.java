@@ -31,6 +31,9 @@ public abstract class Controller implements ControllerStrategy {
             case "OPTIONS":
                 response = options();
                 break;
+            case "PATCH":
+                response = patch(request);
+                break;
             default:
                 response = bogus();
                 break;
@@ -55,6 +58,10 @@ public abstract class Controller implements ControllerStrategy {
     }
 
     protected ResponseBuilder options() {
+        return fourOhFourResponse();
+    }
+
+    protected ResponseBuilder patch(RequestBuilder request) {
         return fourOhFourResponse();
     }
 

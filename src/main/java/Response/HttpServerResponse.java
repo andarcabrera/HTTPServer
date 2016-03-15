@@ -11,7 +11,7 @@ public class HttpServerResponse implements ResponseBuilder{
     private String version = "HTTP/1.0";
     private String statusCode = "";
     private HashMap<String, String> headers = new HashMap<>();
-    private byte[] body;
+    private  ByteArrayOutputStream body = new ByteArrayOutputStream();
     private ByteArrayOutputStream byteResponse = new ByteArrayOutputStream();
 
     public void setStatusCode(String status){
@@ -26,7 +26,7 @@ public class HttpServerResponse implements ResponseBuilder{
         byte[] headerBytes =  entireHeader().getBytes();
         byteResponse.write(headerBytes, 0, headerBytes.length);
         if (body != null){
-            byteResponse.write(body, 0, body.length);
+            byteResponse.write(body.toByteArray(), 0, body.toByteArray().length);
         }
         return byteResponse.toByteArray();
     }
@@ -49,6 +49,6 @@ public class HttpServerResponse implements ResponseBuilder{
     }
 
     public void setResponseBody(byte[] message){
-        this.body = message;
+        body.write(message, 0, message.length);
     }
 }

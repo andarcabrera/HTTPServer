@@ -12,6 +12,8 @@ public class StatusCodes {
         statusCodes.put("PageNotFound", "404 Not Found");
         statusCodes.put("MethodNotAllowed", "405 Method Not Allowed");
         statusCodes.put("Redirect", "302 Found");
+        statusCodes.put("NoContent", "204 No Content");
+        statusCodes.put("Unauthorized", "401 Unauthorized");
     }
 
     public static String getStatus(String status){

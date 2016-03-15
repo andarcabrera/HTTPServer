@@ -3,10 +3,12 @@ package Controllers;
 import FileMgmt.AccessFile;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import Views.HtmlContent;
 
 
 public class SimpleController extends Controller{
     private AccessFile accessFile = new AccessFile();
+    private HtmlContent html = new HtmlContent();
 
     public SimpleController(RequestBuilder request, ResponseBuilder response){
         super(request, response);
@@ -15,6 +17,7 @@ public class SimpleController extends Controller{
     public ResponseBuilder get(RequestBuilder request) {
         byte[] fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
         response.setStatusCode("OK");
+        response.setResponseBody(html.formHtml("data"));
         response.setResponseBody(fileContent);
         return response;
     }

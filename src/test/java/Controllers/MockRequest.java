@@ -8,6 +8,7 @@ import java.util.HashMap;
 public class MockRequest implements RequestBuilder {
     private HashMap<String, String> mockRequestDetails;
 
+
     public MockRequest(HashMap<String, String> details){
         this.mockRequestDetails = details;
     }
@@ -43,6 +44,8 @@ public class MockRequest implements RequestBuilder {
 
     @Override
     public HashMap<String, String> getParams() {
-        return null;
+        HashMap<String, String> params = new HashMap<>();
+        params.put("param", "pam-pam");
+        return params;
     }
 }

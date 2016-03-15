@@ -34,4 +34,14 @@ public class ControllerFactory extends AbstractControllerFactory {
     public Controller createRedirectController(RequestBuilder request, ResponseBuilder response) {
         return new RedirectController(request, response);
     }
+
+    @Override
+    public Controller createPatchController(RequestBuilder request, ResponseBuilder response) {
+        return new PatchController(request, response);
+    }
+
+    @Override
+    public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response) {
+        return new BasicAuthController(request, response);
+    }
 }

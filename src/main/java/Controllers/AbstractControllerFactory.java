@@ -29,6 +29,12 @@ public abstract class AbstractControllerFactory {
             case "redirectController":
                 controller = createRedirectController(request, response);
                 break;
+            case "patchController":
+                controller = createPatchController(request, response);
+                break;
+            case "basicAuthController":
+                controller = createBasicAuthController(request, response);
+                break;
         }
         return controller;
     }
@@ -39,4 +45,6 @@ public abstract class AbstractControllerFactory {
     public abstract Controller createParameterController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createDefaultController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createRedirectController(RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createPatchController(RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response);
 }

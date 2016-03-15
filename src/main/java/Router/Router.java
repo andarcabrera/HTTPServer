@@ -30,6 +30,7 @@ public class Router {
 
     public byte[] getResponse(){
         response =  controller.sendResponse();
+//        System.out.println(new String(response.responseToBytes()));
         return response.responseToBytes();
     }
 
