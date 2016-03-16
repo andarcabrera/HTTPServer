@@ -1,20 +1,24 @@
 package Router;
 
+import Controllers.AbstractControllerFactory;
 import Controllers.Controller;
-import Controllers.ControllerFactory;
 import Request.RequestBuilder;
-import Response.HttpServerResponse;
 import Response.ResponseBuilder;
 
 import java.util.HashMap;
 
 
-public class Router {
-    ResponseBuilder response = new HttpServerResponse();
-    RoutesSetup routesSetup = new RoutesSetup();
-    ControllerFactory controllerFactory = new ControllerFactory();
+public class Router implements RouterStrategy{
+    ResponseBuilder response;
+    TrackRoutes routesSetup;
+    AbstractControllerFactory controllerFactory;
     Controller controller;
 
+    public Router(AbstractControllerFactory controllerFactory, ResponseBuilder response, TrackRoutes routesSetup){
+        this.controllerFactory = controllerFactory;
+        this.response = response;
+        this.routesSetup = routesSetup;
+    }
 
     public void route(RequestBuilder request) {
         String action = request.getUrl();
@@ -22,16 +26,14 @@ public class Router {
         System.out.println(controller.getClass());
     }
 
+    public byte[] getResponse(){
+        response =  controller.sendResponse();
+        return response.responseToBytes();
+    }
+
     private Controller createController(String action, RequestBuilder request, ResponseBuilder response){
         String controllerName = getRoutes().get(action);
         return controllerFactory.createController(controllerName, request, response);
-    }
-
-
-    public byte[] getResponse(){
-        response =  controller.sendResponse();
-//        System.out.println(new String(response.responseToBytes()));
-        return response.responseToBytes();
     }
 
     private HashMap<String, String> getRoutes(){

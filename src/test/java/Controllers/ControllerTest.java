@@ -2,104 +2,76 @@ package Controllers;
 
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
 
 public class ControllerTest {
     private Controller controller;
+    private RequestBuilder request;
+    private ResponseBuilder response;
+    private StringBuffer requestDetails;
 
-
-    @Test
-    public void testSendResponseGet() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "GET");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
+    @Before
+    public void setUp(){
+        request = new MockRequest();
+        response = new MockResponse();
+        requestDetails = new StringBuffer();
         controller = new Controller(request, response) {
             @Override
             public ResponseBuilder sendResponse() {
                 return super.sendResponse();
             }
         };
+    }
+
+    @Test
+    public void testSendResponseGet() throws Exception {
+        requestDetails.append("GET bogus request");
+        request.buildRequest(requestDetails);
+
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
     }
 
     @Test
     public void testSendResponsePut() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "PUT");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
-        controller = new Controller(request, response) {
-            @Override
-            public ResponseBuilder sendResponse() {
-                return super.sendResponse();
-            }
-        };
+        requestDetails.append("PUT bogus request");
+        request.buildRequest(requestDetails);
+
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
     }
 
     @Test
     public void testSendResponsePost() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "POST");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
-        controller = new Controller(request, response) {
-            @Override
-            public ResponseBuilder sendResponse() {
-                return super.sendResponse();
-            }
-        };
+        requestDetails.append("POST bogus request");
+        request.buildRequest(requestDetails);
+
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
     }
 
     @Test
     public void testSendResponseDelete() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "DELETE");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
-        controller = new Controller(request, response) {
-            @Override
-            public ResponseBuilder sendResponse() {
-                return super.sendResponse();
-            }
-        };
+        requestDetails.append("DELETE bogus request");
+        request.buildRequest(requestDetails);
+
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
     }
 
     @Test
     public void testSendResponseOptions() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "OPTIONS");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
-        controller = new Controller(request, response) {
-            @Override
-            public ResponseBuilder sendResponse() {
-                return super.sendResponse();
-            }
-        };
+        requestDetails.append("OPTIONS bogus request");
+        request.buildRequest(requestDetails);
+
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
     }
 
     @Test
     public void testSendResponseBogus() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "BOG");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
-        controller = new Controller(request, response) {
-            @Override
-            public ResponseBuilder sendResponse() {
-                return super.sendResponse();
-            }
-        };
+        requestDetails.append("BOGUS bogus request");
+        request.buildRequest(requestDetails);
+
         assertEquals("MethodNotAllowed", new String(controller.sendResponse().responseToBytes()));
     }
 }

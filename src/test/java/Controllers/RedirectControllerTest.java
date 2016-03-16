@@ -5,8 +5,6 @@ import Response.ResponseBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,13 +14,15 @@ public class RedirectControllerTest {
     private RedirectController redirectController;
     private RequestBuilder request;
     private ResponseBuilder response;
+    private StringBuffer requestDetails;
 
     @Before
     public void setUp(){
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "GET");
-        request = new MockRequest(requestDetails);
+        request = new MockRequest();
         response = new MockResponse();
+        requestDetails = new StringBuffer();
+        requestDetails.append("GET some action");
+        request.buildRequest(requestDetails);
         redirectController = new RedirectController(request, response);
     }
 

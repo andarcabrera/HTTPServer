@@ -4,6 +4,8 @@ import Helpers.RequestLogger;
 import IOStreams.HttpInputStream;
 import IOStreams.HttpOutputStream;
 import Request.InfoProcessor;
+import Request.RequestBuilder;
+import Router.RouterStrategy;
 
 import java.util.logging.Level;
 
@@ -14,13 +16,13 @@ public class HandleUserThread implements Runnable{
     private HttpInputStream input;
     private HttpOutputStream output;
     private InfoProcessor requestProcessor;
-    private String directory;
+    private RouterStrategy router;
 
-
-    public HandleUserThread(HttpInputStream inputStream, HttpOutputStream outputStream, InfoProcessor requestProcessor) {
+    public HandleUserThread(HttpInputStream inputStream, HttpOutputStream outputStream, InfoProcessor requestProcessor, RouterStrategy router) {
         this.input =  inputStream;
         this.output = outputStream;
         this.requestProcessor = requestProcessor;
+        this.router = router;
     }
 
     private String readRequest() {
@@ -33,25 +35,21 @@ public class HandleUserThread implements Runnable{
 
 
     public void run() {
-//        System.out.println(Thread.currentThread().getName() + "connected to server");
-
         StringBuffer rawRequest = new StringBuffer();
         String requestChar;
 
-        while (input.ready() || rawRequest.length() < 1) {
+        while (input.ready() || rawRequest.length() < 5) {
             requestChar = readRequest();
             rawRequest.append(requestChar);
         }
 
-//        System.out.println("rawRequest" + rawRequest.toString());
-
         RequestLogger.logger.log(Level.INFO, rawRequest.toString());
 
         requestProcessor.handleRequest(rawRequest);
+        RequestBuilder request = requestProcessor.getRequest();
+        router.route(request);
 
-        byte[] response = requestProcessor.response();
-//            System.out.println(Thread.currentThread().getName() + "response:");
-//            System.out.println(new String(response));
+        byte[] response = router.getResponse();
         writeMessage(response);
     }
 }

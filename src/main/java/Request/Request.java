@@ -16,12 +16,8 @@ public class Request implements RequestBuilder {
     private HashMap<String, String> headers = new HashMap<>();
     private String requestBody = "";
 
-    public Request(StringBuffer rawRequest){
+    public void buildRequest(StringBuffer rawRequest){
         this.rawRequest = rawRequest.toString();
-        setRequestDetails();
-    }
-
-    public void setRequestDetails(){
         separateHeaderBody();
         setHeaderLines();
         processInitialLine();

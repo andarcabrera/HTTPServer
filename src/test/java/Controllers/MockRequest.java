@@ -6,46 +6,53 @@ import java.util.HashMap;
 
 
 public class MockRequest implements RequestBuilder {
-    private HashMap<String, String> mockRequestDetails;
+    private StringBuffer rawRequest = new StringBuffer();
+    private HashMap<String, String> headers = new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
 
-
-    public MockRequest(HashMap<String, String> details){
-        this.mockRequestDetails = details;
+    @Override
+    public void buildRequest(StringBuffer rawRequest) {
+        this.rawRequest = rawRequest;
     }
+
     @Override
     public String getInitialLine() {
-        return null;
+        return "This is the initial line";
     }
 
     @Override
     public HashMap<String, String> getHeaders() {
-        return null;
+        headers.put("HeaderTitle", "HeaderContent");
+        return headers;
     }
 
     @Override
     public String getRawBody() {
-        return null;
+        return rawRequest.toString();
     }
 
     @Override
     public String getMethod() {
-        return mockRequestDetails.get("method");
+        return parsedRawRequest()[0];
     }
 
     @Override
     public String getUrl() {
-        return mockRequestDetails.get("url");
+        return parsedRawRequest()[1];
     }
 
     @Override
     public String getVersion() {
-        return null;
+        return "RequestVersion";
     }
 
     @Override
     public HashMap<String, String> getParams() {
-        HashMap<String, String> params = new HashMap<>();
         params.put("param", "pam-pam");
         return params;
+    }
+
+    private String[] parsedRawRequest(){
+        return rawRequest.toString().split(" ");
     }
 }

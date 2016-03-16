@@ -5,8 +5,6 @@ import Response.ResponseBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
-
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,12 +14,13 @@ public class ParameterControllerTest {
     private ParameterController parameterController;
     private RequestBuilder request;
     private ResponseBuilder response;
+    private StringBuffer rawRequest = new StringBuffer();
 
     @Before
     public void setUp(){
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "GET");
-        request = new MockRequest(requestDetails);
+        request = new MockRequest();
+        rawRequest.append("GET /action");
+        request.buildRequest(rawRequest);
         response = new MockResponse();
         parameterController = new ParameterController(request, response);
     }

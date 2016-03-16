@@ -4,18 +4,21 @@ import java.util.HashMap;
 
 
 public interface RequestBuilder {
+
+    void buildRequest(StringBuffer rawRequest);
+
     String getInitialLine();
 
-    public HashMap<String, String> getHeaders();
+    HashMap<String, String> getHeaders();
 
-    public String getRawBody();
+    String getRawBody();
 
-    public String getMethod();
+    String getMethod();
 
-    public String getUrl();
+    String getUrl();
 
-    public String getVersion();
+    String getVersion();
 
-    public HashMap<String, String> getParams();
+    HashMap<String, String> getParams();
 
 }

@@ -2,9 +2,8 @@ package Controllers;
 
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import org.junit.Before;
 import org.junit.Test;
-
-import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,14 +12,23 @@ import static org.junit.Assert.assertEquals;
  */
 public class DefaultControllerTest {
     private DefaultController defaultController;
+    private RequestBuilder request;
+    private ResponseBuilder response;
+    private StringBuffer requestDetails;
+
+    @Before
+    public void setUp(){
+        request = new MockRequest();
+        response = new MockResponse();
+        requestDetails = new StringBuffer();
+        defaultController = new DefaultController(request, response);
+    }
 
     @Test
     public void testGet() throws Exception {
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "GET");
-        RequestBuilder request = new MockRequest(requestDetails);
-        ResponseBuilder response = new MockResponse();
-        defaultController = new DefaultController(request, response);
+        requestDetails.append("GET action");
+        request.buildRequest(requestDetails);
+
         assertEquals("PageNotFound", new String(defaultController.sendResponse().responseToBytes()));
     }
 

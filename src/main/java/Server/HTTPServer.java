@@ -1,6 +1,8 @@
 package Server;
 
 import ClientThreads.HandleUserThread;
+import Controllers.AbstractControllerFactory;
+import Controllers.ControllerFactory;
 import Helpers.RequestLogger;
 import IOStreams.HttpClientInputStream;
 import IOStreams.HttpClientOutputStream;
@@ -8,6 +10,14 @@ import IOStreams.HttpInputStream;
 import IOStreams.HttpOutputStream;
 import Request.InfoProcessor;
 import Request.RequestProcessor;
+import Request.RequestBuilder;
+import Request.Request;
+import Response.HttpServerResponse;
+import Response.ResponseBuilder;
+import Router.RoutesSetup;
+import Router.TrackRoutes;
+import Router.Router;
+import Router.RouterStrategy;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -44,9 +54,16 @@ public class HTTPServer {
                 HttpInputStream userInputStream = new HttpClientInputStream(inputReader);
                 HttpOutputStream userOutputStream = new HttpClientOutputStream(dataOutputStream);
 
-                InfoProcessor requestProcessor = new RequestProcessor();
 
-                Thread userThread = new Thread(new HandleUserThread(userInputStream, userOutputStream, requestProcessor));
+                RequestBuilder requestBuilder = new Request();
+                InfoProcessor requestProcessor = new RequestProcessor(requestBuilder);
+
+                AbstractControllerFactory controllerFactory = new ControllerFactory();
+                ResponseBuilder responseBuilder = new HttpServerResponse();
+                TrackRoutes routesSetup = new RoutesSetup();
+                RouterStrategy router = new Router(controllerFactory, responseBuilder, routesSetup);
+
+                Thread userThread = new Thread(new HandleUserThread(userInputStream, userOutputStream, requestProcessor, router));
                 allThreads.put(userThread, userSocket);
 
                 userThread.start();

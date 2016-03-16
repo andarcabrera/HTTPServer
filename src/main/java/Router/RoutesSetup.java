@@ -5,8 +5,7 @@ import java.util.HashMap;
 /**
  * Created by andacabrera29 on 3/3/16.
  */
-public class RoutesSetup {
-    private HashMap<String, String> routes = new HashMap<>();
+public class RoutesSetup implements TrackRoutes{
 
     public RoutesSetup(){
         addRoutes();

@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
@@ -20,15 +19,17 @@ public class DirectoryControllerTest {
     private DirectoryController directoryController;
     private RequestBuilder request;
     private ResponseBuilder response;
+    private StringBuffer requestDetails;
 
     @Rule
     public TemporaryFolder folder= new TemporaryFolder();
 
     @Before
     public void setUp(){
-        HashMap<String, String> requestDetails = new HashMap<>();
-        requestDetails.put("method", "GET");
-        request = new MockRequest(requestDetails);
+        request = new MockRequest();
+        requestDetails = new StringBuffer();
+        requestDetails.append("GET /");
+        request.buildRequest(requestDetails);
         response = new MockResponse();
     }
 

@@ -1,18 +1,24 @@
 package ClientThreads;
 
+import Controllers.MockRequest;
 import Request.InfoProcessor;
+import Request.RequestBuilder;
 
 /**
  * Created by andacabrera29 on 2/25/16.
  */
 public class MockRequestProcessor implements InfoProcessor {
-    byte[] response;
+    private MockRequest request;
 
-    public void handleRequest(StringBuffer rawRequest) {
-        response = rawRequest.substring(0).getBytes();
+    public MockRequestProcessor(){
+        request = new MockRequest();
     }
 
-    public byte[] response() {
-        return response;
+    public void handleRequest(StringBuffer rawRequest) {
+        request.buildRequest(rawRequest);
+    }
+
+    public RequestBuilder getRequest() {
+        return request;
     }
 }
