@@ -1,10 +1,13 @@
 package Controllers;
 
+import FileMgmt.AccessFile;
+import FileMgmt.FileAccess;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
 
 public abstract class AbstractControllerFactory {
+    private FileAccess accessFile = new AccessFile();
 
     public Controller createController(String route, RequestBuilder request, ResponseBuilder response){
         Controller controller = null;
@@ -15,13 +18,13 @@ public abstract class AbstractControllerFactory {
 
         switch (route) {
             case "simpleController":
-                controller = createSimpleController(request, response);
+                controller = createSimpleController(request, response, accessFile);
                 break;
             case "directoryController":
                 controller = createDirectoryController(request, response);
                 break;
             case "fileController":
-                controller = createFileController(request, response);
+                controller = createFileController(request, response, accessFile);
                 break;
             case "parameterController":
                 controller = createParameterController(request, response);
@@ -39,9 +42,9 @@ public abstract class AbstractControllerFactory {
         return controller;
     }
 
-    public abstract Controller createSimpleController(RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createSimpleController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile);
     public abstract Controller createDirectoryController(RequestBuilder request, ResponseBuilder response);
-    public abstract Controller createFileController(RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createFileController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile);
     public abstract Controller createParameterController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createDefaultController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createRedirectController(RequestBuilder request, ResponseBuilder response);

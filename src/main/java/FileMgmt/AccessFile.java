@@ -7,7 +7,7 @@ import java.io.*;
 /**
  * Created by andacabrera29 on 2/25/16.
  */
-public class AccessFile {
+public class AccessFile implements FileAccess{
     FileInputStream fileInputStream = null;
     FileOutputStream fileOutputStream = null;
     RangeParser parser = new RangeParser();

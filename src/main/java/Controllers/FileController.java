@@ -1,21 +1,18 @@
 package Controllers;
 
-import FileMgmt.AccessDirectory;
-import FileMgmt.AccessFile;
+import FileMgmt.FileAccess;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
-import Views.HtmlContent;
 
 import java.util.HashMap;
 
 
 public class FileController extends Controller{
-    private AccessFile accessFile = new AccessFile();
-    private AccessDirectory accessDirectory = new AccessDirectory();
-    private HtmlContent htmlContent = new HtmlContent();
+    private FileAccess accessFile;
 
-    public FileController(RequestBuilder request, ResponseBuilder response){
+    public FileController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile){
         super(request, response);
+        this.accessFile = accessFile;
     }
 
     public ResponseBuilder get(RequestBuilder request) {

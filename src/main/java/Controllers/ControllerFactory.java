@@ -1,13 +1,14 @@
 package Controllers;
 
+import FileMgmt.FileAccess;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
 
 public class ControllerFactory extends AbstractControllerFactory {
     @Override
-    public Controller createSimpleController(RequestBuilder request, ResponseBuilder response) {
-        return new SimpleController(request, response);
+    public Controller createSimpleController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
+        return new SimpleController(request, response, accessFile);
     }
 
     @Override
@@ -16,8 +17,8 @@ public class ControllerFactory extends AbstractControllerFactory {
     }
 
     @Override
-    public Controller createFileController(RequestBuilder request, ResponseBuilder response) {
-        return new FileController(request, response);
+    public Controller createFileController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
+        return new FileController(request, response, accessFile);
     }
 
     @Override

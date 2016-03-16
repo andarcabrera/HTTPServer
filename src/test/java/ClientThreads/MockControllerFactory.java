@@ -1,6 +1,7 @@
 package ClientThreads;
 
 import Controllers.*;
+import FileMgmt.FileAccess;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
@@ -10,7 +11,7 @@ import Response.ResponseBuilder;
 public class MockControllerFactory extends AbstractControllerFactory{
 
     @Override
-    public Controller createSimpleController(RequestBuilder request, ResponseBuilder response) {
+    public Controller createSimpleController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
         return new MockController(request, response);
     }
 
@@ -20,7 +21,7 @@ public class MockControllerFactory extends AbstractControllerFactory{
     }
 
     @Override
-    public Controller createFileController(RequestBuilder request, ResponseBuilder response) {
+    public Controller createFileController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
         return new MockController(request, response);
     }
 

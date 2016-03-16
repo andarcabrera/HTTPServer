@@ -34,11 +34,17 @@ public class DefaultControllerTest {
 
     @Test
     public void testPost() throws Exception {
+        requestDetails.append("POST action");
+        request.buildRequest(requestDetails);
 
+        assertEquals("PageNotFound", new String(defaultController.sendResponse().responseToBytes()));
     }
 
     @Test
     public void testPut() throws Exception {
+        requestDetails.append("PUT action");
+        request.buildRequest(requestDetails);
 
+        assertEquals("PageNotFound", new String(defaultController.sendResponse().responseToBytes()));
     }
 }

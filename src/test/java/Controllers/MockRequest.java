@@ -22,7 +22,7 @@ public class MockRequest implements RequestBuilder {
 
     @Override
     public HashMap<String, String> getHeaders() {
-        headers.put("HeaderTitle", "HeaderContent");
+        headers.put(parsedRawRequest()[3], parsedRawRequest()[4]);
         return headers;
     }
 

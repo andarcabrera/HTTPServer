@@ -29,6 +29,7 @@ public class DirectoryControllerTest {
         request = new MockRequest();
         requestDetails = new StringBuffer();
         requestDetails.append("GET /");
+
         request.buildRequest(requestDetails);
         response = new MockResponse();
     }
@@ -43,8 +44,8 @@ public class DirectoryControllerTest {
         String folderPath = folderRoot.getPath();
         Properties props = System.getProperties();
         props.setProperty("source_directory", folderPath);
-
         directoryController = new DirectoryController(request, response);
+
         assertTrue(new String(directoryController.sendResponse().responseToBytes()).startsWith("OK"));
         assertTrue(new String(directoryController.sendResponse().responseToBytes()).contains("bravo"));
         assertTrue(new String(directoryController.sendResponse().responseToBytes()).contains("bingo"));

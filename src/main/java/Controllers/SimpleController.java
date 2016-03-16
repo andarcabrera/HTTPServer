@@ -1,17 +1,18 @@
 package Controllers;
 
-import FileMgmt.AccessFile;
+import FileMgmt.FileAccess;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 import Views.HtmlContent;
 
 
 public class SimpleController extends Controller{
-    private AccessFile accessFile = new AccessFile();
+    private FileAccess accessFile;
     private HtmlContent html = new HtmlContent();
 
-    public SimpleController(RequestBuilder request, ResponseBuilder response){
+    public SimpleController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile){
         super(request, response);
+        this.accessFile = accessFile;
     }
 
     public ResponseBuilder get(RequestBuilder request) {
