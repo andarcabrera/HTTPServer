@@ -16,7 +16,7 @@ public class RequestLogger {
 
     private static FileHandler requests = null;
 
-    public static void init(){
+    public static void init() {
         try {
             requests = new FileHandler("./requests.log");
         } catch (SecurityException | IOException e) {
@@ -31,15 +31,15 @@ public class RequestLogger {
         requestLogger.setLevel(Level.INFO);
     }
 
-    public static void resetLog(){
+    public static void resetLog() {
         AccessFile accessFile = new AccessFile();
         accessFile.deleteFileContent("./requests.log");
     }
 
-    public static byte[] generateLogContent(){
+    public static byte[] generateLogContent() {
         AccessFile accessFile = new AccessFile();
         return accessFile.readFromFile("./requests.log");
     }
-
 }
+
 

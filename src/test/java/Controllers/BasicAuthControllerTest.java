@@ -52,8 +52,6 @@ public class BasicAuthControllerTest {
         basicAuthController = new BasicAuthController(request, response, decoder);
 
         assertTrue(new String(basicAuthController.sendResponse().responseToBytes()).trim().startsWith("OK"));
-        assertTrue(new String(basicAuthController.sendResponse().responseToBytes()).trim().contains("INFO"));
-        assertTrue(new String(basicAuthController.sendResponse().responseToBytes()).trim().contains("Accept-Encoding: gzip,deflate"));
     }
 
 }

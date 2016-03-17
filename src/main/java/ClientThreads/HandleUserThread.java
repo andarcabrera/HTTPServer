@@ -50,7 +50,7 @@ public class HandleUserThread implements Runnable{
         router.route(request);
 
         byte[] response = router.getResponse();
-        RequestLogger.logger.log(Level.INFO, response.toString());
+        RequestLogger.logger.log(Level.INFO, new String(response));
         writeMessage(response);
     }
 }
