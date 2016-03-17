@@ -43,7 +43,7 @@ public class HTTPServer {
                         System.out.println("Shut down hook started to close all threads.");
                         RequestLogger.resetLog();
                         stopAllThreads();
-                        System.out.println("Shutdown hook completed :).");
+                        System.out.println("Shutdown hook completed.");
                     }
                 });
 

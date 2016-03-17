@@ -48,7 +48,6 @@ public class AccessFile implements FileAccess{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(fileContent.length);
         return fileContent;
     }
 

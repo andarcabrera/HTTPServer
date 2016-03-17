@@ -23,7 +23,6 @@ public class Router implements RouterStrategy{
     public void route(RequestBuilder request) {
         String action = request.getUrl();
         controller = createController(action, request, response);
-        System.out.println(controller.getClass());
     }
 
     public byte[] getResponse(){

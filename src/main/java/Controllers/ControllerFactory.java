@@ -1,6 +1,7 @@
 package Controllers;
 
 import FileMgmt.FileAccess;
+import Helpers.Base64ParserAndDecoder;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
@@ -37,12 +38,12 @@ public class ControllerFactory extends AbstractControllerFactory {
     }
 
     @Override
-    public Controller createPatchController(RequestBuilder request, ResponseBuilder response) {
-        return new PatchController(request, response);
+    public Controller createPatchController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
+        return new PatchController(request, response, accessFile);
     }
 
     @Override
-    public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response) {
-        return new BasicAuthController(request, response);
+    public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder) {
+        return new BasicAuthController(request, response, decoder);
     }
 }

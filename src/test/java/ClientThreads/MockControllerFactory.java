@@ -2,6 +2,7 @@ package ClientThreads;
 
 import Controllers.*;
 import FileMgmt.FileAccess;
+import Helpers.Base64ParserAndDecoder;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
@@ -41,12 +42,12 @@ public class MockControllerFactory extends AbstractControllerFactory{
     }
 
     @Override
-    public Controller createPatchController(RequestBuilder request, ResponseBuilder response) {
+    public Controller createPatchController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
         return new MockController(request, response);
     }
 
     @Override
-    public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response) {
+    public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder) {
         return new MockController(request, response);
     }
 }

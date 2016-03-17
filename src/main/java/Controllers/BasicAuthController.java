@@ -6,12 +6,13 @@ import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
 public class BasicAuthController extends Controller{
-    Base64ParserAndDecoder decoder = new Base64ParserAndDecoder();
+    Base64ParserAndDecoder decoder;
     private String user = "admin";
     private String password = "hunter2";
 
-    public BasicAuthController(RequestBuilder request, ResponseBuilder response){
+    public BasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder){
         super(request, response);
+        this.decoder = decoder;
     }
 
     public ResponseBuilder get(RequestBuilder request) {

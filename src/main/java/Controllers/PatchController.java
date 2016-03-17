@@ -1,16 +1,17 @@
 package Controllers;
 
-import FileMgmt.AccessFile;
+import FileMgmt.FileAccess;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
 
 public class PatchController extends Controller{
-    private AccessFile accessFile = new AccessFile();
+    private FileAccess accessFile;
     private String etag = "dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec";
 
-    public PatchController(RequestBuilder request, ResponseBuilder response){
+    public PatchController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile){
         super(request, response);
+        this.accessFile = accessFile;
     }
 
     public ResponseBuilder get(RequestBuilder request) {

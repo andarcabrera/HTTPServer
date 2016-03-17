@@ -29,11 +29,10 @@ public class MockInputStream implements HttpInputStream {
     }
 
     public void emptyStream() {
-       request.clear();
+        request.clear();
     }
 
     public void addInput(String a) {
-        System.out.println(a);
-            request.add(a);
+        request.add(a);
     }
 }
