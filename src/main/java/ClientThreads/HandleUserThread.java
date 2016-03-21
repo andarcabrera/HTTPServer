@@ -25,22 +25,20 @@ public class HandleUserThread implements Runnable{
         this.router = router;
     }
 
-    private String readRequest() {
-        return input.readMessage();
-    }
-
     private void writeMessage(byte[] message) {
         output.writeMessage(message);
     }
 
-
     public void run() {
+        String requestLine;
         StringBuffer rawRequest = new StringBuffer();
-        String requestChar;
 
-        while (input.ready() || rawRequest.length() < 5) {
-            requestChar = readRequest();
-            rawRequest.append(requestChar);
+        while ((requestLine = input.readLine()) != null) {
+            rawRequest.append(requestLine + "\r\n");
+            if (requestLine.isEmpty()) {
+                while (input.ready()) rawRequest.append(input.read());
+                break;
+            }
         }
 
         RequestLogger.logger.log(Level.INFO, rawRequest.toString());
@@ -50,7 +48,6 @@ public class HandleUserThread implements Runnable{
         router.route(request);
 
         byte[] response = router.getResponse();
-        RequestLogger.logger.log(Level.INFO, new String(response));
         writeMessage(response);
     }
 }

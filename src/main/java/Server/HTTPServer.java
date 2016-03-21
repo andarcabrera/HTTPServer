@@ -30,31 +30,27 @@ import java.util.concurrent.Executors;
 
 
 public class HTTPServer {
-//    private Hashtable<Thread, Socket> allThreads = new Hashtable<Thread, Socket>();
-    ExecutorService executor = Executors.newCachedThreadPool();
+    ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     public void listen(int port) throws IOException {
         ServerSocket server = new ServerSocket(port);
 
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                RequestLogger.resetLog();
+                executor.shutdown();
+            }
+        });
+
         try {
             while (true) {
                 Socket userSocket = server.accept();
-
-                Runtime.getRuntime().addShutdownHook(new Thread() {
-                    public void run() {
-                        RequestLogger.resetLog();
-//                        stopAllThreads();
-                        executor.shutdown();
-                    }
-                });
-
 
                 DataOutputStream dataOutputStream = new DataOutputStream(userSocket.getOutputStream());
                 BufferedReader inputReader = new BufferedReader(new InputStreamReader(userSocket.getInputStream()));
 
                 HttpInputStream userInputStream = new HttpClientInputStream(inputReader);
                 HttpOutputStream userOutputStream = new HttpClientOutputStream(dataOutputStream);
-
 
                 RequestBuilder requestBuilder = new Request();
                 InfoProcessor requestProcessor = new RequestProcessor(requestBuilder);
@@ -64,13 +60,7 @@ public class HTTPServer {
                 TrackRoutes routesSetup = new RoutesSetup();
                 RouterStrategy router = new Router(controllerFactory, responseBuilder, routesSetup);
 
-//                Thread userThread = new Thread(new HandleUserThread(userInputStream, userOutputStream, requestProcessor, router));
-
-                //HandleUserThread userThread = new HandleUserThread(userInputStream, userOutputStream, requestProcessor, router);
-//                allThreads.put(userThread, userSocket);
-
                 executor.execute(new HandleUserThread(userInputStream, userOutputStream, requestProcessor, router));
-//                userThread.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,20 +68,4 @@ public class HTTPServer {
             server.close();
         }
     }
-
-//    private void stopAllThreads() {
-//        synchronized (allThreads) {
-//            Enumeration<Thread> enumKey = allThreads.keys();
-//            while (enumKey.hasMoreElements()) {
-//                Thread thread = enumKey.nextElement();
-//                Socket socket = allThreads.get(thread);
-//                try {
-//                    socket.close();
-//                    thread.join();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
 }

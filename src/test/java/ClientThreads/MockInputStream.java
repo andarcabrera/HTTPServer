@@ -24,6 +24,24 @@ public class MockInputStream implements HttpInputStream {
     }
 
     @Override
+    public char read() {
+        return 0;
+    }
+
+    @Override
+    public String readLine() {
+        String message;
+        if (request.size() >= 1) {
+            message = request.get(0);
+            request.remove(0);
+        } else {
+            isReady = false;
+            message = "";
+        }
+        return message;
+    }
+
+    @Override
     public boolean ready() {
         return isReady;
     }

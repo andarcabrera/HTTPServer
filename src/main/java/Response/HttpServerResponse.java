@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public class HttpServerResponse implements ResponseBuilder{
-    private String version = "HTTP/1.0";
+    private String version = "HTTP/1.1";
     private String statusCode = "";
     private HashMap<String, String> headers = new HashMap<>();
     private  ByteArrayOutputStream body = new ByteArrayOutputStream();

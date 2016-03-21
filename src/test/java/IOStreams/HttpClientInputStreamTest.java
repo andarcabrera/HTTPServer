@@ -23,10 +23,7 @@ public class HttpClientInputStreamTest {
         testBuffer = new BufferedReader(new InputStreamReader(testInputStream));
         HttpClientInputStream httpInputStream = new HttpClientInputStream(testBuffer);
 
-        assertEquals("T", httpInputStream.readMessage());
-        assertEquals("e", httpInputStream.readMessage());
-        assertEquals("s", httpInputStream.readMessage());
-        assertEquals("t", httpInputStream.readMessage());
+        assertEquals("Test", httpInputStream.readLine());
     }
 
     @Test
@@ -37,7 +34,7 @@ public class HttpClientInputStreamTest {
         HttpClientInputStream httpInputStream = new HttpClientInputStream(testBuffer);
 
         assertEquals(true, httpInputStream.ready());
-        assertEquals("K", httpInputStream.readMessage());
+        assertEquals("K", httpInputStream.readLine());
         assertEquals(false, httpInputStream.ready());
     }
 }
