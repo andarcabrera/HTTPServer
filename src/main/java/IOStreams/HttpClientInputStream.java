@@ -14,25 +14,14 @@ public class HttpClientInputStream implements HttpInputStream {
     }
 
     @Override
-    public char read() {
+    public int read() {
         int bitChar = 0;
         try {
             bitChar = input.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return (char) bitChar;
-    }
-
-    @Override
-    public String readLine() {
-        String line = null;
-        try {
-            line = input.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return line;
+        return bitChar;
     }
 
     public boolean ready(){

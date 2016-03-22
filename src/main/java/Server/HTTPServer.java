@@ -30,7 +30,7 @@ import java.util.concurrent.Executors;
 
 
 public class HTTPServer {
-    ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+    ExecutorService executor = Executors.newFixedThreadPool(8);
 
     public void listen(int port) throws IOException {
         ServerSocket server = new ServerSocket(port);

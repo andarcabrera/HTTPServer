@@ -79,8 +79,11 @@ public class Request implements RequestBuilder {
     private void processInitialLine() {
         String[] parsedLine = getInitialLine().split(" ");
         method = parsedLine[0];
-        getUrlAndParams(parsedLine[1]);
-        version = parsedLine[2];
+        if (parsedLine.length > 1){
+            getUrlAndParams(parsedLine[1]);
+            version = parsedLine[2];
+        }
+
     }
 
     private String[] getRawHeaderLines() {
