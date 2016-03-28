@@ -61,8 +61,6 @@ public class TTTHomePage {
         return htmlContent.toString().getBytes();
 
     }
-
-
 }
 
 
