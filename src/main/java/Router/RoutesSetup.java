@@ -29,6 +29,8 @@ public class RoutesSetup implements TrackRoutes{
         addRoute("/redirect", "redirectController");
         addRoute("/patch-content.txt", "patchController");
         addRoute("/logs", "basicAuthController");
+        addRoute("/ttt", "TTTController");
+        addRoute("/games", "TTTController");
     }
 
     private void addRoute(String action, String controller){

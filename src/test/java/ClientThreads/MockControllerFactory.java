@@ -50,4 +50,9 @@ public class MockControllerFactory extends AbstractControllerFactory{
     public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder) {
         return new MockController(request, response);
     }
+
+    @Override
+    public Controller createTTTController(RequestBuilder request, ResponseBuilder response) {
+        return new MockController(request, response);
+    }
 }

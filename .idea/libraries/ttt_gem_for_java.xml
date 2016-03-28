@@ -1,13 +1,10 @@
 <component name="libraryTable">
-  <library name="Maven: junit:junit:4.12">
+  <library name="ttt_gem_for_java">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../ttt_gem_for_java/ttt_gem_for_java.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-javadoc.jar!/" />
-    </JAVADOC>
+    <JAVADOC />
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12-sources.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../ttt_gem_for_java/ttt_gem_for_java.jar!/bundler/gems/warbler-c91085004a21/ext" />
       <root url="jar://$PROJECT_DIR$/../../ttt_gem_for_java/ttt_gem_for_java.jar!/bundler/gems/warbler-c91085004a21/integration/rails4_test/src/test/java" />
       <root url="jar://$PROJECT_DIR$/../../ttt_gem_for_java/ttt_gem_for_java.jar!/bundler/gems/warbler-c91085004a21/integration/runnable_test/src/test/java" />

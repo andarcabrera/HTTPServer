@@ -47,6 +47,7 @@ public class HtmlContentTest {
                 "</head>\n" +
                 "<body>\n" +
                 "<div>\n" +
+                "<h2> <a href=\"/ttt\"> Play TTT </a> </h2> \n" +
                 "<ul>\n" +
                 "<li><a href=\"/testFile1\">/testFile1</a></li>" +
                 "<li><a href=\"/testFile2\">/testFile2</a></li>" +

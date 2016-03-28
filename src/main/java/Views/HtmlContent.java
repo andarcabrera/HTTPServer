@@ -14,6 +14,7 @@ public class HtmlContent {
                 "</head>\n" +
                 "<body>\n" +
                 "<div>\n" +
+                "<h2> <a href=\"/ttt\"> Play TTT </a> </h2> \n" +
                 generateFileLinks(files, sourceDirectory) +
                 "</div>\n" +
                 "</body>\n" +

@@ -35,6 +35,8 @@ public class HandleUserThread implements Runnable{
             if (!input.ready()) break;
         }
 
+        System.out.println(rawRequest.toString());
+
 //        RequestLogger.logger.log(Level.INFO, rawRequest.toString());
 
         requestProcessor.handleRequest(rawRequest);
