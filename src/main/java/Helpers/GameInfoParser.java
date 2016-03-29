@@ -7,6 +7,7 @@ import java.util.HashMap;
  */
 public class GameInfoParser {
     private String rawGameInfo;
+    private String spot;
     private HashMap<String, String> params = new HashMap<>();
 
     public HashMap<String, String> getParams(String rawParamsInfo){
@@ -19,6 +20,11 @@ public class GameInfoParser {
         game_markers[0] = params.get("player1_marker");
         game_markers[1] = params.get("player2_marker");
         return game_markers;
+    }
+
+    public String getSpot(String action){
+        String[] splitActionLine = action.split("/");
+        return splitActionLine[2].trim();
     }
 
     private void parsePlayerInfo(String rawInfo){

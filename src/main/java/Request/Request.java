@@ -78,7 +78,11 @@ public class Request implements RequestBuilder {
 
     private void processInitialLine() {
         String[] parsedLine = getInitialLine().split(" ");
-        method = parsedLine[0];
+        if (rawBody.startsWith("_method")){
+            method = "PUT";
+        } else {
+            method = parsedLine[0];
+        }
         if (parsedLine.length > 1){
             getUrlAndParams(parsedLine[1]);
             version = parsedLine[2];

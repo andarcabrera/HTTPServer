@@ -3,7 +3,7 @@ package Views;
 /**
  * Created by andacabrera29 on 3/28/16.
  */
-public class TTTMakeMoveTTT {
+public class TTTMakeMoveView {
     public byte[] generateHtml(int size, String[] markers, String[] board ){
         StringBuilder htmlContent = new StringBuilder();
         htmlContent.append("<!DOCTYPE html>\n");
@@ -24,22 +24,22 @@ public class TTTMakeMoveTTT {
             for (int j=0; j<rows; j++){
                 htmlContent.append("<td class=\"board-cell\" id=\"" + String.valueOf(i+j) + "\">\n");
                 String spot = board[i + j];
-                System.out.println(spot);
                 if (markers[0].equals(spot) || markers[1].equals(spot)){
                     htmlContent.append(spot);
                 } else {
-                    htmlContent.append("<form action=\"make_move/");
-                    htmlContent.append(String.valueOf(i+j) + "\" method=\"post\">");
-                    htmlContent.append("<input type=\"submit\" class=\"spot-link\">");
-                    htmlContent.append("</form");
+                    htmlContent.append("<form action=\"/make_move/");
+                    htmlContent.append(String.valueOf(i+j) + "\" method=\"POST\">\n");
+                    htmlContent.append("<input type=\"hidden\" name=\"_method\" value=\"PUT\"/>\n");
+                    htmlContent.append("<input type=\"submit\" class=\"spot-link\"/>\n");
+                    htmlContent.append("</form>\n");
                 }
-                htmlContent.append("</td>");
+                htmlContent.append("</td>\n");
             }
-            htmlContent.append("</tr>");
+            htmlContent.append("</tr>\n");
         }
 
-        htmlContent.append("</table>");
-        htmlContent.append("</div>");
+        htmlContent.append("</table>\n");
+        htmlContent.append("</div>\n");
         htmlContent.append("<h3 id=\"game-over\">Click to make your move</h3>\n");
         htmlContent.append("<div id=\"home-button\">\n");
         htmlContent.append("<form action=\"/games\">\n");
@@ -53,3 +53,7 @@ public class TTTMakeMoveTTT {
 
     }
 }
+
+
+
+

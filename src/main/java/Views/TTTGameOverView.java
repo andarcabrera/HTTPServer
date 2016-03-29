@@ -24,7 +24,6 @@ public class TTTGameOverView {
             for (int j=0; j<rows; j++){
                 htmlContent.append("<td class=\"board-cell\" id=\"" + String.valueOf(i+j) + "\">\n");
                 String spot = board[i + j];
-                System.out.println(spot);
                 if (markers[0].equals(spot) || markers[1].equals(spot)){
                     htmlContent.append(spot);
                 }

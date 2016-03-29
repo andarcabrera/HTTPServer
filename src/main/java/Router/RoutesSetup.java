@@ -31,6 +31,22 @@ public class RoutesSetup implements TrackRoutes{
         addRoute("/logs", "basicAuthController");
         addRoute("/ttt", "TTTController");
         addRoute("/games", "TTTController");
+        addRoute("/make_move/0", "TTTController");
+        addRoute("/make_move/1", "TTTController");
+        addRoute("/make_move/2", "TTTController");
+        addRoute("/make_move/3", "TTTController");
+        addRoute("/make_move/4", "TTTController");
+        addRoute("/make_move/5", "TTTController");
+        addRoute("/make_move/6", "TTTController");
+        addRoute("/make_move/7", "TTTController");
+        addRoute("/make_move/8", "TTTController");
+        addRoute("/make_move/9", "TTTController");
+        addRoute("/make_move/10", "TTTController");
+        addRoute("/make_move/11", "TTTController");
+        addRoute("/make_move/12", "TTTController");
+        addRoute("/make_move/13", "TTTController");
+        addRoute("/make_move/14", "TTTController");
+        addRoute("/make_move/15", "TTTController");
     }
 
     private void addRoute(String action, String controller){

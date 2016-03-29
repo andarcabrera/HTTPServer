@@ -1,10 +1,13 @@
 package ClientThreads;
 
+import Helpers.RequestLogger;
 import IOStreams.HttpInputStream;
 import IOStreams.HttpOutputStream;
 import Request.InfoProcessor;
 import Request.RequestBuilder;
 import Router.RouterStrategy;
+
+import java.util.logging.Level;
 
 /**
  * Created by andacabrera29 on 2/24/16.
@@ -37,7 +40,7 @@ public class HandleUserThread implements Runnable{
 
         System.out.println(rawRequest.toString());
 
-//        RequestLogger.logger.log(Level.INFO, rawRequest.toString());
+        RequestLogger.logger.log(Level.INFO, rawRequest.toString());
 
         requestProcessor.handleRequest(rawRequest);
         RequestBuilder request = requestProcessor.getRequest();
