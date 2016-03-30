@@ -6,8 +6,6 @@ import java.util.HashMap;
  * Created by andacabrera29 on 3/23/16.
  */
 public class GameInfoParser {
-    private String rawGameInfo;
-    private String spot;
     private HashMap<String, String> params = new HashMap<>();
 
     public HashMap<String, String> getParams(String rawParamsInfo){

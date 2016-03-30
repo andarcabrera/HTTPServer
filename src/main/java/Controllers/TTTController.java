@@ -1,5 +1,6 @@
 package Controllers;
 
+import Helpers.CookieParser;
 import Helpers.GameInfoParser;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
@@ -15,15 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 public class TTTController extends Controller{
-    static int sessionSize;
+    private int sessionSize;
     static String[] sessionBoard;
-    static Map<String, String> sessionGameInfo;
-    static String[] sessionMarkers;
+    private Map<String, String> sessionGameInfo;
+    private String[] sessionMarkers;
 
     TTTHomePage index = new TTTHomePage();
     TTTGameOverView gameOverView = new TTTGameOverView();
     TTTMakeMoveView makeMoveView = new TTTMakeMoveView();
     GameInfoParser gameInfoParser = new GameInfoParser();
+    CookieParser cookieParser = new CookieParser();
     private IRubyObject rootRubyObject;
     private Ruby runtime;
 
@@ -82,6 +84,10 @@ public class TTTController extends Controller{
 
         sessionBoard = board;
 
+        response.addHeader("Set-Cookie", "game_info=:" + request.getRawBody());
+//        response.addHeader("Set-Cookie", "filled_spots=:spots");
+
+
         if (gameOver){
             response.setStatusCode("OK");
             response.setResponseBody(gameOverView.generateHtml(size, markers, board));
@@ -95,6 +101,20 @@ public class TTTController extends Controller{
 
     public ResponseBuilder put(RequestBuilder request) {
         String spot = gameInfoParser.getSpot(request.getUrl());
+        Map<String, String> cookie = cookieParser.getCookieInfo(request.getHeaders().get("Cookie"));
+        String parsedCookie = cookie.get("game_info");
+        String filledSpots = cookie.get("filled_spots");
+        System.out.println(filledSpots);
+
+        Map<String, String> params = gameInfoParser.getParams(parsedCookie);
+        sessionGameInfo = params;
+
+        int size = Integer.parseInt(params.get("size"));
+        sessionSize = size;
+
+        String[] markers = gameInfoParser.markers();
+        sessionMarkers = markers;
+
 
         String bootstrapSetup =
                 "require \"" + "/Users/andacabrera29/Desktop/tttj_gem/lib/tttj/game_setup.rb" +  "\"\n"+
@@ -132,6 +152,8 @@ public class TTTController extends Controller{
         Boolean gameOver = (Boolean) JavaEmbedUtils.invokeMethod( runtime, game, "game_over?", new Object[] {}, Boolean.class );
 
         sessionBoard = board;
+
+        response.addHeader("Set-Cookie", "filled_spots=:" + filledSpots + spot );
 
         if (gameOver){
             response.setStatusCode("OK");

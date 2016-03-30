@@ -35,7 +35,7 @@ public class SimpleControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        requestDetails.append("GET action");
+        requestDetails.append("GET action version");
         request.buildRequest(requestDetails);
 
         assertEquals("OKRead from file", new String(simpleController.sendResponse().responseToBytes()));
@@ -43,7 +43,7 @@ public class SimpleControllerTest {
 
     @Test
     public void testPost() throws Exception {
-        requestDetails.append("POST action");
+        requestDetails.append("POST action version");
         request.buildRequest(requestDetails);
 
         assertEquals("OK", new String(simpleController.sendResponse().responseToBytes()));
@@ -51,7 +51,7 @@ public class SimpleControllerTest {
 
     @Test
     public void testPut() throws Exception {
-        requestDetails.append("PUT action");
+        requestDetails.append("PUT action version");
         request.buildRequest(requestDetails);
 
         assertEquals("OK", new String(simpleController.sendResponse().responseToBytes()));

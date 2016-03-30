@@ -34,7 +34,7 @@ public class MockRequest implements RequestBuilder {
 
     @Override
     public String getRawBody() {
-        return rawRequest.toString();
+        return parsedRawRequest()[2];
     }
 
     @Override

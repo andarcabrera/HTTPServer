@@ -24,10 +24,9 @@ public class RequestProcessorTest {
 
     @Test
     public void testGetRequest() throws Exception {
-        String testRequest = "Testing info processor";
+        String testRequest = "Method action body";
         rawRequest.append(testRequest);
         requestProcessor.handleRequest(rawRequest);
-        assertEquals(testRequest, requestProcessor.getRequest().getRawBody());
-
+        assertEquals("body", requestProcessor.getRequest().getRawBody());
     }
 }

@@ -15,7 +15,7 @@ public class RequestTest {
 
     @Test
     public void testSetRequestDetailsHeaderOnly() throws Exception {
-        StringBuffer rawRequest = new StringBuffer("GET url version\nheader_title: header_body\nheader2_title: header2_body\n \n");
+        StringBuffer rawRequest = new StringBuffer("GET url version\nheader_title: header_body\nheader2_title: header2_body\n");
         request.buildRequest(rawRequest);
         assertEquals("GET url version", request.getInitialLine());
         assertEquals("header_body", request.getHeaders().get("header_title"));

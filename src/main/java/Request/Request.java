@@ -68,11 +68,13 @@ public class Request implements RequestBuilder {
 
     private void setHeaderLines(){
         initialLine = getRawHeaderLines()[0];
-        for (int i = 1; i < getRawHeaderLines().length - 1 ;i++){
+        for (int i = 1; i < getRawHeaderLines().length ;i++){
             String[] headerInfo = getRawHeaderLines()[i].split(": ");
-            String headerTitle = headerInfo[0];
-            String headerBody = headerInfo[1];
-            headers.put(headerTitle, headerBody);
+            if (headerInfo.length == 2) {
+                String headerTitle = headerInfo[0];
+                String headerBody = headerInfo[1];
+                headers.put(headerTitle, headerBody);
+            }
         }
     }
 
