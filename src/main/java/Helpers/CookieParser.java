@@ -1,5 +1,7 @@
 package Helpers;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +18,7 @@ public class CookieParser {
     }
 
     private void populateCookieInfo(String[] rawCookie){
-        for (int i = 1; i < rawCookie.length ;i++){
+        for (int i = 0; i < rawCookie.length ;i++){
             String[] splitInfo = rawCookie[i].split("=:");
             if (splitInfo.length == 2) {
                 String cookieName = splitInfo[0].trim();
@@ -24,5 +26,20 @@ public class CookieParser {
                 cookieInfo.put(cookieName, cookieValue);
             }
         }
+    }
+
+    public String[] getBoardState(int size){
+        String cookieBoard = cookieInfo.get("board");
+        String[] boardState = new String[size];
+        if (cookieBoard == null){
+            for (int i = 0; i < size ;i++){
+                boardState[i] = String.valueOf(i);
+            }
+        }else {
+            for (int i = 0; i < size; i++) {
+                boardState[i] = cookieBoard.substring(i, i + 1);
+            }
+        }
+        return boardState;
     }
 }
