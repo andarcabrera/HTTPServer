@@ -35,7 +35,7 @@ public class CookieParserTest {
     @Test
     public void testGetFilledSpots() throws Exception {
         String[] testSpots = new String[] {"0", "X", "Y", "3", "4", "5", "6", "7", "8"};
-        parser.getCookieInfo("board=:0XY345678; textwrapon=false; wysiwyg=textarea; game_info=:size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2");
+        parser.getCookieInfo("board=:0-X-Y-3-4-5-6-7-8; textwrapon=false; wysiwyg=textarea; game_info=:size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2");
 
          assertEquals(testSpots, parser.getBoardState(9));
     }
@@ -46,6 +46,14 @@ public class CookieParserTest {
         parser.getCookieInfo("textwrapon=false; wysiwyg=textarea; game_info=:size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2");
 
          assertEquals(testSpots, parser.getBoardState(9));
+    }
+
+    @Test
+    public void testGetFilledSpots4X4board() throws Exception {
+        String[] testSpots = new String[] {"0", "X", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "Y", "13", "14", "15"};
+        parser.getCookieInfo("textwrapon=false; board=:0-X-2-3-4-5-6-7-8-9-10-11-Y-13-14-15; wysiwyg=textarea; game_info=:size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2");
+
+         assertEquals(testSpots, parser.getBoardState(16));
     }
 
 

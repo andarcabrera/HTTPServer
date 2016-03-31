@@ -10,19 +10,16 @@ import Views.TTTMakeMoveView;
 import org.jruby.Ruby;
 import org.jruby.javasupport.JavaEmbedUtils;
 import org.jruby.runtime.builtin.IRubyObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class TTTController extends Controller{
-    private String[] sessionMarkers;
-
-    TTTHomePage index = new TTTHomePage();
-    TTTGameOverView gameOverView = new TTTGameOverView();
-    TTTMakeMoveView makeMoveView = new TTTMakeMoveView();
-    GameInfoParser gameInfoParser = new GameInfoParser();
-    CookieParser cookieParser = new CookieParser();
+    private TTTHomePage index = new TTTHomePage();
+    private TTTGameOverView gameOverView = new TTTGameOverView();
+    private TTTMakeMoveView makeMoveView = new TTTMakeMoveView();
+    private GameInfoParser gameInfoParser = new GameInfoParser();
+    private CookieParser cookieParser = new CookieParser();
     private IRubyObject rootRubyObject;
     private Ruby runtime;
 
@@ -39,8 +36,9 @@ public class TTTController extends Controller{
     public ResponseBuilder post(RequestBuilder request) {
         Map<String, String> params = gameInfoParser.getParams(request.getRawBody());
         int size = Integer.parseInt(params.get("size"));
+        System.out.println(size);
         String[] markers = gameInfoParser.markers();
-        sessionMarkers = markers;
+        String[] sessionMarkers = markers;
 
         String bootstrapSetup =
                 "require \"" + "/Users/andacabrera29/Desktop/tttj_gem/lib/tttj/game_setup.rb" +  "\"\n"+
@@ -97,11 +95,11 @@ public class TTTController extends Controller{
         Map<String, String> params = gameInfoParser.getParams(parsedCookie);
 
         int size = Integer.parseInt(params.get("size"));
+        System.out.println(size);
         String[] filled_spots = cookieParser.getBoardState(size);
 
         String[] markers = gameInfoParser.markers();
-        sessionMarkers = markers;
-
+        String[] sessionMarkers = markers;
 
         String bootstrapSetup =
                 "require \"" + "/Users/andacabrera29/Desktop/tttj_gem/lib/tttj/game_setup.rb" +  "\"\n"+
@@ -158,7 +156,7 @@ public class TTTController extends Controller{
     private String getStringBoard(String[] board){
         String extractedBoard = "";
         for (int i = 0; i < board.length; i++){
-            extractedBoard += board[i];
+            extractedBoard += board[i] + "-";
         }
         return  extractedBoard;
     }

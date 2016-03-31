@@ -36,9 +36,7 @@ public class CookieParser {
                 boardState[i] = String.valueOf(i);
             }
         }else {
-            for (int i = 0; i < size; i++) {
-                boardState[i] = cookieBoard.substring(i, i + 1);
-            }
+            boardState = cookieBoard.split("-");
         }
         return boardState;
     }
