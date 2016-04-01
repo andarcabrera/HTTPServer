@@ -1,28 +1,17 @@
 package Helpers;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by andacabrera29 on 3/23/16.
  */
-public class GameInfoParser {
+public class GameInfoParser implements Parser{
     private HashMap<String, String> params = new HashMap<>();
 
-    public HashMap<String, String> getParams(String rawParamsInfo){
+    public Map<String, String> getParsedInfo(String rawParamsInfo){
         parsePlayerInfo(rawParamsInfo);
         return  params;
-    }
-
-    public String[] markers(){
-        String[] game_markers = new String[2];
-        game_markers[0] = params.get("player1_marker");
-        game_markers[1] = params.get("player2_marker");
-        return game_markers;
-    }
-
-    public String getSpot(String action){
-        String[] splitActionLine = action.split("/");
-        return splitActionLine[2].trim();
     }
 
     private void parsePlayerInfo(String rawInfo){

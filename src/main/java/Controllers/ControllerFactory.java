@@ -2,8 +2,10 @@ package Controllers;
 
 import FileMgmt.FileAccess;
 import Helpers.Base64ParserAndDecoder;
+import Helpers.Parser;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import TTT.TTTGame;
 import Views.AbstractViewFactory;
 
 
@@ -49,7 +51,7 @@ public class ControllerFactory extends AbstractControllerFactory {
     }
 
     @Override
-    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory viewFactory) {
-        return new TTTController(request, response, viewFactory);
+    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory viewFactory, Parser gameInfoParser, Parser cookieParser, TTTGame game) {
+        return new TTTController(request, response, viewFactory, gameInfoParser, cookieParser, game);
     }
 }

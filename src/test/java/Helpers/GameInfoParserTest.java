@@ -29,7 +29,7 @@ public class GameInfoParserTest {
 
     @Test
     public void testGetParams(){
-        assertEquals(testParams, parser.getParams("size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2"));
+        assertEquals(testParams, parser.getParsedInfo("size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2"));
     }
 
 }

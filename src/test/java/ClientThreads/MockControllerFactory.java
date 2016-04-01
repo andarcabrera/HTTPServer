@@ -3,8 +3,10 @@ package ClientThreads;
 import Controllers.*;
 import FileMgmt.FileAccess;
 import Helpers.Base64ParserAndDecoder;
+import Helpers.Parser;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import TTT.TTTGame;
 import Views.AbstractViewFactory;
 
 /**
@@ -53,7 +55,7 @@ public class MockControllerFactory extends AbstractControllerFactory{
     }
 
     @Override
-    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory factory) {
+    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory factory, Parser gameInfoParser, Parser cookieParser, TTTGame game) {
         return new MockController(request, response);
     }
 }

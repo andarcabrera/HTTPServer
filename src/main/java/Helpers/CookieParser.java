@@ -8,14 +8,16 @@ import java.util.Map;
 /**
  * Created by andacabrera29 on 3/30/16.
  */
-public class CookieParser {
+public class CookieParser implements Parser{
     private Map<String, String> cookieInfo = new HashMap<>();
 
-    public Map<String, String> getCookieInfo(String cookie){
+    public Map<String, String> getParsedInfo(String cookie){
         String[] parsedCookie = cookie.split(";");
         populateCookieInfo(parsedCookie);
         return cookieInfo;
     }
+
+
 
     private void populateCookieInfo(String[] rawCookie){
         for (int i = 0; i < rawCookie.length ;i++){
@@ -26,18 +28,5 @@ public class CookieParser {
                 cookieInfo.put(cookieName, cookieValue);
             }
         }
-    }
-
-    public String[] getBoardState(int size){
-        String cookieBoard = cookieInfo.get("board");
-        String[] boardState = new String[size];
-        if (cookieBoard == null){
-            for (int i = 0; i < size ;i++){
-                boardState[i] = String.valueOf(i);
-            }
-        }else {
-            boardState = cookieBoard.split("-");
-        }
-        return boardState;
     }
 }

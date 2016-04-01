@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by andacabrera29 on 3/31/16.
  */
-public class GameRuby {
+public class GameRuby implements TTTGame{
     private Ruby runtime;
     private IRubyObject rootRubyObject;
     private IRubyObject game;
