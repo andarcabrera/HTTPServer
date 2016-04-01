@@ -5,20 +5,24 @@ import Helpers.GameInfoParser;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
 import TTT.GameRuby;
-import Views.TTTGameOverView;
-import Views.TTTHomePage;
-import Views.TTTMakeMoveView;
+import Views.*;
+
 import java.util.Map;
 
 public class TTTController extends Controller{
-    private TTTHomePage index = new TTTHomePage();
-    private TTTGameOverView gameOverView = new TTTGameOverView();
-    private TTTMakeMoveView makeMoveView = new TTTMakeMoveView();
+    AbstractViewFactory viewFactory;
+    private View index;
+    private View gameOverView;
+    private View makeMoveView;
     private GameInfoParser gameInfoParser = new GameInfoParser();
     private CookieParser cookieParser = new CookieParser();
 
-    public TTTController(RequestBuilder request, ResponseBuilder response){
+    public TTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory viewFactory){
         super(request, response);
+        this.viewFactory = viewFactory;
+        this.index = viewFactory.createHomePageView();
+        this.gameOverView = viewFactory.createGameOverView();
+        this.makeMoveView = viewFactory.createMakeMoveView();
     }
 
     public ResponseBuilder get(RequestBuilder request) {

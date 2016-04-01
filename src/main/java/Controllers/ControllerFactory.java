@@ -4,6 +4,7 @@ import FileMgmt.FileAccess;
 import Helpers.Base64ParserAndDecoder;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import Views.AbstractViewFactory;
 
 
 public class ControllerFactory extends AbstractControllerFactory {
@@ -48,7 +49,7 @@ public class ControllerFactory extends AbstractControllerFactory {
     }
 
     @Override
-    public Controller createTTTController(RequestBuilder request, ResponseBuilder response) {
-        return new TTTController(request, response);
+    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory viewFactory) {
+        return new TTTController(request, response, viewFactory);
     }
 }

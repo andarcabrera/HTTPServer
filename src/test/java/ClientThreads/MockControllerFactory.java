@@ -5,6 +5,7 @@ import FileMgmt.FileAccess;
 import Helpers.Base64ParserAndDecoder;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import Views.AbstractViewFactory;
 
 /**
  * Created by andacabrera29 on 3/15/16.
@@ -52,7 +53,7 @@ public class MockControllerFactory extends AbstractControllerFactory{
     }
 
     @Override
-    public Controller createTTTController(RequestBuilder request, ResponseBuilder response) {
+    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory factory) {
         return new MockController(request, response);
     }
 }

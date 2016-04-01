@@ -5,11 +5,14 @@ import FileMgmt.FileAccess;
 import Helpers.Base64ParserAndDecoder;
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import Views.AbstractViewFactory;
+import Views.ViewFactory;
 
 
 public abstract class AbstractControllerFactory {
     private FileAccess accessFile = new AccessFile();
-    Base64ParserAndDecoder decoder = new Base64ParserAndDecoder();
+    private Base64ParserAndDecoder decoder = new Base64ParserAndDecoder();
+    private AbstractViewFactory viewFactory = new ViewFactory();
 
     public Controller createController(String controllerName, RequestBuilder request, ResponseBuilder response){
         Controller controller = null;
@@ -41,7 +44,7 @@ public abstract class AbstractControllerFactory {
                 controller = createBasicAuthController(request, response, decoder);
                 break;
             case "TTTController":
-                controller = createTTTController(request, response);
+                controller = createTTTController(request, response, viewFactory);
                 break;
         }
         return controller;
@@ -55,5 +58,5 @@ public abstract class AbstractControllerFactory {
     public abstract Controller createRedirectController(RequestBuilder request, ResponseBuilder response);
     public abstract Controller createPatchController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile);
     public abstract Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder);
-    public abstract Controller createTTTController(RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory viewFactory);
 }

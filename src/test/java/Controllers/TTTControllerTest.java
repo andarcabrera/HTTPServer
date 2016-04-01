@@ -2,6 +2,8 @@ package Controllers;
 
 import Request.RequestBuilder;
 import Response.ResponseBuilder;
+import Views.AbstractViewFactory;
+import Views.ViewFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,13 +17,15 @@ public class TTTControllerTest {
     private RequestBuilder request;
     private ResponseBuilder response;
     private StringBuffer requestDetails;
+    private AbstractViewFactory viewFactory;
 
     @Before
     public void setUp(){
         request = new MockRequest();
         response = new MockResponse();
         requestDetails = new StringBuffer();
-        controller = new TTTController(request, response);
+        viewFactory = new ViewFactory();
+        controller = new TTTController(request, response, viewFactory);
     }
 
     @Test

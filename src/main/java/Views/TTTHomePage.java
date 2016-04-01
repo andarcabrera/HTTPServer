@@ -3,7 +3,12 @@ package Views;
 /**
  * Created by andacabrera29 on 3/23/16.
  */
-public class TTTHomePage {
+public class TTTHomePage implements View{
+    @Override
+    public byte[] generateHtml(int size, String[] markers, String[] board) {
+        return new byte[0];
+    }
+
     public byte[] homePageHtml(){
         StringBuilder htmlContent = new StringBuilder();
         htmlContent.append("<!DOCTYPE html>\n");

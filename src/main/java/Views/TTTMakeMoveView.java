@@ -3,7 +3,7 @@ package Views;
 /**
  * Created by andacabrera29 on 3/28/16.
  */
-public class TTTMakeMoveView {
+public class TTTMakeMoveView implements View{
     public byte[] generateHtml(int size, String[] markers, String[] board ){
         StringBuilder htmlContent = new StringBuilder();
         htmlContent.append("<!DOCTYPE html>\n");
@@ -51,6 +51,11 @@ public class TTTMakeMoveView {
 
         return htmlContent.toString().getBytes();
 
+    }
+
+    @Override
+    public byte[] homePageHtml() {
+        return new byte[0];
     }
 }
 
