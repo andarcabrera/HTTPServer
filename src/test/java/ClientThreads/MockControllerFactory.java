@@ -15,47 +15,7 @@ import Views.AbstractViewFactory;
 public class MockControllerFactory extends AbstractControllerFactory{
 
     @Override
-    public Controller createSimpleController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createDirectoryController(RequestBuilder request, ResponseBuilder response) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createFileController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createParameterController(RequestBuilder request, ResponseBuilder response) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createDefaultController(RequestBuilder request, ResponseBuilder response) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createRedirectController(RequestBuilder request, ResponseBuilder response) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createPatchController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createBasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder) {
-        return new MockController(request, response);
-    }
-
-    @Override
-    public Controller createTTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory factory, Parser gameInfoParser, Parser cookieParser, TTTGame game) {
+    public Controller createController(String controllerName, RequestBuilder request, ResponseBuilder response) {
         return new MockController(request, response);
     }
 }

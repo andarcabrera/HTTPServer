@@ -44,7 +44,7 @@ public class TTTControllerTest {
         String[] size = new String[] {"9"};
         String[] gameOver = new String[] {"false"};
         String[] markers = new String[] {"M", "N"};
-        String [] board = new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
+        String [] board = new String[] {"0", "M", "2", "3", "4", "5", "6", "7", "8"};
         gameInfo.put("size", size);
         gameInfo.put("gameOver", gameOver);
         gameInfo.put("markers", markers);
@@ -74,7 +74,7 @@ public class TTTControllerTest {
 
     @Test
     public void testPut() throws Exception {
-        requestDetails.append("POST action size=9&player1_type=human&player1_marker=M&player1_name=Player1&player2_type=human&player2_marker=N&player2_name=Player2");
+        requestDetails.append("POST action size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2");
         request.buildRequest(requestDetails);
         requestDetails.append("PUT /make_move/2 version");
         request.buildRequest(requestDetails);

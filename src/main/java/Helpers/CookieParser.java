@@ -17,8 +17,6 @@ public class CookieParser implements Parser{
         return cookieInfo;
     }
 
-
-
     private void populateCookieInfo(String[] rawCookie){
         for (int i = 0; i < rawCookie.length ;i++){
             String[] splitInfo = rawCookie[i].split("=:");
