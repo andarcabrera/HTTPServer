@@ -34,7 +34,7 @@ public class PatchControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        requestDetails.append("GET / version");
+        requestDetails.append("method~GET  url~/");
         request.buildRequest(requestDetails);
         patchController = new PatchController(request, response, accessFile);
 
@@ -43,7 +43,7 @@ public class PatchControllerTest {
 
     @Test
     public void testPatchWithWrongPath() throws Exception {
-        requestDetails.append("PATCH / version If-Match 0");
+        requestDetails.append("method~PATCH  url~/  If-Match~0");
         request.buildRequest(requestDetails);
         patchController = new PatchController(request, response, accessFile);
 
@@ -53,7 +53,7 @@ public class PatchControllerTest {
 
     @Test
     public void testPatchWithCorrectPath() throws Exception {
-        requestDetails.append("PATCH / version If-Match dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec");
+        requestDetails.append("method~PATCH  url~/  If-Match~dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec");
         request.buildRequest(requestDetails);
         patchController = new PatchController(request, response, accessFile);
 

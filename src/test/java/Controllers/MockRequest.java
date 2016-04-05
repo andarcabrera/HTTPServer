@@ -3,16 +3,20 @@ package Controllers;
 import Request.RequestBuilder;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class MockRequest implements RequestBuilder {
+    private String rawRequestInfo;
+    private Map<String, String> requestInfo = new HashMap<>();
     private StringBuffer rawRequest = new StringBuffer();
-    private HashMap<String, String> headers = new HashMap<>();
     HashMap<String, String> params = new HashMap<>();
 
     @Override
     public void buildRequest(StringBuffer rawRequest) {
         this.rawRequest = rawRequest;
+        rawRequestInfo = rawRequest.toString();
+        parseMockRequest();
     }
 
     @Override
@@ -22,34 +26,27 @@ public class MockRequest implements RequestBuilder {
 
     @Override
     public HashMap<String, String> getHeaders() {
-        if (parsedRawRequest().length > 3) {
-            if (parsedRawRequest()[3].trim().equals("Authorization")) {
-                headers.put(parsedRawRequest()[3], "Basic " + parsedRawRequest()[4]);
-            } else{
-                headers.put(parsedRawRequest()[3], parsedRawRequest()[4]);
-            }
-        }
-        return headers;
+        return (HashMap<String, String>) requestInfo;
     }
 
     @Override
     public String getRawBody() {
-        return parsedRawRequest()[2];
+        return requestInfo.get("rawBody");
     }
 
     @Override
     public String getMethod() {
-        return parsedRawRequest()[0];
+        return requestInfo.get("method");
     }
 
     @Override
     public String getUrl() {
-        return parsedRawRequest()[1];
+        return requestInfo.get("url");
     }
 
     @Override
     public String getVersion() {
-        return "RequestVersion";
+        return requestInfo.get("version");
     }
 
     @Override
@@ -58,7 +55,11 @@ public class MockRequest implements RequestBuilder {
         return params;
     }
 
-    private String[] parsedRawRequest(){
-        return rawRequest.toString().split(" ");
+    private void parseMockRequest(){
+        String[] splitRequest = rawRequestInfo.split("  ");
+        for (String requestPart : splitRequest){
+            String[] details = requestPart.split("~");
+            requestInfo.put(details[0], details[1]);
+        }
     }
 }

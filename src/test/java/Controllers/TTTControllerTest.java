@@ -55,7 +55,7 @@ public class TTTControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        requestDetails.append("GET action");
+        requestDetails.append("method~GET");
         request.buildRequest(requestDetails);
 
         assertTrue(new String(controller.sendResponse().responseToBytes()).startsWith("OK"));
@@ -65,7 +65,7 @@ public class TTTControllerTest {
 
     @Test
     public void testPost() throws Exception {
-        requestDetails.append("POST action size=9&player1_type=human&player1_marker=M&player1_name=Player1&player2_type=human&player2_marker=N&player2_name=Player2");
+        requestDetails.append("method~POST  rawBody~size=9&player1_type=human&player1_marker=M&player1_name=Player1&player2_type=human&player2_marker=N&player2_name=Player2");
         request.buildRequest(requestDetails);
 
         assertTrue(new String(controller.sendResponse().responseToBytes()).startsWith("OK"));
@@ -74,11 +74,9 @@ public class TTTControllerTest {
 
     @Test
     public void testPut() throws Exception {
-        requestDetails.append("POST action size=9&player1_type=human&player1_marker=X&player1_name=Player1&player2_type=human&player2_marker=Y&player2_name=Player2");
+        requestDetails.append("method~PUT  url~/make_move/2  Cookie~game_info=:size=9&player1_type=human&player1_marker=M&player1_name=Player1&player2_type=human&player2_marker=N&player2_name=Player2;");
         request.buildRequest(requestDetails);
-        requestDetails.append("PUT /make_move/2 version");
-        request.buildRequest(requestDetails);
-        System.out.println(game.getMarkers()[0]);
+
         assertTrue(new String(controller.sendResponse().responseToBytes()).startsWith("OK"));
         assertTrue(new String(controller.sendResponse().responseToBytes()).contains("Click to make your move"));
         assertTrue(new String(controller.sendResponse().responseToBytes()).contains("M"));

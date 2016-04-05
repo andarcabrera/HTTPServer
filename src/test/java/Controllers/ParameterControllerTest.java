@@ -19,7 +19,7 @@ public class ParameterControllerTest {
     @Before
     public void setUp(){
         request = new MockRequest();
-        rawRequest.append("GET /action");
+        rawRequest.append("method~GET  url~/action");
         request.buildRequest(rawRequest);
         response = new MockResponse();
         parameterController = new ParameterController(request, response);

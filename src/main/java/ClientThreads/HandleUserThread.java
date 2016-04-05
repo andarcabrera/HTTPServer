@@ -6,7 +6,6 @@ import IOStreams.HttpOutputStream;
 import Request.InfoProcessor;
 import Request.RequestBuilder;
 import Router.RouterStrategy;
-
 import java.util.logging.Level;
 
 /**
@@ -42,9 +41,10 @@ public class HandleUserThread implements Runnable{
 
         requestProcessor.handleRequest(rawRequest);
         RequestBuilder request = requestProcessor.getRequest();
-        router.route(request);
 
+        router.route(request);
         byte[] response = router.getResponse();
+
         writeMessage(response);
     }
 }

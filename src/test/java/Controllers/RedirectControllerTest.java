@@ -21,7 +21,7 @@ public class RedirectControllerTest {
         request = new MockRequest();
         response = new MockResponse();
         requestDetails = new StringBuffer();
-        requestDetails.append("GET some action");
+        requestDetails.append("method~GET  url~action");
         request.buildRequest(requestDetails);
         redirectController = new RedirectController(request, response);
     }

@@ -29,7 +29,7 @@ public class BasicAuthControllerTest {
 
     @Test
     public void testGetNoAuthorizationHeader() throws Exception {
-        requestDetails.append("GET / version");
+        requestDetails.append("method~GET  url~/");
         request.buildRequest(requestDetails);
         basicAuthController = new BasicAuthController(request, response, decoder);
 
@@ -38,7 +38,7 @@ public class BasicAuthControllerTest {
 
     @Test
     public void testGetWithWrongAuthorizationHeader() throws Exception {
-        requestDetails.append("GET / version Authorization MWRtaW46aHVudGVyMg==");
+        requestDetails.append("method~GET  url~/  Authorization~ Basic MWRtaW46aHVudGVyMg==");
         request.buildRequest(requestDetails);
         basicAuthController = new BasicAuthController(request, response, decoder);
 
@@ -47,7 +47,7 @@ public class BasicAuthControllerTest {
 
     @Test
     public void testGetWithCorrectAuthorizationHeader() throws Exception {
-        requestDetails.append("GET / version Authorization YWRtaW46aHVudGVyMg==");
+        requestDetails.append("method~GET  url~/  Authorization~Basic YWRtaW46aHVudGVyMg==");
         request.buildRequest(requestDetails);
         basicAuthController = new BasicAuthController(request, response, decoder);
 

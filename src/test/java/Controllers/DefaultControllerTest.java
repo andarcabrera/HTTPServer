@@ -26,7 +26,7 @@ public class DefaultControllerTest {
 
     @Test
     public void testGet() throws Exception {
-        requestDetails.append("GET action");
+        requestDetails.append("method~GET");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(defaultController.sendResponse().responseToBytes()));
@@ -34,7 +34,7 @@ public class DefaultControllerTest {
 
     @Test
     public void testPost() throws Exception {
-        requestDetails.append("POST action");
+        requestDetails.append("method~POST");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(defaultController.sendResponse().responseToBytes()));
@@ -42,7 +42,7 @@ public class DefaultControllerTest {
 
     @Test
     public void testPut() throws Exception {
-        requestDetails.append("PUT action");
+        requestDetails.append("method~PUT");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(defaultController.sendResponse().responseToBytes()));

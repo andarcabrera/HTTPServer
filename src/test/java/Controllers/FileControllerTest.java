@@ -33,7 +33,7 @@ public class FileControllerTest {
 
     @Test
     public void testGetFullFileContent() throws Exception {
-        requestDetails.append("GET / version noRange 0");
+        requestDetails.append("method~GET  url~/");
         request.buildRequest(requestDetails);
         fileController = new FileController(request, response, accessFile);
 
@@ -42,7 +42,7 @@ public class FileControllerTest {
 
     @Test
     public void testGetPartialFileContent() throws Exception {
-        requestDetails.append("GET / version Range 0");
+        requestDetails.append("method~GET  url~/  Range~0");
         request.buildRequest(requestDetails);
         fileController = new FileController(request, response, accessFile);
 
@@ -51,7 +51,7 @@ public class FileControllerTest {
 
     @Test
     public void testPost() throws Exception {
-        requestDetails.append("POST /");
+        requestDetails.append("method~POST  url~/");
         request.buildRequest(requestDetails);
         fileController = new FileController(request, response, accessFile);
 
@@ -60,7 +60,7 @@ public class FileControllerTest {
 
     @Test
     public void testPut() throws Exception {
-        requestDetails.append("PUT /");
+        requestDetails.append("method~PUT  url~/");
         request.buildRequest(requestDetails);
         fileController = new FileController(request, response, accessFile);
 

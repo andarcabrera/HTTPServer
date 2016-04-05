@@ -29,7 +29,7 @@ public class ControllerTest {
 
     @Test
     public void testSendResponseGet() throws Exception {
-        requestDetails.append("GET bogus request");
+        requestDetails.append("method~GET");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
@@ -37,7 +37,7 @@ public class ControllerTest {
 
     @Test
     public void testSendResponsePut() throws Exception {
-        requestDetails.append("PUT bogus request");
+        requestDetails.append("method~PUT");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
@@ -45,7 +45,7 @@ public class ControllerTest {
 
     @Test
     public void testSendResponsePost() throws Exception {
-        requestDetails.append("POST bogus request");
+        requestDetails.append("method~POST");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
@@ -53,7 +53,7 @@ public class ControllerTest {
 
     @Test
     public void testSendResponseDelete() throws Exception {
-        requestDetails.append("DELETE bogus request");
+        requestDetails.append("method~DELETE");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
@@ -61,7 +61,7 @@ public class ControllerTest {
 
     @Test
     public void testSendResponseOptions() throws Exception {
-        requestDetails.append("OPTIONS bogus request");
+        requestDetails.append("method~OPTIONS");
         request.buildRequest(requestDetails);
 
         assertEquals("PageNotFound", new String(controller.sendResponse().responseToBytes()));
@@ -69,7 +69,7 @@ public class ControllerTest {
 
     @Test
     public void testSendResponseBogus() throws Exception {
-        requestDetails.append("BOGUS bogus request");
+        requestDetails.append("method~BOGUS");
         request.buildRequest(requestDetails);
 
         assertEquals("MethodNotAllowed", new String(controller.sendResponse().responseToBytes()));

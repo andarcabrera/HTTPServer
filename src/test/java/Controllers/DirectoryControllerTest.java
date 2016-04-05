@@ -28,7 +28,7 @@ public class DirectoryControllerTest {
     public void setUp(){
         request = new MockRequest();
         requestDetails = new StringBuffer();
-        requestDetails.append("GET /");
+        requestDetails.append("method~GET  url~/");
 
         request.buildRequest(requestDetails);
         response = new MockResponse();

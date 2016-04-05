@@ -32,7 +32,7 @@ public class RouterTest {
 
     @Test
     public void testGetResponse() throws Exception {
-        requestDetails.append("GET action");
+        requestDetails.append("method~GET");
         request.buildRequest(requestDetails);
         router.route(request);
 
