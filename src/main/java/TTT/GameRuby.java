@@ -48,22 +48,22 @@ public class GameRuby implements TTTGame{
         size = Integer.parseInt(params.get("size"));
 
         String bootstrapSetup =
-                    "require_relative \"" + "../tttj_gem/lib/tttj/game_setup.rb" +  "\"\n"+
-                            "class Bootstrap \n" +
-                            "   def execute root_object, spot  \n" +
-                            "       " + "TTT::GameSetup.new" + "(root_object, spot) \n" +
-                            "   end    \n" +
-                            "end \n" +
-                            "Bootstrap.new";
+                "require_relative \"" + "../tttj_gem/lib/tttj/game_setup.rb" +  "\"\n"+
+                        "class Bootstrap \n" +
+                        "   def execute root_object, spot  \n" +
+                        "       " + "TTT::GameSetup.new" + "(root_object, spot) \n" +
+                        "   end    \n" +
+                        "end \n" +
+                        "Bootstrap.new";
 
         String bootstrapGame =
-                    "require_relative \"" + "../tttj_gem/lib/tttj/game.rb" +  "\"\n"+
-                            "class Bootstrap \n" +
-                            "   def execute root_object, size  \n" +
-                            "       " + "TTT::Game.new" + "(root_object, size) \n" +
-                            "   end    \n" +
-                            "end \n" +
-                            "Bootstrap.new";
+                "require_relative \"" + "../tttj_gem/lib/tttj/game.rb" +  "\"\n"+
+                        "class Bootstrap \n" +
+                        "   def execute root_object, size  \n" +
+                        "       " + "TTT::Game.new" + "(root_object, size) \n" +
+                        "   end    \n" +
+                        "end \n" +
+                        "Bootstrap.new";
 
         List<String> loadPaths = new ArrayList<>();
         loadPaths.add(".");
