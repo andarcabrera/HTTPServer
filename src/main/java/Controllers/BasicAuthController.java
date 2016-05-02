@@ -10,12 +10,12 @@ public class BasicAuthController extends Controller{
     private String user = "admin";
     private String password = "hunter2";
 
-    public BasicAuthController(RequestBuilder request, ResponseBuilder response, Base64ParserAndDecoder decoder){
-        super(request, response);
+    public BasicAuthController(RequestBuilder request, ResponseBuilder response, String methodsAllowed, Base64ParserAndDecoder decoder){
+        super(request, response, methodsAllowed);
         this.decoder = decoder;
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
+    public ResponseBuilder getSecureResponse() {
         String authorization = request.getHeaders().get("Authorization");
         if (authorization !=null) {
             decoder.decodeBase64(authorization);

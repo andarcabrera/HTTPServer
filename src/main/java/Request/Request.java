@@ -44,6 +44,7 @@ public class Request implements RequestBuilder {
     }
 
     public String getUrl(){
+        System.out.println("url" + url);
         return url;
     }
 
@@ -53,6 +54,10 @@ public class Request implements RequestBuilder {
 
     public HashMap<String, String> getParams(){
         return params;
+    }
+
+    public String getRequestAction(){
+        return getMethod() + " " + getUrl();
     }
 
 

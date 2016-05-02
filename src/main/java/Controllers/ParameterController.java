@@ -8,11 +8,11 @@ import java.util.Map;
 
 
 public class ParameterController extends Controller{
-    public ParameterController(RequestBuilder request, ResponseBuilder response){
-        super(request, response);
+    public ParameterController(RequestBuilder request, ResponseBuilder response, String methodsAllowed){
+        super(request, response, methodsAllowed);
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
+    public ResponseBuilder showParamsInBody() {
         response.setStatusCode("OK");
         response.setResponseBody(getParams(request.getParams()));
         return response;

@@ -4,5 +4,5 @@ import Request.RequestBuilder;
 import Response.ResponseBuilder;
 
 public abstract class AbstractControllerFactory {
-    public abstract Controller createController(String controllerName, RequestBuilder request, ResponseBuilder response);
+    public abstract Controller createController(String controllerName, RequestBuilder request, ResponseBuilder response, String methodsAllowed);
 }

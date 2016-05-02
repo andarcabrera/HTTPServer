@@ -14,6 +14,7 @@ public class StatusCodes {
         statusCodes.put("Redirect", "302 Found");
         statusCodes.put("NoContent", "204 No Content");
         statusCodes.put("Unauthorized", "401 Unauthorized");
+        statusCodes.put("Teapot", "418 I'm a teapot");
     }
 
     public static String getStatus(String status){

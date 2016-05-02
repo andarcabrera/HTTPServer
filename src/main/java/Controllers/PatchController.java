@@ -9,12 +9,12 @@ public class PatchController extends Controller{
     private FileAccess accessFile;
     private String etag = "dc50a0d27dda2eee9f65644cd7e4c9cf11de8bec";
 
-    public PatchController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile){
-        super(request, response);
+    public PatchController(RequestBuilder request, ResponseBuilder response, String methodsAllowed, FileAccess accessFile){
+        super(request, response, methodsAllowed);
         this.accessFile = accessFile;
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
+    public ResponseBuilder show() {
         byte[] fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
         response.setStatusCode("OK");
         response.addHeader("ETag", etag);
@@ -22,7 +22,7 @@ public class PatchController extends Controller{
         return response;
     }
 
-    public ResponseBuilder patch(RequestBuilder request) {
+    public ResponseBuilder showPatched() {
         String requestEtag = request.getHeaders().get("If-Match");
         byte[] fileContent = accessFile.readFromFile(sourceDirectory + request.getUrl());
 

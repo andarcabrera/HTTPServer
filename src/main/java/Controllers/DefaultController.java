@@ -6,22 +6,12 @@ import Response.ResponseBuilder;
 
 public class DefaultController extends Controller{
 
-    public DefaultController(RequestBuilder request, ResponseBuilder response){
-        super(request, response);
+    public DefaultController(RequestBuilder request, ResponseBuilder response, String methodsAllowed){
+        super(request, response, methodsAllowed);
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
-        response.setStatusCode("PageNotFound");
-        return response;
-    }
-
-    public ResponseBuilder post(RequestBuilder request) {
-        response.setStatusCode("PageNotFound");
-        return response;
-    }
-
-    public ResponseBuilder put(RequestBuilder request) {
-        response.setStatusCode("PageNotFound");
+    public ResponseBuilder sendResponse(String action) {
+        response.setStatusCode("MethodNotAllowed");
         return response;
     }
 }

@@ -10,12 +10,12 @@ import java.util.HashMap;
 public class FileController extends Controller{
     private FileAccess accessFile;
 
-    public FileController(RequestBuilder request, ResponseBuilder response, FileAccess accessFile){
-        super(request, response);
+    public FileController(RequestBuilder request, ResponseBuilder response, String methodsAllowed, FileAccess accessFile){
+        super(request, response, methodsAllowed);
         this.accessFile = accessFile;
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
+    public ResponseBuilder showFileContent() {
         HashMap<String, String> headers = request.getHeaders();
         String range = headers.get("Range");
 
@@ -31,15 +31,7 @@ public class FileController extends Controller{
         return response;
     }
 
-    public ResponseBuilder post(RequestBuilder request) {
-        response.setStatusCode("MethodNotAllowed");
-        return response;
-    }
 
-    public ResponseBuilder put(RequestBuilder request) {
-        response.setStatusCode("MethodNotAllowed");
-        return response;
-    }
 
 }
 

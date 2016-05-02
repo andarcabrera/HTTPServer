@@ -19,8 +19,8 @@ public class TTTController extends Controller{
     private Parser cookieParser = new CookieParser();
     private TTTGame rubyGame;
 
-    public TTTController(RequestBuilder request, ResponseBuilder response, AbstractViewFactory viewFactory, Parser gameInfoParser, Parser cookieParser, TTTGame game){
-        super(request, response);
+    public TTTController(RequestBuilder request, ResponseBuilder response, String methodsAllowed, AbstractViewFactory viewFactory, Parser gameInfoParser, Parser cookieParser, TTTGame game){
+        super(request, response, methodsAllowed);
         this.viewFactory = viewFactory;
         this.index = viewFactory.createHomePageView();
         this.gameOverView = viewFactory.createGameOverView();
@@ -30,13 +30,13 @@ public class TTTController extends Controller{
         this.rubyGame = game;
     }
 
-    public ResponseBuilder get(RequestBuilder request) {
+    public ResponseBuilder tttHomePage() {
         response.setStatusCode("OK");
         response.setResponseBody(index.homePageHtml());
         return response;
     }
 
-    public ResponseBuilder post(RequestBuilder request) {
+    public ResponseBuilder startGame() {
         Map<String, String> params = gameInfoParser.getParsedInfo(request.getRawBody());
 
         rubyGame.setGame(params, null);
@@ -57,7 +57,7 @@ public class TTTController extends Controller{
         return response;
     }
 
-    public ResponseBuilder put(RequestBuilder request) {
+    public ResponseBuilder makeMove() {
         String spot = getSpot(request.getUrl());
         Map<String, String> cookie = cookieParser.getParsedInfo(request.getHeaders().get("Cookie"));
         String parsedCookie = cookie.get("game_info");
