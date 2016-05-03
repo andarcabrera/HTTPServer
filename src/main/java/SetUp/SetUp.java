@@ -31,7 +31,7 @@ public class SetUp {
         return routesConfig;
     }
 
-    public void configure(){
+    private void configure(){
         for (int i = 0; i < args.length; i++){
             if (args[i].equals("-p")) {
                 setPort(i + 1);

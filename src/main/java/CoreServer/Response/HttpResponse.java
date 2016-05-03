@@ -7,14 +7,13 @@ import java.util.Map;
 
 public class HttpResponse implements Response {
     private String version = "HTTP/1.1";
-    private String statusCode = "";
-    private StatusCodes statusCodes = new StatusCodes();
+    private String statusCode;
     private HashMap<String, String> headers = new HashMap<>();
     private  ByteArrayOutputStream body = new ByteArrayOutputStream();
     private ByteArrayOutputStream byteResponse = new ByteArrayOutputStream();
 
     public void setStatusCode(String status){
-        this.statusCode = statusCodes.getStatus(status);
+        this.statusCode = StatusCodes.statusCodes.get(status);
     }
 
     public void addHeader(String headerTitle, String headerDetail){

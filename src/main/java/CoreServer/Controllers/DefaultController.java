@@ -10,8 +10,18 @@ public class DefaultController extends Controller{
         super(request, response, methodsAllowed);
     }
 
-    public Response sendResponse(String action) {
+//    public Response sendResponse(String action) {
+//        response.setStatusCode("MethodNotAllowed");
+//        return response;
+//    }
+
+    public Response methodNotAllowed() {
         response.setStatusCode("MethodNotAllowed");
+        return response;
+    }
+
+    public Response pageNotFound() {
+        response.setStatusCode("PageNotFound");
         return response;
     }
 }

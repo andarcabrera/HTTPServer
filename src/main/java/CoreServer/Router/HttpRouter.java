@@ -62,8 +62,11 @@ public class HttpRouter implements RouterStrategy{
                 break;
             } else if (action.startsWith(httpRoutes.get(i).getRequestAction())){
                 httpRoute = httpRoutes.get(i);
+            } else if (httpRoutes.get(i).getRouteURL().equals(request.getUrl()) && !routeOptions(request.getUrl()).contains(request.getMethod())){
+                httpRoute = new HttpRoute(request.getRequestAction(), "defaultController", "methodNotAllowed");
+                break;
             } else {
-                httpRoute = new HttpRoute("", "", "");
+                httpRoute = new HttpRoute(request.getRequestAction(), "defaultController", "pageNotFound");
             }
         }
     }

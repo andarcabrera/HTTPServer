@@ -49,6 +49,9 @@ public class CobSpecControllerFactory extends AbstractControllerFactory {
             case "teapotController":
                 controller = createTeapotController(request, response, methodsAllowed);
                 break;
+            case "defaultController":
+                controller = createDefaultController(request, response, methodsAllowed);
+                break;
             default:
                 controller = createDefaultController(request, response, methodsAllowed);
         }

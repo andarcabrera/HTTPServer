@@ -25,7 +25,7 @@ public class TTTControllerFactory extends AbstractControllerFactory {
     @Override
     public Controller createController(String controllerName, Request request, Response response, String methodsAllowed){
         this.methodsAllowed = methodsAllowed;
-        Controller controller = null;
+        Controller controller;
 
         switch (controllerName) {
             case "TTTController":
