@@ -3,7 +3,7 @@ package TTTApp.Controllers;
 import CoreServer.Controllers.Controller;
 import TTTApp.Parsers.CookieParser;
 import TTTApp.Parsers.GameInfoParser;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 import TTTApp.TTTGame.TTTGame;
 import TTTApp.Views.AbstractViewFactory;
@@ -20,7 +20,7 @@ public class TTTController extends Controller {
     private CookieParser cookieParser = new CookieParser();
     private TTTGame rubyGame;
 
-    public TTTController(RequestBuilder request, Response response, String methodsAllowed, AbstractViewFactory viewFactory, GameInfoParser gameInfoParser, CookieParser cookieParser, TTTGame game){
+    public TTTController(Request request, Response response, String methodsAllowed, AbstractViewFactory viewFactory, GameInfoParser gameInfoParser, CookieParser cookieParser, TTTGame game){
         super(request, response, methodsAllowed);
         this.viewFactory = viewFactory;
         this.index = viewFactory.createHomePageView();

@@ -2,7 +2,7 @@ package CoreServer.Router;
 
 import CoreServer.Controllers.AbstractControllerFactory;
 import CoreServer.Controllers.Controller;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class HttpRouter implements RouterStrategy{
     Response response;
-    RequestBuilder request;
+    Request request;
     RoutesConfig routesSetup;
     AbstractControllerFactory controllerFactory;
     Controller controller;
@@ -22,7 +22,7 @@ public class HttpRouter implements RouterStrategy{
         this.routesSetup = routesSetup;
     }
 
-    public void route(RequestBuilder request) {
+    public void route(Request request) {
         this.request = request;
         String action = request.getRequestAction();
         controller = createController(action, request, response);
@@ -44,7 +44,7 @@ public class HttpRouter implements RouterStrategy{
         return options;
     }
 
-    private Controller createController(String action, RequestBuilder request, Response response){
+    private Controller createController(String action, Request request, Response response){
         setHttpRoute(action);
         String controllerName = httpRoute.getControllerName();
         return controllerFactory.createController(controllerName, request, response, routeOptions(request.getUrl()));

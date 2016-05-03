@@ -1,6 +1,10 @@
+import CobSpecApp.Config.CobspecRoutes;
 import CobSpecApp.Config.RequestLogger;
+import CobSpecApp.Controllers.CobSpecControllerFactory;
+import CoreServer.Controllers.AbstractControllerFactory;
+import CoreServer.Router.RoutesConfig;
 import CoreServer.Server.HTTPServer;
-import CoreServer.SetUp.SetUp;
+import SetUp.SetUp;
 
 import java.io.IOException;
 
@@ -13,7 +17,10 @@ public class StartServer {
 
         int port = serverSetup.getPort();
 
-        HTTPServer server = new HTTPServer();
+        AbstractControllerFactory controllerFactory = serverSetup.getControllerFactory();
+        RoutesConfig routesSetup = serverSetup.getRoutesConfig();
+
+        HTTPServer server = new HTTPServer(controllerFactory, routesSetup);
         server.listen(port);
     }
 }

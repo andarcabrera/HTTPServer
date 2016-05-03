@@ -10,10 +10,10 @@ import CoreServer.IOStreams.HttpClientOutputStream;
 import CoreServer.IOStreams.HttpInputStream;
 import CoreServer.IOStreams.HttpOutputStream;
 import CoreServer.Request.InfoProcessor;
+import CoreServer.Request.HttpRequest;
 import CoreServer.Request.Request;
-import CoreServer.Request.RequestBuilder;
 import CoreServer.Request.RequestProcessor;
-import CoreServer.Response.HttpServerResponse;
+import CoreServer.Response.HttpResponse;
 import CoreServer.Response.Response;
 import CoreServer.Router.HttpRouter;
 import CoreServer.Router.RouterStrategy;
@@ -31,6 +31,13 @@ import java.util.concurrent.Executors;
 
 public class HTTPServer {
     ExecutorService executor = Executors.newFixedThreadPool(8);
+    AbstractControllerFactory controllerFactory;
+    RoutesConfig routesSetup;
+
+    public HTTPServer(AbstractControllerFactory controllerFactory, RoutesConfig routesConfig) {
+        this.controllerFactory =controllerFactory;
+        this.routesSetup = routesConfig;
+    }
 
     public void listen(int port) throws IOException {
         ServerSocket server = new ServerSocket(port);
@@ -52,12 +59,10 @@ public class HTTPServer {
                 HttpInputStream userInputStream = new HttpClientInputStream(inputReader);
                 HttpOutputStream userOutputStream = new HttpClientOutputStream(dataOutputStream);
 
-                RequestBuilder requestBuilder = new Request();
+                Request requestBuilder = new HttpRequest();
                 InfoProcessor requestProcessor = new RequestProcessor(requestBuilder);
 
-                AbstractControllerFactory controllerFactory = new CobSpecControllerFactory();
-                Response responseBuilder = new HttpServerResponse();
-                RoutesConfig routesSetup = new CobspecRoutes();
+                Response responseBuilder = new HttpResponse();
                 RouterStrategy router = new HttpRouter(controllerFactory, responseBuilder, routesSetup);
 
                 executor.execute(new HandleUserThread(userInputStream, userOutputStream, requestProcessor, router));

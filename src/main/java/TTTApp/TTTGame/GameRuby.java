@@ -44,6 +44,7 @@ public class GameRuby implements TTTGame {
     }
 
     public void setGame(Map<String, String> requestParams, String spot){
+        System.out.println("do you get here?***************");
         Map<String, String> params = requestParams;
         size = Integer.parseInt(params.get("size"));
 
@@ -51,19 +52,21 @@ public class GameRuby implements TTTGame {
                 "require_relative \"" + "../tttj_gem/lib/tttj/game_setup.rb" +  "\"\n"+
                         "class Bootstrap \n" +
                         "   def execute root_object, spot  \n" +
-                        "       " + "TTTApp.TTT::GameSetup.new" + "(root_object, spot) \n" +
+                        "       " + "TTT::GameSetup.new" + "(root_object, spot) \n" +
                         "   end    \n" +
                         "end \n" +
                         "Bootstrap.new";
+
 
         String bootstrapGame =
                 "require_relative \"" + "../tttj_gem/lib/tttj/game.rb" +  "\"\n"+
                         "class Bootstrap \n" +
                         "   def execute root_object, size  \n" +
-                        "       " + "TTTApp.TTT::Game.new" + "(root_object, size) \n" +
+                        "       " + "TTT::Game.new" + "(root_object, size) \n" +
                         "   end    \n" +
                         "end \n" +
                         "Bootstrap.new";
+
 
         List<String> loadPaths = new ArrayList<>();
         loadPaths.add(".");
@@ -73,6 +76,8 @@ public class GameRuby implements TTTGame {
 
         IRubyObject setup = (IRubyObject) JavaEmbedUtils.invokeMethod( runtime, rootRubyObject, "execute", new Object[] {params, spot}, IRubyObject.class );
         IRubyObject players = (IRubyObject) JavaEmbedUtils.invokeMethod( runtime, setup, "create_players", new Object[] {}, IRubyObject.class );
+        System.out.println("how about here?");
+
 
         IRubyObject rootGame = JavaEmbedUtils.newRuntimeAdapter().eval( runtime, bootstrapGame );
         game = (IRubyObject) JavaEmbedUtils.invokeMethod( runtime, rootGame, "execute", new Object[] {players, size}, IRubyObject.class );

@@ -2,7 +2,7 @@ package CobSpecApp.Controllers;
 
 import CoreServer.Controllers.Controller;
 import CoreServer.FileMgmt.FileAccess;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 import java.util.HashMap;
@@ -12,7 +12,7 @@ public class FileController extends Controller {
     private FileAccess accessFile;
     private String sourceDirectory;
 
-    public FileController(RequestBuilder request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory){
+    public FileController(Request request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory){
         super(request, response, methodsAllowed);
         this.accessFile = accessFile;
         this.sourceDirectory = sourceDirectory;

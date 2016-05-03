@@ -5,15 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class HttpServerResponse implements Response {
+public class HttpResponse implements Response {
     private String version = "HTTP/1.1";
     private String statusCode = "";
+    private StatusCodes statusCodes = new StatusCodes();
     private HashMap<String, String> headers = new HashMap<>();
     private  ByteArrayOutputStream body = new ByteArrayOutputStream();
     private ByteArrayOutputStream byteResponse = new ByteArrayOutputStream();
 
     public void setStatusCode(String status){
-        this.statusCode = StatusCodes.getStatus(status);
+        this.statusCode = statusCodes.getStatus(status);
     }
 
     public void addHeader(String headerTitle, String headerDetail){

@@ -2,7 +2,7 @@ package CobSpecApp.Controllers;
 
 import CoreServer.Controllers.Controller;
 import CoreServer.FileMgmt.FileAccess;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 import CobSpecApp.Views.HtmlContent;
 
@@ -12,7 +12,7 @@ public class SimpleController extends Controller {
     private String sourceDirectory;
     private HtmlContent html = new HtmlContent();
 
-    public SimpleController(RequestBuilder request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory){
+    public SimpleController(Request request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory){
         super(request, response, methodsAllowed);
         this.accessFile = accessFile;
         this.sourceDirectory = sourceDirectory;

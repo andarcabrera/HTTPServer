@@ -1,7 +1,7 @@
 package CobSpecApp.Controllers;
 
 import CoreServer.Controllers.Controller;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 /**
@@ -9,7 +9,7 @@ import CoreServer.Response.Response;
  */
 public class TeapotController extends Controller {
 
-    public TeapotController(RequestBuilder request, Response response, String methodsAllowed){
+    public TeapotController(Request request, Response response, String methodsAllowed){
         super(request, response, methodsAllowed);
     }
 

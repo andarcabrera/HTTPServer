@@ -1,6 +1,6 @@
 package CoreServer.Controllers;
 
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 import java.lang.reflect.Method;
@@ -8,10 +8,10 @@ import java.lang.reflect.Method;
 
 public abstract class Controller implements ControllerStrategy {
     protected Response response;
-    protected RequestBuilder request;
+    protected Request request;
     protected  String methodsAllowed;
 
-    public Controller(RequestBuilder request, Response response, String methodsAllowed){
+    public Controller(Request request, Response response, String methodsAllowed){
         this.request = request;
         this.response = response;
         this.methodsAllowed = methodsAllowed;

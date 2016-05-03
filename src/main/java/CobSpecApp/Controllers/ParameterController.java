@@ -1,7 +1,7 @@
 package CobSpecApp.Controllers;
 
 import CoreServer.Controllers.Controller;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class ParameterController extends Controller {
-    public ParameterController(RequestBuilder request, Response response, String methodsAllowed){
+    public ParameterController(Request request, Response response, String methodsAllowed){
         super(request, response, methodsAllowed);
     }
 

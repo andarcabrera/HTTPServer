@@ -6,18 +6,21 @@ import CoreServer.Controllers.DefaultController;
 import CoreServer.FileMgmt.AccessFile;
 import CoreServer.FileMgmt.FileAccess;
 import CobSpecApp.Parsers.Base64ParserAndDecoder;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 public class CobSpecControllerFactory extends AbstractControllerFactory {
     private FileAccess accessFile = new AccessFile();
     private Base64ParserAndDecoder decoder = new Base64ParserAndDecoder();
-    private String sourceDirectory = System.getProperty("source_directory");
-
+    private String sourceDirectory;
     private String methodsAllowed;
 
+    public CobSpecControllerFactory(String sourceDirectory){
+        this.sourceDirectory = sourceDirectory;
+    }
+
     @Override
-    public Controller createController(String controllerName, RequestBuilder request, Response response, String methodsAllowed){
+    public Controller createController(String controllerName, Request request, Response response, String methodsAllowed){
         this.methodsAllowed = methodsAllowed;
         Controller controller = null;
 
@@ -51,39 +54,39 @@ public class CobSpecControllerFactory extends AbstractControllerFactory {
         }
         return controller;
     }
-    private Controller createSimpleController(RequestBuilder request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory) {
+    private Controller createSimpleController(Request request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory) {
         return new SimpleController(request, response, methodsAllowed, accessFile, sourceDirectory);
     }
 
-    private Controller createDirectoryController(RequestBuilder request, Response response, String methodsAllowed, String sourceDirectory) {
+    private Controller createDirectoryController(Request request, Response response, String methodsAllowed, String sourceDirectory) {
         return new DirectoryController(request, response, methodsAllowed, sourceDirectory);
     }
 
-    private Controller createFileController(RequestBuilder request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory) {
+    private Controller createFileController(Request request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory) {
         return new FileController(request, response, methodsAllowed, accessFile, sourceDirectory);
     }
 
-    private Controller createParameterController(RequestBuilder request, Response response, String methodsAllowed) {
+    private Controller createParameterController(Request request, Response response, String methodsAllowed) {
         return new ParameterController(request, response, methodsAllowed);
     }
 
-    private Controller createDefaultController(RequestBuilder request, Response response, String methodsAllowed) {
+    private Controller createDefaultController(Request request, Response response, String methodsAllowed) {
         return new DefaultController(request, response, methodsAllowed);
     }
 
-    private Controller createRedirectController(RequestBuilder request, Response response, String methodsAllowed) {
+    private Controller createRedirectController(Request request, Response response, String methodsAllowed) {
         return new RedirectController(request, response, methodsAllowed);
     }
 
-    private Controller createPatchController(RequestBuilder request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory) {
+    private Controller createPatchController(Request request, Response response, String methodsAllowed, FileAccess accessFile, String sourceDirectory) {
         return new PatchController(request, response, methodsAllowed, accessFile, sourceDirectory);
     }
 
-    private Controller createBasicAuthController(RequestBuilder request, Response response, String methodsAllowed, Base64ParserAndDecoder decoder) {
+    private Controller createBasicAuthController(Request request, Response response, String methodsAllowed, Base64ParserAndDecoder decoder) {
         return new BasicAuthController(request, response, methodsAllowed, decoder);
     }
 
-    private Controller createTeapotController(RequestBuilder request, Response response, String methodsAllowed) {
+    private Controller createTeapotController(Request request, Response response, String methodsAllowed) {
         return new TeapotController(request, response, methodsAllowed);
     }
 }

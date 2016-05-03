@@ -2,7 +2,7 @@ package CobSpecApp.Controllers;
 
 import CoreServer.Controllers.Controller;
 import CoreServer.FileMgmt.AccessDirectory;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 import CobSpecApp.Views.HtmlContent;
 
@@ -14,7 +14,7 @@ public class DirectoryController extends Controller {
     private String sourceDirectory;
     private HtmlContent htmlContent = new HtmlContent();
 
-    public DirectoryController(RequestBuilder request, Response response, String methodsAllowed, String sourceDirectory){
+    public DirectoryController(Request request, Response response, String methodsAllowed, String sourceDirectory){
         super(request, response, methodsAllowed);
         this.sourceDirectory = sourceDirectory;
     }

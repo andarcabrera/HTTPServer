@@ -5,5 +5,5 @@ package CoreServer.Request;
  */
 public interface InfoProcessor {
     void handleRequest(StringBuffer rawRequest);
-    RequestBuilder getRequest();
+    Request getRequest();
 }

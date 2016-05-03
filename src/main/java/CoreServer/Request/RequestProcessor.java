@@ -4,9 +4,9 @@ package CoreServer.Request;
  * Created by andacabrera29 on 2/24/16.
  */
 public class RequestProcessor implements InfoProcessor {
-    private RequestBuilder request;
+    private Request request;
 
-    public RequestProcessor(RequestBuilder requestBuilder){
+    public RequestProcessor(Request requestBuilder){
         this.request = requestBuilder;
     }
 
@@ -14,7 +14,7 @@ public class RequestProcessor implements InfoProcessor {
         request.buildRequest(rawRequest);
     }
 
-    public RequestBuilder getRequest(){
+    public Request getRequest(){
         return request;
     }
 

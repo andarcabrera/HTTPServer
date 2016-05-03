@@ -4,7 +4,7 @@ import CobSpecApp.Config.RequestLogger;
 import CoreServer.IOStreams.HttpInputStream;
 import CoreServer.IOStreams.HttpOutputStream;
 import CoreServer.Request.InfoProcessor;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Router.RouterStrategy;
 import java.util.logging.Level;
 
@@ -40,7 +40,7 @@ public class HandleUserThread implements Runnable{
         RequestLogger.logger.log(Level.INFO, rawRequest.toString());
 
         requestProcessor.handleRequest(rawRequest);
-        RequestBuilder request = requestProcessor.getRequest();
+        Request request = requestProcessor.getRequest();
 
         router.route(request);
         byte[] response = router.getResponse();

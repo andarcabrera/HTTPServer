@@ -3,7 +3,7 @@ package CobSpecApp.Controllers;
 import CoreServer.Controllers.Controller;
 import CobSpecApp.Parsers.Base64ParserAndDecoder;
 import CobSpecApp.Config.RequestLogger;
-import CoreServer.Request.RequestBuilder;
+import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 public class BasicAuthController extends Controller {
@@ -11,7 +11,7 @@ public class BasicAuthController extends Controller {
     private String user = "admin";
     private String password = "hunter2";
 
-    public BasicAuthController(RequestBuilder request, Response response, String methodsAllowed, Base64ParserAndDecoder decoder){
+    public BasicAuthController(Request request, Response response, String methodsAllowed, Base64ParserAndDecoder decoder){
         super(request, response, methodsAllowed);
         this.decoder = decoder;
     }
