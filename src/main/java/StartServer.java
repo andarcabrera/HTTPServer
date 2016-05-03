@@ -1,6 +1,6 @@
-import Helpers.RequestLogger;
-import Server.HTTPServer;
-import SetUp.SetUp;
+import CobSpecApp.Config.RequestLogger;
+import CoreServer.Server.HTTPServer;
+import CoreServer.SetUp.SetUp;
 
 import java.io.IOException;
 
