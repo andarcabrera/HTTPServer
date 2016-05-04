@@ -9,12 +9,6 @@ public class DefaultController extends Controller{
     public DefaultController(Request request, Response response, String methodsAllowed){
         super(request, response, methodsAllowed);
     }
-
-//    public Response sendResponse(String action) {
-//        response.setStatusCode("MethodNotAllowed");
-//        return response;
-//    }
-
     public Response methodNotAllowed() {
         response.setStatusCode("MethodNotAllowed");
         return response;

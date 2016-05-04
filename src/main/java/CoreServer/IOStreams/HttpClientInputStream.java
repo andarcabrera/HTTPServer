@@ -7,7 +7,7 @@ import java.io.IOException;
  * Created by andacabrera29 on 2/24/16.
  */
 public class HttpClientInputStream implements HttpInputStream {
-    BufferedReader input = null;
+    private BufferedReader input = null;
 
     public HttpClientInputStream(BufferedReader input) {
         this.input = input;

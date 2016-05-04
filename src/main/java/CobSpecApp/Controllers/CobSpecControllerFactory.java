@@ -14,6 +14,8 @@ public class CobSpecControllerFactory extends AbstractControllerFactory {
     private Base64ParserAndDecoder decoder = new Base64ParserAndDecoder();
     private String sourceDirectory;
     private String methodsAllowed;
+    private Controller controller;
+
 
     public CobSpecControllerFactory(String sourceDirectory){
         this.sourceDirectory = sourceDirectory;
@@ -22,7 +24,6 @@ public class CobSpecControllerFactory extends AbstractControllerFactory {
     @Override
     public Controller createController(String controllerName, Request request, Response response, String methodsAllowed){
         this.methodsAllowed = methodsAllowed;
-        Controller controller = null;
 
         switch (controllerName) {
             case "simpleController":

@@ -4,14 +4,19 @@ import CoreServer.Router.HttpRoute;
 import CoreServer.Router.Route;
 import CoreServer.Router.RoutesConfig;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
  * Created by andacabrera29 on 3/3/16.
  */
 public class CobspecRoutes implements RoutesConfig {
+    ArrayList<Route> routes = new ArrayList<>();
+    String sourceDirectory;
 
-    public CobspecRoutes(){
+    public CobspecRoutes(String sourceDirectory){
+        this.sourceDirectory = sourceDirectory;
+        addRoutesFromDirectory();
         addRoutes();
     }
 
@@ -22,17 +27,11 @@ public class CobspecRoutes implements RoutesConfig {
     private void addRoutes(){
         addRoute(new HttpRoute("GET /", "directoryController", "index"));
         addRoute(new HttpRoute("HEAD /", "directoryController", "headOnly"));
-        addRoute(new HttpRoute("GET /file1", "fileController", "showFileContent"));
-        addRoute(new HttpRoute("GET /image.jpeg", "fileController", "showFileContent"));
-        addRoute(new HttpRoute("GET /image.png", "fileController", "showFileContent"));
-        addRoute(new HttpRoute("GET /image.gif", "fileController", "showFileContent"));
         addRoute(new HttpRoute("GET /parameters", "parameterController", "showParamsInBody"));
         addRoute(new HttpRoute("GET /form", "simpleController", "getForm"));
         addRoute(new HttpRoute("POST /form", "simpleController", "postForm"));
         addRoute(new HttpRoute("PUT /form", "simpleController", "putForm"));
         addRoute(new HttpRoute("DELETE /form", "simpleController", "deleteForm"));
-        addRoute(new HttpRoute("GET /text-file.txt", "fileController", "showFileContent"));
-        addRoute(new HttpRoute("GET /partial_content.txt", "fileController", "showFileContent"));
         addRoute(new HttpRoute("GET /foobar", "simpleController", "notFound"));
         addRoute(new HttpRoute("HEAD /foobar", "simpleController", "notFound"));
         addRoute(new HttpRoute("GET /method_options", "simpleController", "notFound"));
@@ -48,6 +47,16 @@ public class CobspecRoutes implements RoutesConfig {
         addRoute(new HttpRoute("GET /patch-content.txt", "patchController", "show"));
         addRoute(new HttpRoute("PATCH /patch-content.txt", "patchController", "showPatched"));
         addRoute(new HttpRoute("GET /logs", "basicAuthController", "getSecureResponse"));
+    }
+
+    private void addRoutesFromDirectory(){
+        File directory = new File(sourceDirectory);
+        File[] files = directory.listFiles();
+        for (File file : files) {
+            String filePath = "" + file;
+            String requestAction = "GET " + filePath.substring(sourceDirectory.length(), filePath.length());
+            addRoute(new HttpRoute(requestAction, "fileController", "showFileContent"));
+        }
     }
 
     private void addRoute(HttpRoute httpRoute){

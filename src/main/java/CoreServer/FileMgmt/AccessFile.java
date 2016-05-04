@@ -14,16 +14,12 @@ public class AccessFile implements FileAccess{
 
     public byte[] readFromFile(String fileName) {
         File file = new File(fileName);
-
         byte[] fileContent = new byte[(int) file.length()];
-
         try {
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(fileContent);
             fileInputStream.close();
-
-
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException  e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,10 +29,8 @@ public class AccessFile implements FileAccess{
 
     public byte[] readPartiallyFromFile(String fileName, String rawRange) {
         File file = new File(fileName);
-
         int containerSize = parser.containerSize(rawRange, (int) file.length());
         byte[] fileContent = new byte[containerSize];
-
         try {
             fileInputStream = new FileInputStream(file);
             fileInputStream.skip(parser.getSkipedBytes());

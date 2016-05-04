@@ -10,6 +10,8 @@ import java.util.ArrayList;
  * Created by andacabrera29 on 5/2/16.
  */
 public class TTTRoutes implements RoutesConfig {
+    ArrayList<Route> routes = new ArrayList<>();
+
     public TTTRoutes(){
         addRoutes();
     }

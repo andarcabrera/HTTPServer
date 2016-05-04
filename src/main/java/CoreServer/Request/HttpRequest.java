@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class HttpRequest implements Request {
     private String rawRequest;
-    private String rawHeader = "";
-    private String rawBody = "";
-    private String method = "";
-    private String url = "";
+    private String rawHeader;
+    private String rawBody;
+    private String method;
+    private String url;
     private HashMap<String, String> params = new HashMap<>();
-    private String version= "";
-    private String initialLine = "";
+    private String version;
+    private String initialLine;
     private HashMap<String, String> headers = new HashMap<>();
-    private String requestBody = "";
+    private String requestBody;
 
     public void buildRequest(StringBuffer rawRequest){
         this.rawRequest = rawRequest.toString();
@@ -67,6 +67,7 @@ public class HttpRequest implements Request {
             rawBody = parsedRequest[1];
         }else {
             rawHeader = rawRequest;
+            rawBody = "";
         }
     }
 
@@ -137,8 +138,7 @@ public class HttpRequest implements Request {
 
     private String[] getRawVariables(String rawUrlParams){
         String rawParams = getRawParams(rawUrlParams);
-        String[] rawVariables = rawParams.split("&");
-        return rawVariables;
+        return rawParams.split("&");
     }
 
     private String getRawParams(String rawUrlParams){

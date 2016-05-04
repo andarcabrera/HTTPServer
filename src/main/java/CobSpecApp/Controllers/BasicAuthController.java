@@ -7,7 +7,7 @@ import CoreServer.Request.Request;
 import CoreServer.Response.Response;
 
 public class BasicAuthController extends Controller {
-    Base64ParserAndDecoder decoder;
+    private Base64ParserAndDecoder decoder;
     private String user = "admin";
     private String password = "hunter2";
 

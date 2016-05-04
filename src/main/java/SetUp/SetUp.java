@@ -33,12 +33,16 @@ public class SetUp {
 
     private void configure(){
         for (int i = 0; i < args.length; i++){
-            if (args[i].equals("-p")) {
-                setPort(i + 1);
-            } else if (args[i].equals("-d")){
-                setDirectory(i + 1);
-            } else if (args[i].equals("-app")) {
-                setAppRoutesAndControllers(i + 1);
+            switch (args[i]) {
+                case "-p":
+                    setPort(i + 1);
+                    break;
+                case "-d":
+                    setDirectory(i + 1);
+                    break;
+                case "-app":
+                    setAppRoutesAndControllers(i + 1);
+                    break;
             }
         }
     }
@@ -54,7 +58,7 @@ public class SetUp {
     private void setAppRoutesAndControllers(int argIndex){
         if(args[argIndex].equals("cob")){
             controllerFactory = new CobSpecControllerFactory(directory);
-            routesConfig = new CobspecRoutes();
+            routesConfig = new CobspecRoutes(directory);
         } else if (args[argIndex].equals("ttt")){
             controllerFactory = new TTTControllerFactory();
             routesConfig = new TTTRoutes();

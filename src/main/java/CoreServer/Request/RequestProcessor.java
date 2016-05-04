@@ -6,8 +6,8 @@ package CoreServer.Request;
 public class RequestProcessor implements InfoProcessor {
     private Request request;
 
-    public RequestProcessor(Request requestBuilder){
-        this.request = requestBuilder;
+    public RequestProcessor(Request request){
+        this.request = request;
     }
 
     public void handleRequest(StringBuffer rawRequest){

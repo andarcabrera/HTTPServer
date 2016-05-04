@@ -20,6 +20,10 @@ public class HttpResponse implements Response {
         headers.put(headerTitle, headerDetail);
     }
 
+    public void setResponseBody(byte[] message){
+        body.write(message, 0, message.length);
+    }
+
     public byte[] responseToBytes(){
         byte[] headerBytes =  entireHeader().getBytes();
         byteResponse.write(headerBytes, 0, headerBytes.length);
@@ -30,10 +34,9 @@ public class HttpResponse implements Response {
     }
 
     private String entireHeader(){
-        String buildHeader = (version + " " + statusCode + "\n" +
+        return (version + " " + statusCode + "\n" +
                                 headersToString() +
                                 "\n");
-        return buildHeader;
     }
 
     private String headersToString(){
@@ -44,9 +47,5 @@ public class HttpResponse implements Response {
             headersString += headerTitle + ": " + headerContent + "\n";
         }
         return headersString;
-    }
-
-    public void setResponseBody(byte[] message){
-        body.write(message, 0, message.length);
     }
 }

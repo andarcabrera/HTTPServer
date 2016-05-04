@@ -33,8 +33,5 @@ public class FileController extends Controller {
         response.setResponseBody(fileContent);
         return response;
     }
-
-
-
 }
 

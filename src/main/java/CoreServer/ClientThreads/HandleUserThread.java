@@ -6,6 +6,8 @@ import CoreServer.IOStreams.HttpOutputStream;
 import CoreServer.Request.InfoProcessor;
 import CoreServer.Request.Request;
 import CoreServer.Router.RouterStrategy;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 
 /**
@@ -24,10 +26,6 @@ public class HandleUserThread implements Runnable{
         this.router = router;
     }
 
-    private void writeMessage(byte[] message) {
-        output.writeMessage(message);
-    }
-
     public void run() {
         int requestChar;
         StringBuffer rawRequest = new StringBuffer();
@@ -43,8 +41,17 @@ public class HandleUserThread implements Runnable{
         Request request = requestProcessor.getRequest();
 
         router.route(request);
-        byte[] response = router.getResponse();
+        byte[] response = new byte[0];
+        try {
+            response = router.getResponse();
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
 
         writeMessage(response);
+    }
+
+    private void writeMessage(byte[] message) {
+        output.writeMessage(message);
     }
 }

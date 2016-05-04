@@ -8,7 +8,7 @@ import java.util.Base64;
 public class Base64ParserAndDecoder {
     private String user;
     private String password;
-    Base64.Decoder decoder = Base64.getDecoder();
+    private Base64.Decoder decoder = Base64.getDecoder();
 
     public String getUser(){
         return user;
@@ -18,17 +18,17 @@ public class Base64ParserAndDecoder {
         return password;
     }
 
-    private void setUserandPassword(String decodedAuthorization){
-        String[] splitDecodedAuthorization = decodedAuthorization.split(":");
-        user = splitDecodedAuthorization[0];
-        password = splitDecodedAuthorization[1];
-    }
-
     public void decodeBase64(String entireMessage){
         String encodedAuthorization = getEncodedAuthorization(entireMessage);
         byte[] decodedAuthorization = decoder.decode(encodedAuthorization);
         String authorization =  new String(decodedAuthorization);
         setUserandPassword(authorization);
+    }
+
+    private void setUserandPassword(String decodedAuthorization){
+        String[] splitDecodedAuthorization = decodedAuthorization.split(":");
+        user = splitDecodedAuthorization[0];
+        password = splitDecodedAuthorization[1];
     }
 
     private String getEncodedAuthorization(String entireMessage){

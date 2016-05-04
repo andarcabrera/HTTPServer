@@ -13,8 +13,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class RequestLogger {
     public final static Logger logger = Logger.getLogger(RequestLogger.class.getName());
-
-    private static FileHandler requests = null;
+    private static FileHandler requests;
 
     public static void init() {
         try {
