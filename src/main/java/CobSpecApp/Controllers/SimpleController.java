@@ -55,5 +55,11 @@ public class SimpleController extends Controller {
         return response;
     }
 
+    public Response blankResponse() {
+        response.setStatusCode("OK");
+//        response.addHeader("Allow", methodsAllowed);
+        return response;
+    }
+
 }
 

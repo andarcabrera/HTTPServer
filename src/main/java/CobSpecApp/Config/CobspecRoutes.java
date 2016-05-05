@@ -34,13 +34,11 @@ public class CobspecRoutes implements RoutesConfig {
         addRoute(new HttpRoute("DELETE /form", "simpleController", "deleteForm"));
         addRoute(new HttpRoute("GET /foobar", "simpleController", "notFound"));
         addRoute(new HttpRoute("HEAD /foobar", "simpleController", "notFound"));
-        addRoute(new HttpRoute("GET /method_options", "simpleController", "notFound"));
-        addRoute(new HttpRoute("HEAD /method_options", "simpleController", "notFound"));
-        addRoute(new HttpRoute("POST /method_options", "simpleController", "notFound"));
-        addRoute(new HttpRoute("OPTIONS /method_options", "simpleController", "options"));
-        addRoute(new HttpRoute("PUT /method_options", "simpleController", "notFound"));
-        addRoute(new HttpRoute("OPTIONS /method_options2", "simpleController", "options"));
-        addRoute(new HttpRoute("GET /method_options2", "simpleController", "notFound"));
+        addRoute(new HttpRoute("GET /method_options", "simpleController", "blankResponse"));
+        addRoute(new HttpRoute("HEAD /method_options", "simpleController", "blankResponse"));
+        addRoute(new HttpRoute("POST /method_options", "simpleController", "blankResponse"));
+        addRoute(new HttpRoute("PUT /method_options", "simpleController", "blankResponse"));
+        addRoute(new HttpRoute("GET /method_options2", "simpleController", "blankResponse"));
         addRoute(new HttpRoute("GET /redirect", "redirectController", "redirect"));
         addRoute(new HttpRoute("GET /coffee", "teapotController", "coffee"));
         addRoute(new HttpRoute("GET /tea", "teapotController", "tea"));

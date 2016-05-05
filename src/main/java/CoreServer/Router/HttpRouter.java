@@ -43,7 +43,7 @@ public class HttpRouter implements RouterStrategy{
                 options += getRoutes().get(i).getRouteMethod() + ",";
             }
         }
-        return options;
+        return options + "OPTIONS";
     }
 
     private Controller createController(String action, Request request, Response response){
@@ -68,6 +68,8 @@ public class HttpRouter implements RouterStrategy{
             } else if (httpRoute1.getRouteURL().equals(request.getUrl()) && !routeOptions(request.getUrl()).contains(request.getMethod())) {
                 httpRoute = new HttpRoute(request.getRequestAction(), "defaultController", "methodNotAllowed");
                 break;
+            } else if (request.getMethod().equals("OPTIONS")){
+                httpRoute = new HttpRoute(request.getRequestAction(), "simpleController", "options");
             } else {
                 httpRoute = new HttpRoute(request.getRequestAction(), "defaultController", "pageNotFound");
             }
